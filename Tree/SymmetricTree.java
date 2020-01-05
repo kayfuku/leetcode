@@ -32,10 +32,10 @@ public class SymmetricTree {
 		return isMirror(root.left, root.right);
 	}
 	private boolean isMirror(TreeNode t1, TreeNode t2) {
+		// Let's start with this. 
 		if (t1 == null && t2 == null) {
 			return true;
 		}
-
 		if (t1 == null || t2 == null) {
 			// Either t1 or t2 is null. 
 			return false;
@@ -43,7 +43,8 @@ public class SymmetricTree {
 		if (t1.val != t2.val) {
 			return false;
 		}
-
+		// Now that t1.val == t2.val, we have to check the subtrees. 
+		
 		// Traverse left subtree first for t1 and right subtree first for t2. 
 		return isMirror(t1.left, t2.right) && 
 				isMirror(t1.right, t2.left);

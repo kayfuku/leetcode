@@ -4,11 +4,7 @@
 
 package leetcode;
 
-import googlecodejam.FashionPolice;
-
 import java.util.Stack;
-
-import javax.swing.RootPaneContainer;
 
 public class PathSum {
 	// fields here. 
@@ -33,6 +29,8 @@ public class PathSum {
 			return false;
 		}
 		
+		// Preorder. As soon as you get the node value, you can make a conclusion if 
+		// it is a leaf node. 
 		remain -= node.val;
 		if (node.left == null && node.right == null) {
 			// There is no child node, which means node is a leaf. 
