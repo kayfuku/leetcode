@@ -76,6 +76,7 @@ public class MovingAverageFromDataStream {
 // Author: @liaison and @andvary + kei
 // Date  : January 6, 2020
 class MovingAverageFromDataStream2 {
+	// Only one pointer is needed. 
 	int winSize, head = 0, windowSum = 0, count = 0;
 	int[] queue;
 	

@@ -15,6 +15,7 @@ public class PaintFence {
 		
 	// Dynamic Programming. Accepted. 
 	// Counting ways. 
+	// The count can be determined based only on the last count. => Bottom up dynamic programming
 	// We divided it into two cases.
 	// 1. the last two posts have the same color, the number of ways to paint in this case is sameColorCounts.
 	// 2. the last two posts have different colors, and the number of ways in this case is diffColorCounts.
@@ -28,17 +29,27 @@ public class PaintFence {
     	if (n == 1) {
 			return k;
 		}
-    	// n == 2
-    	int sameCnt = k;
-    	int diffCnt = k * (k - 1);
-    	// Induction step.
+    	// (n == 2)
+    	// The number of the cases where the first color and the second color are the same. 
+    	int sameColorCnt = k;
+    	// The number of the cases where the first color and the second color are different. 
+    	int diffColorCnt = k * (k - 1);
+    	// (n >= 3) Induction step. 
     	for (int i = 3; i <= n; i++) {
-			int temp = diffCnt;
-			diffCnt = sameCnt * (k - 1) + diffCnt * (k - 1);
-    		sameCnt = temp;    		
+			int temp = diffColorCnt;
+			// In the case where the last two colors are the same, there are k - 1 patterns for the 
+			// current colors such that the last color and the current color are different. 
+			// In the case where the last two colors are different, there are k - 1 patterns for the 
+			// current colors such that the last color and the current color are different. 
+			diffColorCnt = sameColorCnt * (k - 1) + diffColorCnt * (k - 1);
+			// In the case where the last two colors are the same, there is no pattern for the 
+			// current colors such that the last color and the current color are the same. 
+			// In the case where the last two colors are different, there is 1 color that is the same 
+			// as the last color such that the last color and the current color are the same. 
+			sameColorCnt = temp;    		
 		}
     	
-    	return sameCnt + diffCnt;
+    	return sameColorCnt + diffColorCnt;
     }
 	
 	

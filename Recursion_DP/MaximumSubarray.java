@@ -23,7 +23,7 @@ public class MaximumSubarray {
 	// So, this problem seems to have optimal substructure and also have a greedy choice property. 
 	// So, I think I can use Greedy Algorithm. 
 	// 
-	// Iterating through the array, for each iteration, I Check if I can get bigger sum when 
+	// Iterating through the array, for each iteration, I check if I can get bigger sum when 
 	// I add the current elem nums[i].
 	// curMaxSum_i = max(curMaxSum_i-1 + nums_i, nums_i)
 	// maxSum = max(curMaxSum_i) 
@@ -92,6 +92,7 @@ public class MaximumSubarray {
 			return nums[left];
 		}
 
+		// From mid to left
 		int leftSubsum = Integer.MIN_VALUE;
 		int curSum = 0;
 		for (int i = mid; i >= left; i--) {
@@ -100,6 +101,7 @@ public class MaximumSubarray {
 			leftSubsum = Math.max(leftSubsum, curSum);
 		}
 
+		// From mid + 1 to right
 		int rightSubsum = Integer.MIN_VALUE;
 		curSum = 0;
 		for (int i = mid + 1; i <= right; i++) {

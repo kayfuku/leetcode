@@ -88,7 +88,7 @@ public class LongestIncreasingSubsequence {
 	//   dp:  1 1 1 2 2
 	//                => dp[2] + 1
 	// 
-	// dp[i] = max(dp[j]) + 1 (0 ≤ j < i)
+	// dp[i] = max(dp[j] + 1) (0 ≤ j < i)
 	// LIS = max(dp[i]) (0 ≤ i < n)
 	// 
 	// O(N^2) time, O(N) space. 
@@ -97,25 +97,32 @@ public class LongestIncreasingSubsequence {
 			return 0;
 		}
 
+		// To hold the max values (longest) so far (index 0 to i). 
 		int[] dp = new int[nums.length];
 
 		dp[0] = 1;
 		// Since 'nums' is unsorted, we need to keep track of max through the 'dp' array. 
 		int longest = 1; 
+		// Fill up the dp assuming that nums[i] is the last element of the sequence.
 		// i starts from 1 because no need to check when the list is just one element. 
 		for (int i = 1; i < dp.length; i++) {
 			// For up to i-th elem, find a max. 
 			int maxVal = 1;
 			for (int j = 0; j < i; j++) {
-				if (nums[i] > nums[j]) {
+				if (nums[j] < nums[i]) {
 					// Since nums[i] meets the requirement (increasing order), 
-					// we count up the longest length so far, (dp[j] + 1)
-					// and take the larger value. 
+					// we count up the longest length so far (dp[j] + 1) because 
+					// dp[j] holds the longest length at the point of j, in other words, 
+					// nums[j] is the last element of that sequence. And so, dp[j] + 1 
+					// is the length of that sequence plus nums[i]. 
+					// We want the max among 0 <= j < i. 
 					maxVal = Math.max(maxVal, dp[j] + 1);
 				}
 			}
+			// Put the max in the dp. 
 			dp[i] = maxVal;
 
+			// Max values among all dp[i] is the answer. 
 			longest = Math.max(longest, dp[i]);
 		}
 

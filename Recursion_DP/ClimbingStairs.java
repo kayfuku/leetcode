@@ -18,6 +18,7 @@ public class ClimbingStairs {
 
 	// other classes here. 
 
+	
 	// 1. Recursion. Time Limit Exceeded. 
 	// O(2^N) time, because of 2 recursion calls and n recursion stack. 
 	// O(N) space, 
@@ -59,20 +60,23 @@ public class ClimbingStairs {
 	}
 
 	// 3. Bottom Up Dynamic Programming. 
-	// The total number of ways to reach i-th is equal to the sum of ways of reaching (i-1)-th 
-	// step and ways of reaching (i-2)-th step.
+	// The total number of ways to reach i-th is equal to the sum of 
+	// the ways of reaching (i-1)-th step and the ways of reaching (i-2)-th step.
 	// O(N) time, O(N) space. 
 	public int climbStairs3(int n) {
 		if (n <= 1) {
 			return 1;
 		}
 
-		// Just match the index.
+		// The reason n + 1 is just match the index.
 		int[] dp = new int[n + 1];
 		dp[1] = 1;
 		dp[2] = 2;
 
+		// n >= 3
 		for (int i = 3; i <= n; i++) {
+			// It's the num of ways, so no need to add 1. 
+			// Just pass on the num to the current.  
 			dp[i] = dp[i - 1] + dp[i - 2];
 		}
 

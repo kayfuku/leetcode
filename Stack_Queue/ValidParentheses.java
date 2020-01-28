@@ -20,14 +20,14 @@ public class ValidParentheses {
 
 	public ValidParentheses() {
 		// Initialization here. 
-		map = new HashMap<Character, Character>();
+		map = new HashMap<>();
 		map.put(')', '(');
 		map.put('}', '{');
 		map.put(']', '[');
 
 	}
 
-	// Basically, when I find a opening bracket, I push it to the stack. 
+	// Basically, when I find an opening bracket, I push it to the stack. 
 	// when I find a closing bracket, I check the top of the stack to see if 
 	// there is the opening bracket of the same kind. 
 	// O(n) time, O(n) space. 
@@ -90,7 +90,7 @@ public class ValidParentheses {
 	}
 
 
-	// Review. 
+	// Review. This is the best. 
 	public boolean isValidR2(String s) {
 		if (s.length() == 0 || s == null) {
 			return true;
