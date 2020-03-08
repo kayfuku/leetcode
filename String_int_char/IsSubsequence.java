@@ -22,7 +22,7 @@ public class IsSubsequence {
   // 1. Using two pointers.
   // Set the pointers to the first character of each string.
   // Iterating through string t, check if the characters are the same.
-  // If it's same, then move forward both of pointers.
+  // If it's same, then move forward s pointer.
   // If it's not, then move on to the next character of t until finding the same character.
   //
   // https://leetcode.com/problems/is-subsequence/discuss/87254/Straight-forward-Java-simple-solution
@@ -45,6 +45,7 @@ public class IsSubsequence {
       if (s.charAt(idxS) == t.charAt(idxT)) {
         idxS++;
         if (idxS == s.length()) {
+          // Subsequence found.
           return true;
         }
       }
@@ -63,7 +64,7 @@ public class IsSubsequence {
   // after that index.
   //
   // https://leetcode.com/problems/is-subsequence/discuss/87384/java-1ms-solution
-  // O(N) time, where N is t length (~=500,000).
+  // O(N) time, where N is t length (~=500,000). The fastest solution.
   // O(1) space.
   //
   // Author: shuoshankou + kei
@@ -144,7 +145,7 @@ public class IsSubsequence {
   // Binary Search R = M, Continuous version. (Next int)
   // Binary Search to find an index of the elem in the list, which is the smallest, but
   // greater than the 'prevElem'.
-  // Note that the list is a list of indices in string t.
+  // Note that the list is a list of indices in string t sorted in ascending order.
   //
   // O(logN) time, where N is the list length.
   // Author: kei (+ shuoshankou)
