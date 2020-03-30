@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class MyHashSet {
+class DesignHashSet {
 	
 	private final int MAX_LEN = 100000; // the amount of buckets
 	private List<Integer>[] set;      // hash set implemented by array
@@ -16,7 +16,7 @@ class MyHashSet {
 	
 	/** Initialize your data structure here. */
 	@SuppressWarnings("unchecked")
-	public MyHashSet() {
+	public DesignHashSet() {
 		// Array of ArrayLists. 
 		set = (List<Integer>[]) new ArrayList[MAX_LEN];
 	}
@@ -82,7 +82,7 @@ class MyHashSet {
 
 	// For testing. 
 	public static void main(String[] args) {
-		MyHashSet solution = new MyHashSet();
+		DesignHashSet solution = new DesignHashSet();
 
 		// Test arguments. 
 		// int num = 24;
