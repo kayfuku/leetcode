@@ -58,12 +58,15 @@ public class VideoStitching {
     // Why not -1? Because we use min accumulator later.
     // Why not Integer.MAX_VALUE? Because we add 1 before taking min. It's going to overflow.
     Arrays.fill(dp, T + 1);
+    // No clip needed to cover [0, 0].
     dp[0] = 0;
     for (int t = 1; t <= T; t++) {
-      // Iterate through all clips. No need to sort clips.
+      // Iterate through all the clips that cover t. No need to sort clips.
       for (int[] currClip : clips) {
         if (currClip[0] <= t && t <= currClip[1]) {
-          // Find min of numbers of clips at start time of the current clip plus one.
+          // We can cover [start time, t] with currClip, and cover [0, start time]
+          // with dp[start time] clips.
+          // Take the minimum between dp[t] and the one using currClip.
           dp[t] = Math.min(dp[t], dp[currClip[0]] + 1);
         }
       }
