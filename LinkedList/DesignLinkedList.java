@@ -10,7 +10,7 @@ public class DesignLinkedList {
 
   // 1. Singly Linked List
   // Author: @liaison and @andvary + kei
-  // Date : April 8, 2020
+  // Date : April 8, 2020, May 21, 2020
   public class ListNode {
     int val;
     ListNode next;
@@ -22,11 +22,12 @@ public class DesignLinkedList {
 
   class MyLinkedList {
     int size;
-    ListNode head; // sentinel node as pseudo-head
+    ListNode dummyHead; // sentinel node as pseudo-head
 
     public MyLinkedList() {
+      // Dummy head does not count toward the size.
       size = 0;
-      head = new ListNode(0);
+      dummyHead = new ListNode(0);
     }
 
     /**
@@ -39,7 +40,7 @@ public class DesignLinkedList {
         return -1;
       }
 
-      ListNode curr = head;
+      ListNode curr = dummyHead;
       // index + 1 steps needed to move from sentinel node to wanted index
       for (int i = 0; i < index + 1; i++) {
         curr = curr.next;
@@ -82,7 +83,7 @@ public class DesignLinkedList {
 
       size++;
       // Find predecessor of the node to be added.
-      ListNode pred = head;
+      ListNode pred = dummyHead;
       // Move 'pred' 'index' nodes forward.
       for (int i = 0; i < index; i++) {
         pred = pred.next;
@@ -105,7 +106,7 @@ public class DesignLinkedList {
       }
 
       // Find predecessor of the node to be deleted.
-      ListNode pred = head;
+      ListNode pred = dummyHead;
       for (int i = 0; i < index; ++i) {
         pred = pred.next;
       }
@@ -113,6 +114,14 @@ public class DesignLinkedList {
       // Delete the node.
       pred.next = pred.next.next;
       size--;
+    }
+
+    public void printList() {
+      ListNode curr = dummyHead;
+      for (int i = 0; i < size; i++) {
+        curr = curr.next;
+        System.out.println(curr.val);
+      }
     }
   }
 
@@ -134,15 +143,15 @@ public class DesignLinkedList {
   class MyDoublyLinkedList {
     int size;
     // sentinel nodes as pseudo-head and pseudo-tail
-    DoublyListNode head, tail;
+    DoublyListNode dummyHead, dummyTail;
 
     public MyDoublyLinkedList() {
       size = 0;
-      head = new DoublyListNode(0);
-      tail = new DoublyListNode(0);
+      dummyHead = new DoublyListNode(0);
+      dummyTail = new DoublyListNode(0);
       // Don't forget this!
-      head.next = tail;
-      tail.prev = head;
+      dummyHead.next = dummyTail;
+      dummyTail.prev = dummyHead;
     }
 
     /**
@@ -154,9 +163,9 @@ public class DesignLinkedList {
         return -1;
       }
 
-      // choose the fastest way: to move from the head
-      // or to move from the tail
-      DoublyListNode curr = head;
+      // Choose the fastest way: to move from the head
+      // or to move from the tail.
+      DoublyListNode curr = dummyHead;
       // index + 1 is the distance between head and index.
       // size - index is the distance between tail and index.
       if (index + 1 < size - index) {
@@ -164,7 +173,8 @@ public class DesignLinkedList {
           curr = curr.next;
         }
       } else {
-        curr = tail;
+        // dummyTail is closer.
+        curr = dummyTail;
         for (int i = 0; i < size - index; i++) {
           curr = curr.prev;
         }
@@ -178,7 +188,7 @@ public class DesignLinkedList {
      * new node will be the first node of the linked list.
      */
     public void addAtHead(int val) {
-      DoublyListNode pred = head, succ = head.next;
+      DoublyListNode pred = dummyHead, succ = dummyHead.next;
 
       size++;
       DoublyListNode newNode = new DoublyListNode(val);
@@ -190,7 +200,7 @@ public class DesignLinkedList {
 
     /** Append a node of value val to the last element of the linked list. */
     public void addAtTail(int val) {
-      DoublyListNode succ = tail, pred = tail.prev;
+      DoublyListNode pred = dummyTail.prev, succ = dummyTail;
 
       size++;
       DoublyListNode newNode = new DoublyListNode(val);
@@ -218,15 +228,15 @@ public class DesignLinkedList {
         index = 0;
       }
 
-      // find predecessor and successor of the node to be added
+      // Find predecessor and successor of the node to be added
       // succ should be at 'index' before insertion.
       DoublyListNode pred, succ;
       // Use bidirectional search to perform faster.
-      // index is the distance between head and prev.
-      // size - index is the distance between tail and index (succ).
+      // index is the distance between dummyHead and prev.
+      // size - index is the distance between dummyTail and index (succ).
       if (index < size - index) {
-        // head is closer to the index
-        pred = head;
+        // dummyHead is closer to the index.
+        pred = dummyHead;
         // Move pred 'index' nodes forward.
         for (int i = 0; i < index; i++) {
           pred = pred.next;
@@ -235,8 +245,8 @@ public class DesignLinkedList {
         succ = pred.next;
 
       } else {
-        // tail is closer to the index.
-        succ = tail;
+        // dummyTail is closer to the index.
+        succ = dummyTail;
         // Move succ 'size - index' nodes backward.
         for (int i = 0; i < size - index; i++) {
           succ = succ.prev;
@@ -254,26 +264,30 @@ public class DesignLinkedList {
       succ.prev = newNode;
     }
 
-    /** Delete the index-th node in the linked list, if the index is valid. */
+
+    // Delete the index-th node in the linked list, if the index is valid.
+    // Need predecessor and successor of the node to be deleted.
     public void deleteAtIndex(int index) {
       // if the index is invalid, do nothing
       if (index < 0 || index >= size) {
         return;
       }
 
-      // find predecessor and successor of the node to be deleted
+      // Find predecessor and successor of the node to be deleted.
       DoublyListNode pred, succ;
       // Use bidirectional search to perform faster.
+      // index is the distance between dummyHead and prev.
+      // size - index is the distance between dummyTail and index (succ).
       if (index < size - index) {
-        // head is closer to the index
-        pred = head;
+        // dummyHead is closer to the index.
+        pred = dummyHead;
         for (int i = 0; i < index; i++) {
           pred = pred.next;
         }
         // succ is the next node of the node to be deleted
         succ = pred.next.next;
       } else {
-        succ = tail;
+        succ = dummyTail;
         for (int i = 0; i < size - index - 1; i++) {
           succ = succ.prev;
         }
@@ -310,6 +324,17 @@ public class DesignLinkedList {
     // int num = 24;
     // int target = 2;
     // solution.getInt(num, target);
+
+    MyLinkedList list = solution.new MyLinkedList();
+    list.addAtTail(0);
+    list.addAtTail(1);
+    list.addAtTail(2);
+    // list.printList();
+    // System.out.println(list.get(2));
+    list.addAtHead(3);
+    list.printList();
+    list.deleteAtIndex(2);
+    list.printList();
 
 
 
