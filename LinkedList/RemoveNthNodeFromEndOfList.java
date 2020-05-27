@@ -15,7 +15,9 @@ public class RemoveNthNodeFromEndOfList {
     // count = 0;
   }
 
-  // Main logic here. Copy the signature of the method in LeetCode.
+
+
+  // Given n will always be valid.
   public ListNode removeNthFromEnd(ListNode head, int n) {
     if (head == null) {
       return null;
