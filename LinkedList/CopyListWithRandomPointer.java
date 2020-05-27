@@ -44,6 +44,7 @@ public class CopyListWithRandomPointer {
   // Date : May 26, 2020
 
   // HashMap which holds old nodes as keys and new nodes as its values.
+  // K: old node, V: new node
   HashMap<Node, Node> visitedHash = new HashMap<Node, Node>();
 
   public Node copyRandomList(Node head) {
@@ -82,6 +83,7 @@ public class CopyListWithRandomPointer {
   // Date : May 26, 2020
 
   // Visited dictionary to hold old node reference as "key" and new node reference as the "value"
+  // K: old node, V: new node
   HashMap<Node, Node> visited = new HashMap<Node, Node>();
 
   public Node getClonedNode(Node node) {

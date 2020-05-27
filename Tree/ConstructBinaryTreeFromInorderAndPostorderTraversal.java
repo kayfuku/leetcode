@@ -36,12 +36,15 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
   }
 
 
+  // Use postorder to find the next root node, and use inorder
+  // to figure out which nodes are in the left subtree or right subtree.
   // Author: LeetCode + kei
   // Date : May 26, 2020
 
   int postRoot;
   int[] postorder;
   int[] inorder;
+  // K: element in inorder array, V: index of the element
   HashMap<Integer, Integer> inMap = new HashMap<Integer, Integer>();
 
   public TreeNode buildTree(int[] inorder, int[] postorder) {

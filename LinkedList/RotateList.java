@@ -55,10 +55,10 @@ public class RotateList {
     // Find the new tail node.
     // Rotate 2 => The last two nodes move to the head, which means
     // The 3rd node to the last is the new tail node.
-    // The new tail node is (n - 1 - k) edge away from head.
+    // The new tail node is (n - 1 - k) edges away from head.
     // We can actually replace k by k % n in order to consider the case
     // where k >= n.
-    // So, the new tail node is (n - 1 - (k % n)) edge away from head.
+    // So, the new tail node is (n - 1 - (k % n)) edges away from head.
     // n - 1 is # edges in the list. k % n is the distance between
     // the last node and the new tail node.
     // If the k is the multiples of n, then the rotated list is the same as

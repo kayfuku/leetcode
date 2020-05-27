@@ -33,6 +33,8 @@ public class BinaryTreeLevelOrderTraversal {
     while (!queue.isEmpty()) {
       // For each level.
       List<Integer> valsL = new ArrayList<>();
+      // Note that you cannot merge this line into the for loop condition
+      // because queue.size() varies during the loop.
       int size = queue.size();
       // Prepare for the next level.
       for (int i = 0; i < size; i++) {
