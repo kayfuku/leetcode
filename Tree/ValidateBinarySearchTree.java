@@ -4,6 +4,8 @@
 
 package leetcode;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
@@ -51,10 +53,14 @@ public class ValidateBinarySearchTree {
     // Preorder/DFS traversal because I can check validity as soon as I get to the node.
     // Check validity.
     // null check lower, not node. Include equal.
-    // If lower(upper) is null, then any number is ok, including -2147483648(2147483647).
+    // If lower(upper) is null, then any number is ok, including -2147483648 (2147483647).
+    // If the definition of BST is like (left < mid <= right),
+    // then lower != null && node.val < lower.
     if (lower != null && node.val <= lower) {
       return false;
     }
+    // If the definition of BST is like (left <= mid < right),
+    // then upper != null && node.val > upper.
     if (upper != null && node.val >= upper) {
       return false;
     }
@@ -100,7 +106,7 @@ public class ValidateBinarySearchTree {
 
       // Check validity.
       // null check lower, not node. Include equal.
-      // If lower(upper) is null, then any number is ok, including -2147483648(2147483647).
+      // If lower(upper) is null, then any number is ok, including -2147483648 (2147483647).
       if (lower != null && node.val <= lower) {
         return false;
       }
@@ -132,7 +138,7 @@ public class ValidateBinarySearchTree {
   // tree,
   // because of the stack size.
   public boolean isValidBST3(TreeNode node) {
-    LinkedList<TreeNode> stack = new LinkedList<>();
+    Deque<TreeNode> stack = new ArrayDeque<>();
     Integer prev = null;
 
     // Inorder Traversal.
@@ -143,13 +149,13 @@ public class ValidateBinarySearchTree {
       }
 
       // Note that you do not need to create a new TreeNode here.
-      node = stack.poll();
+      // The stack pops the nodes in ascending order.
+      node = stack.pop();
       // Check validity.
       // If prev is null, any number is ok including -2147483648.
       if (prev != null && node.val <= prev) {
         return false;
       }
-
       prev = node.val;
       node = node.right;
     }

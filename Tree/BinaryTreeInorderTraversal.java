@@ -32,7 +32,9 @@ public class BinaryTreeInorderTraversal {
       return;
     }
 
+    // In-order traversal
     inorderTraversal(node.left, list);
+    // Do something.
     list.add(node.val);
     inorderTraversal(node.right, list);
   }
@@ -59,8 +61,10 @@ public class BinaryTreeInorderTraversal {
     // Or if the tree only has a right subtree, then the stack is going to be
     // empty at the root node, but the root node has a right child, so
     // I have to keep traversing (cur != null).
+    // Unlike normal DFS, no need to push the root node in the stack before the while loop.
     while (!stack.isEmpty() || cur != null) {
       // 1. Keep pushing left child until it gets to null.
+      // 3. Push the right child in the stack.
       while (cur != null) {
         stack.push(cur);
         cur = cur.left;
@@ -71,8 +75,9 @@ public class BinaryTreeInorderTraversal {
       // Then, check the right node.
       // If the right child is null, go back to the previous node (pop the node again),
       // which is mid node.
-      // If the right child is not null, then repeat step 1.
+      // If the right child is not null, then go to step 3 and 1 again.
       cur = stack.pop();
+      // Do something. After that, check the right child.
       list.add(cur.val);
       cur = cur.right;
     }

@@ -101,8 +101,8 @@ public class PseudoPalindromicPathsInBinaryTree {
     // Pre-order traversal
     // Count the number of characters using bit vector.
     ptn ^= 1 << node.val;
-    // Check palindrome using (ptn & ptn - 1) == 0.
-    if ((ptn & ptn - 1) == 0 && node.left == null && node.right == null) {
+    // Check palindrome using (ptn & ptn - 1) == 0 if node is a leaf.
+    if (node.left == null && node.right == null && (ptn & ptn - 1) == 0) {
       ct++;
     }
 

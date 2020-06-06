@@ -31,7 +31,7 @@ public class PaintHouse {
   // O(N) time, O(1) space.
   // Author: hai_dee + kei (AC)
   // Date : February 11, 2020
-  public int minCost(int[][] costs) {
+  public int minCost2(int[][] costs) {
     int len = costs.length;
     if (costs == null || len == 0) {
       return 0;
@@ -57,27 +57,26 @@ public class PaintHouse {
   // O(N) time, O(1) space.
   // Author: bitbleach + hai_dee + kei (AC)
   // Date : February 13, 2020
-  public int minCost2(int[][] costs) {
+  public int minCost(int[][] costs) {
     if (costs == null || costs.length == 0) {
       return 0;
     }
 
     int[] currRow = costs[0];
+    for (int i = 1; i < costs.length; i++) {
+      int[] nextRow = costs[i];
 
-    for (int n = 0; n + 1 < costs.length; n++) {
-
-      int[] nextRow = costs[n + 1];
-
-      // Total cost of painting the n-th house red.
+      // Total cost of painting the i-th house red.
       nextRow[0] += Math.min(currRow[1], currRow[2]);
-      // Total cost of painting the n-th house green.
+      // Total cost of painting the i-th house green.
       nextRow[1] += Math.min(currRow[0], currRow[2]);
-      // Total cost of painting the n-th house blue.
+      // Total cost of painting the i-th house blue.
       nextRow[2] += Math.min(currRow[0], currRow[1]);
 
       currRow = nextRow;
     }
 
+    // Take the minimum of the three.
     return Math.min(Math.min(currRow[0], currRow[1]), currRow[2]);
   }
 
