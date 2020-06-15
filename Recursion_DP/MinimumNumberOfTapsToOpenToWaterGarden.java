@@ -27,6 +27,7 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
     Arrays.fill(dp, n + 2);
     // We need no tap to water nothing.
     dp[0] = 0;
+    // Iterate through the taps from the leftmost.
     // Find the leftmost point of garden to water with tap i.
     // Find the rightmost point of garden to water with tap i.
     // We can water [leftmost, rightmost] with one tap i,
@@ -39,6 +40,8 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
       int leftmost = Math.max(i - A[i], 0);
       int rightmost = Math.min(i + A[i], n);
       for (int j = leftmost; j <= rightmost; j++) {
+        // The minimum number of taps to water [0, i] is the smaller of
+        // dp[j] or dp[leftmost] plus the current tap.
         dp[j] = Math.min(dp[j], dp[leftmost] + 1);
       }
     }
