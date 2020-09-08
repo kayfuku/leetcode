@@ -66,12 +66,13 @@ public class SwapNodesInPairs {
 
       // Swap.
       prev.next = second;
-      first.next = second.next;
       second.next = first;
+      // Don't forget the link after the two. 
+      first.next = second.next;
 
       // Reinitialize the curr and prev for next swap.
       prev = first;
-      curr = first.next; // jump
+      curr = first.next; 
     }
 
     // Return the new list.
@@ -81,6 +82,7 @@ public class SwapNodesInPairs {
 
 
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     SwapNodesInPairs solution = new SwapNodesInPairs();
 

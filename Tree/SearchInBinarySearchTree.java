@@ -109,8 +109,8 @@ public class SearchInBinarySearchTree {
     tn5.left = tn6;
     tn5.right = tn7;
 
-    int val = 2;
-    solution.searchBST(tn1, val);
+    int val = 4;
+    solution.searchBSTIter(tn1, val);
 
 
 

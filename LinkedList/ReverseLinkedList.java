@@ -4,6 +4,8 @@
 
 package leetcode;
 
+import javax.print.event.PrintEvent;
+
 public class ReverseLinkedList {
   // fields here.
   // private int count;
@@ -13,23 +15,26 @@ public class ReverseLinkedList {
     // this.count = 0;
   }
 
+
   // 1. Iterative.
   // O(N) time, O(1) space.
   public ListNode reverseList(ListNode head) {
     // corner: null, 1, => ok
 
+    // This is going to be the last null. 
     ListNode prev = null;
     ListNode cur = head;
+    // The third pointer should be after the null check. 
     // ListNode nextNode = cur.next; // NG!
 
     // We need to process the last node. That's why 'cur != null',
     // not 'cur.next != null'.
     while (cur != null) {
-      // Save the pointer before cutting cur.next so that
-      // I can move forward the cur pointer.
+      // Save the pointer before cutting the link to cur.next so that
+      // I can move forward the cur pointer later.
       ListNode nextNode = cur.next;
 
-      // Reverse the link.
+      // Reverse the link. Reverse the arrow. 
       // Cut the link to refer to the previous node.
       cur.next = prev;
 
@@ -44,7 +49,8 @@ public class ReverseLinkedList {
     return prev;
   }
 
-  // 2. Recursive.
+
+  // 2. Recursive. Postorder. Next solution is the best. 
   // O(N) time, O(N) space.
   public ListNode reverseList2(ListNode node) {
     // You can add node == null later when you explain the corner case.
@@ -62,7 +68,7 @@ public class ReverseLinkedList {
     // the list to be reversed.
     ListNode lastNode = reverseList2(node.next);
 
-    // Reverse the link.
+    // Reverse the link. This is the point!
     node.next.next = node;
     // Put a null lid on the node to avoid doubly linked list.
     node.next = null;
@@ -74,6 +80,56 @@ public class ReverseLinkedList {
     return lastNode;
   }
 
+
+  // 2-3. Recursive. Preorder. This is the best. 
+  // O(N) time, O(N) space, and tail recursion benefit
+  // Author: kei (AC)
+  // Date  : September 4, 2020
+  public ListNode reverseListRecur2(ListNode node) {
+    ListNode prev = null;
+    return preorder(prev, node);
+  }
+
+  private ListNode preorder(ListNode prev, ListNode curr) {
+    // You can add node == null later when you explain the corner case.
+    // node.next == null means when the node gets to the last node.
+    if (curr == null) {
+      return prev;
+    }
+
+    ListNode nextNode = curr.next;
+    curr.next = prev;
+
+    // Tail recursion benefit
+    return preorder(curr, nextNode);
+  }
+
+
+  // 2-4. Recursive.
+  // O(N) time, O(N) space.
+  // Author: kei (AC)
+  // Date  : September 4, 2020
+  ListNode prev = null;
+
+  public ListNode reverseListRecur3(ListNode node) {
+    preorder2(prev, node);
+    return prev;
+  }
+
+  private void preorder2(ListNode p, ListNode curr) {
+    if (curr == null) {
+      return;
+    }
+
+    ListNode nextNode = curr.next;
+    curr.next = p;
+    
+    prev = curr;
+    curr = nextNode;
+    preorder2(prev, curr);
+  }
+
+  
 
   // Review
   public ListNode reverseListR(ListNode head) {
@@ -122,7 +178,7 @@ public class ReverseLinkedList {
     list.add(2);
     list.add(3);
     System.out.println(list.toString()); // [ 1 2 3 ]
-    ListNode node = solution.reverseList2(list.head);
+    ListNode node = solution.reverseListRecur3(list.head);
     System.out.println(node); // 3
 
   }
