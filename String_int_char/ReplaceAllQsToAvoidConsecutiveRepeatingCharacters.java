@@ -22,7 +22,7 @@ public class ReplaceAllQsToAvoidConsecutiveRepeatingCharacters {
     char[] s = S.toCharArray();
     for (int i = 0; i < s.length; i++) {
       if (s[i] == '?') {
-        // Iterate lowercase alphabets. 
+        // Iterate lowercase English letters. 
         for (int c = 'a'; c <= 'z'; c++) {
           // Look at how nicely Handled the edge cases are. 
           if ((i == 0 || c != s[i - 1]) && (i == s.length - 1 || c != s[i + 1])) {
@@ -76,7 +76,7 @@ public class ReplaceAllQsToAvoidConsecutiveRepeatingCharacters {
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    ReplaceAllQsToAvoidConsecutiveRepeatingCharacters solution = new ReplaceAllQsToAvoidConsecutiveRepeatingCharacters();
 
     // Test arguments.
     // int num = 24;

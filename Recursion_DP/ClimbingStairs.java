@@ -19,9 +19,9 @@ public class ClimbingStairs {
 	// other classes here. 
 
 	
-	// 1. Recursion. Time Limit Exceeded. 
+	// 1. Recursion. (TLE)
 	// O(2^N) time, because of 2 recursion calls and n recursion stack. 
-	// O(N) space, 
+	// O(N) space.  
 	public int climbStairs(int n) {
 		return climbStairs(0, n);
 	}

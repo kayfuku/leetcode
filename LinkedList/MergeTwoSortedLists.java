@@ -39,8 +39,8 @@ public class MergeTwoSortedLists {
       prev = prev.next;
     }
 
-    // Exactly one of p1 and p2 can be non-null at this point, so connect
-    // the non-null list to the end of the merged list.
+    // One of p1 and p2 is null at this point, so connect
+    // the non-null (possibly null) list to the end of the merged list.
     prev.next = (p1 == null) ? p2 : p1;
 
     return dummy.next;

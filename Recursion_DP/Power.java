@@ -37,7 +37,7 @@ public class Power {
 	}
     
     
-    // 2. Fast Power Algorithm Recursive. Accepted. 
+    // 2. Fast Power Algorithm Recursive. Accepted. This is good enough. 
     // Recurrence Formula: 
     // f(n) = f(n/2) * f(n/2)      if n is even. 
     //      = f(n/2) * f(n/2) * x  if n is odd.
@@ -78,7 +78,7 @@ public class Power {
 	}
     
     
-    // 3. Fast Power Algorithm Iterative. 
+    // 3. Fast Power Algorithm Iterative. (Approach 2 is good enough.)
     // https://leetcode.com/problems/powx-n/solution/
     // 
     public double myPow3(double x, int n) {
