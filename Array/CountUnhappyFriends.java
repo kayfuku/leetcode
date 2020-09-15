@@ -20,28 +20,24 @@ public class CountUnhappyFriends {
   }
 
 
-  // Author:
+  // Author: kei (AC)
   // Date  : September 14, 2020
   public int unhappyFriends(int n, int[][] preferences, int[][] pairs) {
+    // Map<Integer, Integer> pairMap = new HashMap<>();
+    // Using array as a map is faster than using HashMap as a map if possible. 
+    int[] pairMap = new int[n];
 
-
-
-    return 0;
-  }
-
-
-  // Author: kei (AC)
-  // Date  : September 12, 2020
-  public int unhappyFriends2(int n, int[][] preferences, int[][] pairs) {
-    Map<Integer, Integer> pairMap = new HashMap<>();
     for (int[] pair : pairs) {
-      pairMap.put(pair[0], pair[1]);
-      pairMap.put(pair[1], pair[0]);
+      // pairMap.put(pair[0], pair[1]);
+      // pairMap.put(pair[1], pair[0]);
+      pairMap[pair[0]] = pair[1];
+      pairMap[pair[1]] = pair[0];      
     }
 
     int count = 0;
     for (int i = 0; i < n; i++) {
-      int b = pairMap.get(i);
+      // int b = pairMap.get(i);
+      int b = pairMap[i];      
       if (check(i, b, preferences, pairMap)) {
         count++;
       } 
@@ -50,7 +46,8 @@ public class CountUnhappyFriends {
     return count;
   }
 
-  boolean check(int i, int b, int[][] preferences, Map<Integer, Integer> pairMap) {
+  // boolean check(int i, int b, int[][] preferences, Map<Integer, Integer> pairMap) {
+  boolean check(int i, int b, int[][] preferences, int[] pairMap) {
     List<Integer> hiList = new ArrayList<>(); 
     for (int e : preferences[i]) {
       if (e == b) {
@@ -58,9 +55,11 @@ public class CountUnhappyFriends {
       }
       hiList.add(e);
     }
-    for (int h : hiList) {
-      for (int e : preferences[h]) {
-        if (e == pairMap.get(h)) {
+    for (int u : hiList) {
+      for (int e : preferences[u]) {
+        // int v = pairMap.get(u);
+        int v = pairMap[u];
+        if (e == v) {
           break;
         }
         if (e == i) {
