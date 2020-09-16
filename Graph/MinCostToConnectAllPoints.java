@@ -84,8 +84,7 @@ public class MinCostToConnectAllPoints {
       if (par[x] < 0) {
         return x;
       }
-      par[x] = find(par[x]);
-      return par[x];
+      return find(par[x]);
     }
 
     // Merge the two trees. 
