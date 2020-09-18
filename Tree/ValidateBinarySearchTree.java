@@ -52,10 +52,10 @@ public class ValidateBinarySearchTree {
 
     // Preorder/DFS traversal because I can check validity as soon as I get to the node.
     // Check validity.
-    // null check lower, not node. Include equal.
+    // null check lower, not node. Include equal because right cannot be equal to mid. 
     // If lower(upper) is null, then any number is ok, including -2147483648 (2147483647).
     // If the definition of BST is like (left < mid <= right),
-    // then lower != null && node.val < lower.
+    // then lower != null && node.val < lower because right can be equal to mid. 
     if (lower != null && node.val <= lower) {
       return false;
     }
