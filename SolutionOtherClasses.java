@@ -28,16 +28,14 @@ class SolutionOtherClasses {
 
 
     // Binary Tree
-    // 1
-    // \
-    // 2
-    // /
-    // 3
-    BinaryTree binaryTree = new BinaryTree();
+    //   1
+    //    \
+    //     2
+    //    /
+    //   3
     TreeNode n1 = new TreeNode(1);
     TreeNode n2 = new TreeNode(2);
     TreeNode n3 = new TreeNode(3);
-    binaryTree.root = n1;
     n1.right = n2;
     n2.left = n3;
 
@@ -48,7 +46,6 @@ class SolutionOtherClasses {
     // 3 12
     // / \ / \
     // 1 4 9 14
-    BinaryTree bst = new BinaryTree();
     TreeNode tn1 = new TreeNode(6);
     TreeNode tn2 = new TreeNode(3);
     TreeNode tn3 = new TreeNode(1);
@@ -57,7 +54,6 @@ class SolutionOtherClasses {
     TreeNode tn6 = new TreeNode(9);
     TreeNode tn7 = new TreeNode(14);
 
-    bst.root = tn1;
     tn1.setLeft(tn2);
     tn1.setRight(tn5);
     tn2.setLeft(tn3);
@@ -390,6 +386,15 @@ class UF {
     x = find(x);
     y = find(y);
     if (x != y) {
+      // // Balance the tree to optimize the performance. 
+      // // Put the rank-like value in the parent of the root. 
+      // if (par[y] < par[x]) {
+      //   int d = x;
+      //   x = y;
+      //   y = d;
+      // }
+      // par[x] += par[y];
+
       // Merge tree y into x. 
       par[y] = x;
     }
