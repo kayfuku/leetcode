@@ -15,16 +15,15 @@ public class ReverseLinkedList {
     // this.count = 0;
   }
 
-
   // 1. Iterative.
   // O(N) time, O(1) space.
   public ListNode reverseList(ListNode head) {
     // corner: null, 1, => ok
 
-    // This is going to be the last null. 
+    // This is going to be the last null.
     ListNode prev = null;
     ListNode cur = head;
-    // The third pointer should be after the null check. 
+    // The third pointer should be after the null check.
     // ListNode nextNode = cur.next; // NG!
 
     // We need to process the last node. That's why 'cur != null',
@@ -34,7 +33,7 @@ public class ReverseLinkedList {
       // I can move forward the cur pointer later.
       ListNode nextNode = cur.next;
 
-      // Reverse the link. Reverse the arrow. 
+      // Reverse the link. Reverse the arrow.
       // Cut the link to refer to the previous node.
       cur.next = prev;
 
@@ -49,8 +48,7 @@ public class ReverseLinkedList {
     return prev;
   }
 
-
-  // 2. Recursive. Postorder. Next solution is the best. 
+  // 2. Recursive. Postorder. Next solution is the best.
   // O(N) time, O(N) space.
   public ListNode reverseList2(ListNode node) {
     // You can add node == null later when you explain the corner case.
@@ -80,11 +78,10 @@ public class ReverseLinkedList {
     return lastNode;
   }
 
-
-  // 2-3. Recursive. Preorder. This is the best. 
+  // 2-3. Recursive. Preorder. This is the best.
   // O(N) time, O(N) space, and tail recursion benefit
   // Author: kei (AC)
-  // Date  : September 4, 2020
+  // Date : September 4, 2020
   public ListNode reverseListRecur2(ListNode node) {
     ListNode prev = null;
     return preorder(prev, node);
@@ -98,17 +95,17 @@ public class ReverseLinkedList {
     }
 
     ListNode nextNode = curr.next;
+    // Reverse the link. This is the point!
     curr.next = prev;
 
     // Tail recursion benefit
     return preorder(curr, nextNode);
   }
 
-
   // 2-4. Recursive.
   // O(N) time, O(N) space.
   // Author: kei (AC)
-  // Date  : September 4, 2020
+  // Date : September 4, 2020
   ListNode prev = null;
 
   public ListNode reverseListRecur3(ListNode node) {
@@ -123,13 +120,11 @@ public class ReverseLinkedList {
 
     ListNode nextNode = curr.next;
     curr.next = p;
-    
+
     prev = curr;
     curr = nextNode;
     preorder2(prev, curr);
   }
-
-  
 
   // Review
   public ListNode reverseListR(ListNode head) {
@@ -162,8 +157,6 @@ public class ReverseLinkedList {
     return lastNode;
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     ReverseLinkedList solution = new ReverseLinkedList();
@@ -184,5 +177,3 @@ public class ReverseLinkedList {
   }
 
 }
-
-

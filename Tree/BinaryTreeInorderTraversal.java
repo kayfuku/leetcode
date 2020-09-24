@@ -18,7 +18,6 @@ public class BinaryTreeInorderTraversal {
     // this.count = 0;
   }
 
-
   // 1. Inorder traversal recursive version.
   // O(N) time, O(N) space, where N is the total number of nodes.
   public List<Integer> inorderTraversal(TreeNode root) {
@@ -39,8 +38,6 @@ public class BinaryTreeInorderTraversal {
     inorderTraversal(node.right, list);
   }
 
-
-
   // Iterative.
   //
   // 2. Inorder traversal iterative version.
@@ -57,11 +54,13 @@ public class BinaryTreeInorderTraversal {
     List<Integer> list = new ArrayList<>();
     TreeNode cur = root;
     Stack<TreeNode> stack = new Stack<>();
+
     // If the stack is not empty, there should be a mid node to visit.
     // Or if the tree only has a right subtree, then the stack is going to be
     // empty at the root node, but the root node has a right child, so
     // I have to keep traversing (cur != null).
-    // Unlike normal DFS, no need to push the root node in the stack before the while loop.
+    // Unlike normal DFS, no need to push the root node in the stack before the
+    // while loop.
     while (!stack.isEmpty() || cur != null) {
       // 1. Keep pushing left child until it gets to null.
       // 3. Push the right child in the stack.
@@ -73,7 +72,8 @@ public class BinaryTreeInorderTraversal {
       // 2. If it gets to null of left subtree, then pop the node from the
       // stack. That is the node to be printed or processed now.
       // Then, check the right node.
-      // If the right child is null, go back to the previous node (pop the node again),
+      // If the right child is null, go back to the previous node (pop the node
+      // again),
       // which is mid node.
       // If the right child is not null, then go to step 3 and 1 again.
       cur = stack.pop();
@@ -84,7 +84,6 @@ public class BinaryTreeInorderTraversal {
 
     return list;
   }
-
 
   // 2. Inorder traversal iterative version.
   // Push the nodes to the stack until the left child is null.
@@ -112,7 +111,6 @@ public class BinaryTreeInorderTraversal {
     return ans;
   }
 
-
   // Review
   // Recursive.
   public List<Integer> inorderTraversalR(TreeNode root) {
@@ -131,8 +129,6 @@ public class BinaryTreeInorderTraversal {
     list.add(node.val);
     inorderTraversalR(node.right, list);
   }
-
-
 
   // For testing.
   public static void main(String[] args) {
@@ -163,10 +159,6 @@ public class BinaryTreeInorderTraversal {
     List<Integer> ret2 = solution.inorderTraversal2(binaryTree.root);
     System.out.println(ret2.toString()); // [1, 3, 2]
 
-
-
   }
 
 }
-
-
