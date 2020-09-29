@@ -83,6 +83,7 @@ public class IntersectionOfTwoArrays {
 
 	// 3. Binary Search
 	// If given array is sorted, this solution is better.
+	// O(NlogM) time (N < M), O(1) space (The sorting line omitted)
 	// Author: kei (AC)
 	// Date : September 25, 2020
 	public int[] intersection3(int[] nums1, int[] nums2) {
