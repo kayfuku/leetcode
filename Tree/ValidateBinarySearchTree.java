@@ -9,7 +9,6 @@ import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Stack;
 
-
 public class ValidateBinarySearchTree {
   // fields here.
   // private int count;
@@ -19,21 +18,23 @@ public class ValidateBinarySearchTree {
     // this.count = 0;
   }
 
-
-
   // For this problem, BST is a special binary tree that all the descendants
   // to the left of a node are less than the node, and all the descendants
   // to the right of the node are greater than the node.
   // (left < mid < right)
 
   // 1. DFS. Lower/Upper Approach (Recursive).
-  // While traversing the tree, I'm going to keep track of the minimum and maximum for the current
+  // While traversing the tree, I'm going to keep track of the minimum and maximum
+  // for the current
   // node.
-  // When going down left subtree, I update the maximum with the current node value.
-  // When going down right subtree, I update the minimum with the current node value.
+  // When going down left subtree, I update the maximum with the current node
+  // value.
+  // When going down right subtree, I update the minimum with the current node
+  // value.
   //
   // O(N) time, since we visit each node exactly once.
-  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the height of the input
+  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the
+  // height of the input
   // tree,
   // because of the recursion stack.
   public boolean isValidBST(TreeNode root) {
@@ -50,12 +51,15 @@ public class ValidateBinarySearchTree {
       return true;
     }
 
-    // Preorder/DFS traversal because I can check validity as soon as I get to the node.
+    // Preorder/DFS traversal because I can check validity as soon as I get to the
+    // node.
     // Check validity.
-    // null check lower, not node. Include equal because right cannot be equal to mid. 
-    // If lower(upper) is null, then any number is ok, including -2147483648 (2147483647).
+    // null check lower, not node. Include equal because right cannot be equal to
+    // mid.
+    // If lower(upper) is null, then any number is ok, including -2147483648
+    // (2147483647).
     // If the definition of BST is like (left < mid <= right),
-    // then lower != null && node.val < lower because right can be equal to mid. 
+    // then lower != null && node.val < lower because right can be equal to mid.
     if (lower != null && node.val <= lower) {
       return false;
     }
@@ -71,10 +75,10 @@ public class ValidateBinarySearchTree {
     return isValidBST(node.left, lower, node.val) && isValidBST(node.right, node.val, upper);
   }
 
-
   // 2. DFS. Lower/Upper Approach (Iterative).
   // O(N) time, since we visit each node exactly once.
-  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the height of the input
+  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the
+  // height of the input
   // tree,
   // because of the recursion stack.
   LinkedList<TreeNode> stackNodes = new LinkedList<>();
@@ -95,7 +99,8 @@ public class ValidateBinarySearchTree {
     // NG!
     // Integer min = Integer.MIN_VALUE, max = Integer.MAX_VALUE;
 
-    // Preorder/DFS traversal because I can check validity as soon as I get to the node.
+    // Preorder/DFS traversal because I can check validity as soon as I get to the
+    // node.
     // Push the state first.
     update(node, lower, upper);
     while (!stackNodes.isEmpty()) {
@@ -106,7 +111,8 @@ public class ValidateBinarySearchTree {
 
       // Check validity.
       // null check lower, not node. Include equal.
-      // If lower(upper) is null, then any number is ok, including -2147483648 (2147483647).
+      // If lower(upper) is null, then any number is ok, including -2147483648
+      // (2147483647).
       if (lower != null && node.val <= lower) {
         return false;
       }
@@ -126,15 +132,17 @@ public class ValidateBinarySearchTree {
     return true;
   }
 
-
   // 3. Inorder Approach (Iterative).
-  // Inorder traversal of BST gives nodes in non-decreasing order, in this problem,
+  // Inorder traversal of BST gives nodes in non-decreasing order, in this
+  // problem,
   // an increasing order.
-  // I need to store the previous value, so I'm going to use iterative inorder traversal.
+  // I need to store the previous value, so I'm going to use iterative inorder
+  // traversal.
   // Inorder traversal recursive might not be possible because we cannot store the
   // previous value when we go back to the previous recursion stack.
   // O(N) time, since we visit each node exactly once.
-  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the height of the input
+  // O(H) space (O(logN) for balanced, O(N) for not balanced), where H is the
+  // height of the input
   // tree,
   // because of the stack size.
   public boolean isValidBST3(TreeNode node) {
@@ -163,7 +171,6 @@ public class ValidateBinarySearchTree {
     return true;
   }
 
-
   // Review
   // Recursive. Accepted.
   public boolean isValidBSTRecurR(TreeNode node) {
@@ -186,10 +193,8 @@ public class ValidateBinarySearchTree {
       return false;
     }
 
-    return isValidBSTRecurR(node.left, lower, node.val)
-        && isValidBSTRecurR(node.right, node.val, upper);
+    return isValidBSTRecurR(node.left, lower, node.val) && isValidBSTRecurR(node.right, node.val, upper);
   }
-
 
   // Review. DFS. Iterative. Accepted.
   Stack<TreeNode> stackNode = new Stack<>();
@@ -221,7 +226,6 @@ public class ValidateBinarySearchTree {
       if (upper != null && node.val >= upper) {
         return false;
       }
-
 
       if (node.right != null) {
         pushState(node.right, node.val, upper);
@@ -257,10 +261,8 @@ public class ValidateBinarySearchTree {
       return false;
     }
 
-    return isValidBstDfsRecurR2(node.left, min, node.val)
-        && isValidBstDfsRecurR2(node.right, node.val, max);
+    return isValidBstDfsRecurR2(node.left, min, node.val) && isValidBstDfsRecurR2(node.right, node.val, max);
   }
-
 
   // Review 2. DFS. Iterative.
   public boolean isValidBstDfsIterR2(TreeNode root) {
@@ -303,7 +305,6 @@ public class ValidateBinarySearchTree {
     return true;
   }
 
-
   // Review 2. Inorder. Iterative.
   public boolean isValidBstInorderR2(TreeNode node) {
     // corner. => ok.
@@ -326,8 +327,6 @@ public class ValidateBinarySearchTree {
     return true;
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     ValidateBinarySearchTree solution = new ValidateBinarySearchTree();
@@ -343,7 +342,6 @@ public class ValidateBinarySearchTree {
     // 3 12
     // / \ / \
     // 1 4 9 14
-    BinaryTree bst = new BinaryTree();
     TreeNode n1 = new TreeNode(6);
     TreeNode n2 = new TreeNode(3);
     TreeNode n3 = new TreeNode(1);
@@ -351,16 +349,14 @@ public class ValidateBinarySearchTree {
     TreeNode n5 = new TreeNode(12);
     TreeNode n6 = new TreeNode(9);
     TreeNode n7 = new TreeNode(14);
+    n1.left = n2;
+    n1.right = n5;
+    n2.left = n3;
+    n2.right = n4;
+    n5.left = n6;
+    n5.right = n7;
 
-    bst.root = n1;
-    n1.setLeft(n2);
-    n1.setRight(n5);
-    n2.setLeft(n3);
-    n2.setRight(n4);
-    n5.setLeft(n6);
-    n5.setRight(n7);
-
-    boolean ret = solution.isValidBST(bst.root);
+    boolean ret = solution.isValidBST(n1);
     System.out.println(ret); // true
 
     // This is not a Binary Search Tree.
@@ -369,29 +365,22 @@ public class ValidateBinarySearchTree {
     // 3 12
     // / \ / \
     // 1 7 9 14
-    BinaryTree notBst = new BinaryTree();
-    notBst.root = n1;
     TreeNode n8 = new TreeNode(7);
-    n1.setLeft(n2);
-    n1.setRight(n5);
-    n2.setLeft(n3);
-    n2.setRight(n8);
-    n5.setLeft(n6);
-    n5.setRight(n7);
+    n1.left = n2;
+    n1.right = n5;
+    n2.left = n3;
+    n2.right = n8; // Changed here
+    n5.left = n6;
+    n5.right = n7;
 
-    ret = solution.isValidBST(notBst.root);
+    ret = solution.isValidBST(n1);
     System.out.println(ret); // false
-
 
     // TreeNode n9 = new TreeNode(1);
     // TreeNode n10 = new TreeNode(1);
     // n9.left = n10;
     // System.out.println(solution.isValidBST4(n9));
 
-
-
   }
 
 }
-
-

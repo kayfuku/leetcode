@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Queue;
 
 public class BinaryTreeZigzagLevelOrderTraversal {
-	// fields here. 
-	//	private int count;
+	// fields here.
+	// private int count;
 
 	public BinaryTreeZigzagLevelOrderTraversal() {
-		// Initialization here. 
-		//		this.count = 0;
+		// Initialization here.
+		// this.count = 0;
 	}
 
-	// 1. BFS. 
-	// Depending on the level, add the value to the head or tail of the list. 
-	// O(N) time, where N is the total number of nodes, because we visit every node. 
-	// O(N) space, because of the size of the queue. 
+	// 1. BFS.
+	// Depending on the level, add the value to the head or tail of the list.
+	// O(N) time, where N is the total number of nodes, because we visit every node.
+	// O(N) space, because of the size of the queue.
 	public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
 		List<List<Integer>> ret = new LinkedList<>();
 		if (root == null) {
@@ -39,10 +39,10 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 
 				// Do Zigzag.
 				if (level % 2 == 0) {
-					// level is even. Add the value to the tail of the list. 
+					// level is even. Add the value to the tail of the list.
 					valsL.add(node.val);
 				} else {
-					// level is odd. Add the value to the head of the list. 
+					// level is odd. Add the value to the head of the list.
 					valsL.add(0, node.val);
 				}
 
@@ -60,12 +60,12 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		return ret;
 	}
 
-
-	// 2. DFS, recursive.  
-	// Basically, do the DFS level order traversal. 
-	// Depending on the number of the level, add the value to the head or tail of the list. 
-	// O(N) time, where N is the total number of nodes, because we visit every node. 
-	// O(logN) space, because of the recursion stack. 
+	// 2. DFS, recursive.
+	// Basically, do the DFS level order traversal.
+	// Depending on the number of the level, add the value to the head or tail of
+	// the list.
+	// O(N) time, where N is the total number of nodes, because we visit every node.
+	// O(logN) space, because of the recursion stack.
 	public List<List<Integer>> zigzagLevelOrderDfs(TreeNode root) {
 		List<List<Integer>> ret = new ArrayList<>();
 		if (root == null) {
@@ -74,6 +74,7 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		zigzagLevelOrderDfsHelper(root, 0, ret);
 		return ret;
 	}
+
 	private void zigzagLevelOrderDfsHelper(TreeNode node, int level, List<List<Integer>> ret) {
 		if (node == null) {
 			return;
@@ -94,11 +95,10 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		zigzagLevelOrderDfsHelper(node.right, level + 1, ret);
 	}
 
-
-	// Review. 
+	// Review.
 	public List<List<Integer>> zigzagLevelOrderBfsR(TreeNode root) {
 		List<List<Integer>> ret = new ArrayList<>();
-		// corner. 
+		// corner.
 		if (root == null) {
 			return ret;
 		}
@@ -130,9 +130,8 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 			level++;
 		}
 
-		return ret;	
+		return ret;
 	}
-
 
 	// Review. DFS.
 	public List<List<Integer>> zigzagLevelOrderDfsR(TreeNode root) {
@@ -143,9 +142,10 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		zigzagLevelOrder(root, 0, ret);
 		return ret;
 	}
+
 	private void zigzagLevelOrder(TreeNode node, int level, List<List<Integer>> ret) {
 		if (node == null) {
-			return;	
+			return;
 		}
 
 		if (ret.size() == level) {
@@ -158,26 +158,24 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		}
 
 		zigzagLevelOrder(node.left, level + 1, ret);
-		zigzagLevelOrder(node.right, level + 1, ret);	
+		zigzagLevelOrder(node.right, level + 1, ret);
 	}
 
-
-
-	// For testing. 
+	// For testing.
 	public static void main(String[] args) {
 		BinaryTreeZigzagLevelOrderTraversal solution = new BinaryTreeZigzagLevelOrderTraversal();
 
-		// Test arguments. 
-		//	    int num = 24;
-		//	    int target = 2;
-		//	    solution.getInt(num, target);
+		// Test arguments.
+		// int num = 24;
+		// int target = 2;
+		// solution.getInt(num, target);
 
 		// Binary Tree
-		//    1
-		//   / \
-		//  9  20 
-		//     / \
-		//    15  7
+		// 1
+		// / \
+		// 9 20
+		// / \
+		// 15 7
 		BinaryTree binaryTree = new BinaryTree();
 		TreeNode n1 = new TreeNode(3);
 		TreeNode n2 = new TreeNode(20);
@@ -194,22 +192,6 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 		List<List<Integer>> ret = solution.zigzagLevelOrder(binaryTree.root);
 		System.out.println(ret); // [[3], [20, 9], [15, 7]]
 
-
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

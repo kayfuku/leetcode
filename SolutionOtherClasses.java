@@ -10,7 +10,6 @@ import java.util.List;
 
 class SolutionOtherClasses {
 
-
   // For testing.
   public static void main(String[] args) {
 
@@ -25,20 +24,17 @@ class SolutionOtherClasses {
     list.add(6);
     System.out.println(list.toString()); // [ 7 9 2 10 1 8 6 ]
 
-
-
     // Binary Tree
-    //   1
-    //    \
-    //     2
-    //    /
-    //   3
+    // 1
+    // \
+    // 2
+    // /
+    // 3
     TreeNode n1 = new TreeNode(1);
     TreeNode n2 = new TreeNode(2);
     TreeNode n3 = new TreeNode(3);
     n1.right = n2;
     n2.left = n3;
-
 
     // Binary Search Tree
     // 6
@@ -53,16 +49,20 @@ class SolutionOtherClasses {
     TreeNode tn5 = new TreeNode(12);
     TreeNode tn6 = new TreeNode(9);
     TreeNode tn7 = new TreeNode(14);
+    tn1.left = tn2;
+    tn1.right = tn5;
+    tn2.left = tn3;
+    tn2.right = tn4;
+    tn5.left = tn6;
+    tn5.right = tn7;
 
-    tn1.setLeft(tn2);
-    tn1.setRight(tn5);
-    tn2.setLeft(tn3);
-    tn2.setRight(tn4);
-    tn5.setLeft(tn6);
-    tn5.setRight(tn7);
+    System.out.println("preorder: ");
+    preorder(tn1);
+    System.out.println();
+    System.out.println("inorder: ");
+    inorder(tn1);
 
   }
-
 
   // For test.
   private static void preorder(TreeNode node) {
@@ -85,10 +85,7 @@ class SolutionOtherClasses {
     inorder(node.right);
   }
 
-
 }
-
-
 
 class ListNode {
   int val;
@@ -109,7 +106,6 @@ class ListNode {
   }
 }
 
-
 class DoublyListNode {
   int val;
   DoublyListNode next, prev;
@@ -118,7 +114,6 @@ class DoublyListNode {
     val = x;
   }
 }
-
 
 class MyLinkedList {
   ListNode head;
@@ -155,39 +150,53 @@ class MyLinkedList {
 
 }
 
-
-
 class BinaryTree {
-
   TreeNode root;
-
-
 }
 
-
-class TreeNode implements Comparable<TreeNode> {
+class TreeNode {
   int val;
-  int count;
   TreeNode left;
   TreeNode right;
 
-  public TreeNode() {}
+  TreeNode() {
+  }
 
-  public TreeNode(int data) {
+  TreeNode(int val) {
+    this.val = val;
+  }
+
+  TreeNode(int val, TreeNode left, TreeNode right) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
+class TreeNodeC implements Comparable<TreeNodeC> {
+  int val;
+  int count;
+  TreeNodeC left;
+  TreeNodeC right;
+
+  public TreeNodeC() {
+  }
+
+  public TreeNodeC(int data) {
     this.val = data;
     this.count = 1;
   }
 
-  public void setLeft(TreeNode node) {
+  public void setLeft(TreeNodeC node) {
     left = node;
   }
 
-  public void setRight(TreeNode node) {
+  public void setRight(TreeNodeC node) {
     right = node;
   }
 
   @Override
-  public int compareTo(TreeNode o) {
+  public int compareTo(TreeNodeC o) {
     if (this.val < o.val) {
       return -1;
     } else if (this.val == o.val) {
@@ -215,7 +224,7 @@ class TreeNode implements Comparable<TreeNode> {
       return false;
     if (getClass() != obj.getClass())
       return false;
-    TreeNode other = (TreeNode) obj;
+    TreeNodeC other = (TreeNodeC) obj;
     if (val != other.val)
       return false;
     return true;
@@ -226,10 +235,7 @@ class TreeNode implements Comparable<TreeNode> {
     return String.valueOf(val);
   }
 
-
 }
-
-
 
 // This is also in the javafx library.
 class Pair {
@@ -251,7 +257,6 @@ class Pair {
 
 }
 
-
 class PairGen<T1, T2> {
   private T1 key;
   private T2 value;
@@ -271,20 +276,19 @@ class PairGen<T1, T2> {
 
 }
 
-
 // Graph without weight.
 class GraphNode {
   public int val;
   public List<GraphNode> neighbors;
 
-  public GraphNode() {}
+  public GraphNode() {
+  }
 
   public GraphNode(int val, List<GraphNode> neighbors) {
     this.val = val;
     this.neighbors = neighbors;
   }
 }
-
 
 // Graph without weight.
 class Graph {
@@ -315,8 +319,6 @@ class Graph {
   }
 }
 
-
-
 // Graph with weight.
 class Edge {
   int src;
@@ -329,7 +331,6 @@ class Edge {
     this.weight = weight;
   }
 }
-
 
 class GraphWithWeight {
   int numNodes;
@@ -361,7 +362,6 @@ class GraphWithWeight {
   }
 }
 
-
 // Union Find (Disjoint Set)
 class UF {
   public int[] par;
@@ -371,7 +371,7 @@ class UF {
     Arrays.fill(par, -1);
   }
 
-  // Find root. 
+  // Find root.
   public int find(int x) {
     if (par[x] < 0) {
       return x;
@@ -380,33 +380,29 @@ class UF {
     return par[x];
   }
 
-  // Merge the two trees. 
-  // Return true if they are not in the same tree. 
+  // Merge the two trees.
+  // Return true if they are not in the same tree.
   public boolean union(int x, int y) {
     x = find(x);
     y = find(y);
     if (x != y) {
-      // // Balance the tree to optimize the performance. 
-      // // Put the rank-like value in the parent of the root. 
+      // // Balance the tree to optimize the performance.
+      // // Put the rank-like value in the parent of the root.
       // if (par[y] < par[x]) {
-      //   int d = x;
-      //   x = y;
-      //   y = d;
+      // int d = x;
+      // x = y;
+      // y = d;
       // }
       // par[x] += par[y];
 
-      // Merge tree y into x. 
+      // Merge tree y into x.
       par[y] = x;
     }
     return x != y;
   }
 
-  // Check if the two nodes belong to the same tree. 
+  // Check if the two nodes belong to the same tree.
   public boolean same(int x, int y) {
     return find(x) == find(y);
   }
 }
-
-
-
-

@@ -18,7 +18,6 @@ public class BinaryTreeLevelOrderTraversal {
     // this.count = 0;
   }
 
-
   // 1. Level order traversal (BFS, Iterative).
   // O(N) time, O(N) space.
   public List<List<Integer>> levelOrder(TreeNode root) {
@@ -30,9 +29,11 @@ public class BinaryTreeLevelOrderTraversal {
     Queue<TreeNode> queue = new LinkedList<>();
     queue.add(root);
 
+    // This is not necessary for this problem, but useful for others.
+    int level = 0;
     while (!queue.isEmpty()) {
       // For each level.
-      List<Integer> valsL = new ArrayList<>();
+      List<Integer> list = new ArrayList<>();
       // Note that you cannot merge this line into the for loop condition
       // because queue.size() varies during the loop.
       int size = queue.size();
@@ -40,7 +41,7 @@ public class BinaryTreeLevelOrderTraversal {
       for (int i = 0; i < size; i++) {
         TreeNode node = queue.poll();
         // Do something here.
-        valsL.add(node.val);
+        list.add(node.val);
 
         if (node.left != null) {
           queue.add(node.left);
@@ -50,16 +51,18 @@ public class BinaryTreeLevelOrderTraversal {
         }
       }
 
-      result.add(valsL);
+      result.add(list);
+      level++;
     }
 
     return result;
   }
 
-
   // 2. Level order traversal (DFS, Recursive).
-  // For DFS, I'm going to use level variable to learn which level the current node is in.
-  // For each level, I use a list, and while traversing the tree, I add the node to
+  // For DFS, I'm going to use level variable to learn which level the current
+  // node is in.
+  // For each level, I use a list, and while traversing the tree, I add the node
+  // to
   // the corresponding list.
   // O(N) time, O(logN) (balanced) or O(N) (not balanced) space.
   public List<List<Integer>> levelOrderDfs(TreeNode root) {
@@ -87,7 +90,6 @@ public class BinaryTreeLevelOrderTraversal {
     levelOrderDfsHelper(node.left, level + 1, ret);
     levelOrderDfsHelper(node.right, level + 1, ret);
   }
-
 
   // Level order traversal. Accepted. The first one might be better.
   // O(N) time, O(N) space.
@@ -123,7 +125,6 @@ public class BinaryTreeLevelOrderTraversal {
     return ans;
   }
 
-
   // Review.
   public List<List<Integer>> levelOrderBfsR(TreeNode root) {
     List<List<Integer>> res = new ArrayList<>();
@@ -156,7 +157,6 @@ public class BinaryTreeLevelOrderTraversal {
     return res;
   }
 
-
   // Review. DFS Recursive.
   public List<List<Integer>> levelOrderDfsR(TreeNode root) {
     List<List<Integer>> ret = new ArrayList<>();
@@ -181,8 +181,6 @@ public class BinaryTreeLevelOrderTraversal {
     levelOrderDfsR(node.right, level + 1, ret);
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     BinaryTreeLevelOrderTraversal solution = new BinaryTreeLevelOrderTraversal();
@@ -192,10 +190,6 @@ public class BinaryTreeLevelOrderTraversal {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

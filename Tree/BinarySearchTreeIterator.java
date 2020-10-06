@@ -18,7 +18,6 @@ public class BinarySearchTreeIterator {
     // this.count = 0;
   }
 
-
   // 1. Flattening the BST.
   // The in-order traversal of a BST gives us the elements in an ascending order.
   // For iterator, I just need an array and a pointer.
@@ -62,24 +61,27 @@ public class BinarySearchTreeIterator {
     }
   }
 
-
   // 2. Controlled Recursion.
   // next(): Amortized O(1) time, hasNext(): O(1) time.
-  // O(h) space, where h is the height of the tree, which is also the size of the stack we use.
+  // O(h) space, where h is the height of the tree, which is also the size of the
+  // stack we use.
   // Author: LeetCode + kei
   // Date : June 12, 2019
   /**
    * https://leetcode.com/problems/binary-search-tree-iterator/solution/
    * 
-   * next() involves two major operations. One is where we pop an element from the stack which
-   * becomes the next smallest element to return. This is a O(1) operation. However, we then make a
-   * call to our helper function addLeftmostNodes which iterates over a bunch of nodes. This is
-   * clearly a linear time operation i.e. O(N) in the worst case. This is true. However, the
-   * important thing to note here is that we only make such a call for nodes which have a right
-   * child. Otherwise, we simply return. Also, even if we end up calling the helper function, it
-   * won't always process N nodes. They will be much lesser. Only if we have a skewed tree would
-   * there be N nodes for the root. But that is the only node for which we would call the helper
-   * function. Thus, the amortized (average) time complexity for this function would still be O(1).
+   * next() involves two major operations. One is where we pop an element from the
+   * stack which becomes the next smallest element to return. This is a O(1)
+   * operation. However, we then make a call to our helper function
+   * addLeftmostNodes which iterates over a bunch of nodes. This is clearly a
+   * linear time operation i.e. O(N) in the worst case. This is true. However, the
+   * important thing to note here is that we only make such a call for nodes which
+   * have a right child. Otherwise, we simply return. Also, even if we end up
+   * calling the helper function, it won't always process N nodes. They will be
+   * much lesser. Only if we have a skewed tree would there be N nodes for the
+   * root. But that is the only node for which we would call the helper function.
+   * Thus, the amortized (average) time complexity for this function would still
+   * be O(1).
    */
   class BSTIterator2 {
 
@@ -116,12 +118,11 @@ public class BinarySearchTreeIterator {
     }
   }
 
-
   /**
-   * Your BSTIterator object will be instantiated and called as such: BSTIterator obj = new
-   * BSTIterator(root); int param_1 = obj.next(); boolean param_2 = obj.hasNext();
+   * Your BSTIterator object will be instantiated and called as such: BSTIterator
+   * obj = new BSTIterator(root); int param_1 = obj.next(); boolean param_2 =
+   * obj.hasNext();
    */
-
 
   // Review
   // O(N) time, O(N) space.
@@ -190,7 +191,6 @@ public class BinarySearchTreeIterator {
 
   }
 
-
   // For testing.
   public static void main(String[] args) {
     BinarySearchTreeIterator solution = new BinarySearchTreeIterator();
@@ -206,7 +206,6 @@ public class BinarySearchTreeIterator {
     // 3 12
     // / \ / \
     // 1 4 9 14
-    BinaryTree bst = new BinaryTree();
     TreeNode tn1 = new TreeNode(6);
     TreeNode tn2 = new TreeNode(3);
     TreeNode tn3 = new TreeNode(1);
@@ -214,16 +213,14 @@ public class BinarySearchTreeIterator {
     TreeNode tn5 = new TreeNode(12);
     TreeNode tn6 = new TreeNode(9);
     TreeNode tn7 = new TreeNode(14);
+    tn1.left = tn2;
+    tn1.right = tn5;
+    tn2.left = tn3;
+    tn2.right = tn4;
+    tn5.left = tn6;
+    tn5.right = tn7;
 
-    bst.root = tn1;
-    tn1.setLeft(tn2);
-    tn1.setRight(tn5);
-    tn2.setLeft(tn3);
-    tn2.setRight(tn4);
-    tn5.setLeft(tn6);
-    tn5.setRight(tn7);
-
-    BSTIterator2 bstIterator2 = solution.new BSTIterator2(bst.root);
+    BSTIterator2 bstIterator2 = solution.new BSTIterator2(tn1);
     System.out.println(bstIterator2.next()); // 1
     System.out.println(bstIterator2.next()); // 3
     System.out.println(bstIterator2.next()); // 4
@@ -234,10 +231,6 @@ public class BinarySearchTreeIterator {
     System.out.println(bstIterator2.next()); // 14
     System.out.println(bstIterator2.hasNext()); // false
 
-
-
   }
 
 }
-
-
