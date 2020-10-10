@@ -13,7 +13,7 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
 		// this.count = 0;
 	}
 
-	// Union Find.
+	// Union Find. Bottom one is better.
 	// https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/discuss/77574/Easiest-2ms-Java-Solution
 	// Author: yavinci + kei
 	// Data : July 31, 2019
@@ -69,6 +69,47 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
 			id = roots[id];
 		}
 		return id;
+	}
+
+	// Review 3
+	public int countComponentsR3(int n, int[][] edges) {
+		UF uf = new UF(n);
+
+		for (int[] e : edges) {
+			int s = e[0];
+			int t = e[1];
+			int x = uf.find(s);
+			int y = uf.find(t);
+			if (x != y) {
+				uf.unite(x, y);
+				n--;
+			}
+		}
+
+		return n;
+	}
+
+	class UF {
+		int[] roots;
+
+		UF(int n) {
+			roots = new int[n];
+			for (int i = 0; i < n; i++) {
+				roots[i] = i;
+			}
+		}
+
+		int find(int x) {
+			if (x == roots[x]) {
+				return x;
+			}
+			roots[x] = find(roots[x]);
+			return roots[x];
+		}
+
+		void unite(int x, int y) {
+			roots[x] = y;
+		}
 	}
 
 	// For testing.

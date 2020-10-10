@@ -49,6 +49,33 @@ public class FriendCircles {
     }
   }
 
+  // Review 3
+  public int findCircleNumR3(int[][] M) {
+    if (M == null || M.length == 0) {
+      return 0;
+    }
+    int N = M.length;
+    int count = 0;
+    int[] p = new int[N];
+    for (int i = 0; i < N; i++) {
+      if (p[i] != 1) {
+        dfsR3(M, p, i);
+        count++;
+      }
+    }
+
+    return count;
+  }
+
+  void dfsR3(int[][] M, int[] p, int i) {
+    for (int j = 0; j < M.length; j++) {
+      if (M[i][j] == 1 && p[j] == 0) {
+        p[j] = 1;
+        dfsR3(M, p, j);
+      }
+    }
+  }
+
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {

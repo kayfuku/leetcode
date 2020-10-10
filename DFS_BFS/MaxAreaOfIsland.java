@@ -4,6 +4,7 @@
 
 package leetcode;
 
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class MaxAreaOfIsland {
@@ -61,7 +62,7 @@ public class MaxAreaOfIsland {
 	// int[][] grid;
 
 	public int maxAreaOfIslandB(int[][] grid) {
-		if (grid.length == 0 || grid == null) {
+		if (grid == null || grid.length == 0) {
 			return 0;
 		}
 		int R = grid.length;
@@ -212,6 +213,91 @@ public class MaxAreaOfIsland {
 		} // r
 
 		return maxArea;
+	}
+
+	// DFS Review 3
+	// int[][] grid;
+
+	public int maxAreaOfIslandR3(int[][] grid) {
+		if (grid == null || grid.length == 0) {
+			return 0;
+		}
+		this.grid = grid;
+
+		int maxArea = 0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (grid[i][j] == 1) {
+					maxArea = Math.max(maxArea, dfsR3(i, j));
+				}
+			}
+		}
+
+		return maxArea;
+	}
+
+	int dfsR3(int r, int c) {
+		if (r < 0 || c < 0 || r >= grid.length || c >= grid[0].length || grid[r][c] == 0) {
+			return 0;
+		}
+
+		grid[r][c] = 0;
+		int area = 1 + dfsR3(r - 1, c) + dfsR3(r + 1, c) + dfsR3(r, c - 1) + dfsR3(r, c + 1);
+
+		return area;
+	}
+
+	// BFS Review 3
+	// int[][] grid;
+
+	public int maxAreaOfIslandR3b(int[][] grid) {
+		if (grid == null || grid.length == 0) {
+			return 0;
+		}
+		this.grid = grid;
+
+		int maxArea = 0;
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[0].length; j++) {
+				if (grid[i][j] == 1) {
+					maxArea = Math.max(maxArea, bfsR3(i, j));
+				}
+			}
+		}
+
+		return maxArea;
+	}
+
+	private final int[] DIR_R = new int[] { -1, 1, 0, 0 };
+	private final int[] DIR_C = new int[] { 0, 0, -1, 1 };
+
+	int bfsR3(int r, int c) {
+		LinkedList<int[]> q = new LinkedList<>();
+		q.add(new int[] { r, c });
+		grid[r][c] = 0;
+
+		int count = 0;
+		while (!q.isEmpty()) {
+			int[] s = q.poll();
+			int row = s[0];
+			int col = s[1];
+			count++;
+			// NG!
+			// grid[nr][nc] = 0;
+
+			for (int i = 0; i < 4; i++) {
+				int nr = row + DIR_R[i];
+				int nc = col + DIR_C[i];
+				if (nr < 0 || nc < 0 || nr >= grid.length || nc >= grid[0].length || grid[nr][nc] == 0) {
+					continue;
+				}
+				// Attention! Adding and marking as visited must be at the same time!
+				q.add(new int[] { nr, nc });
+				grid[nr][nc] = 0;
+			}
+		}
+
+		return count;
 	}
 
 	// For testing.

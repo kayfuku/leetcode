@@ -4,7 +4,6 @@
 
 package leetcode;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
@@ -18,13 +17,13 @@ public class NumberOfIslands {
 		// this.count = 0;
 	}
 
-	// 1. DFS. The best solution is the BFS at the bottom.
+	// 1. DFS. This is the best for DFS.
 	// O(MN) time, where M is the num of rows, and N is num of columns,
 	// because we visit every square at most twice.
 	// O(MN) space, in the case that the grid map is filled with lands
 	// where DFS goes by M x N deep.
 	public int numIslands(char[][] grid) {
-		// Epithet code.
+		// Epithet code. Note that grid == null is first.
 		if (grid == null || grid.length == 0) {
 			return 0;
 		}
@@ -54,6 +53,7 @@ public class NumberOfIslands {
 		// Mark as visited using '0'.
 		grid[r][c] = '0';
 
+		// No need to return anything.
 		dfs(grid, r - 1, c); // up
 		dfs(grid, r + 1, c); // down
 		dfs(grid, r, c - 1); // left
@@ -236,7 +236,7 @@ public class NumberOfIslands {
 		return uf.getCount();
 	}
 
-	// Review. This is the best!
+	// BFS. Review. This is the best for BFS!
 	// Author: kei (AC)
 	// Date : January 6, 2020
 	public int numIslandsR(char[][] grid) {
@@ -271,8 +271,8 @@ public class NumberOfIslands {
 		int C = grid[0].length;
 
 		Queue<int[]> queue = new LinkedList<>();
+		// Adding to the queue and marking as visited.
 		queue.add(new int[] { r, c });
-		// Mark as visited.
 		grid[r][c] = VISITED;
 
 		while (!queue.isEmpty()) {
@@ -287,10 +287,90 @@ public class NumberOfIslands {
 				if (nr < 0 || nc < 0 || nr >= R || nc >= C || grid[nr][nc] == VISITED) {
 					continue;
 				}
+				// Attention! Adding and marking as visited must be at the same time!
 				queue.add(new int[] { nr, nc });
 				grid[nr][nc] = VISITED;
 			}
 
+		}
+	}
+
+	// Review DFS
+	public int numIslandsR2(char[][] grid) {
+		if (grid == null || grid.length == 0) {
+			return 0;
+		}
+
+		int R = grid.length;
+		int C = grid[0].length;
+
+		int count = 0;
+		for (int i = 0; i < R; i++) {
+			for (int j = 0; j < C; j++) {
+				if (grid[i][j] == '1') {
+					dfsR2(grid, i, j);
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	void dfsR2(char[][] grid, int r, int c) {
+		if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length || grid[r][c] == '0') {
+			return;
+		}
+
+		grid[r][c] = '0';
+
+		dfsR2(grid, r - 1, c);
+		dfsR2(grid, r + 1, c);
+		dfsR2(grid, r, c - 1);
+		dfsR2(grid, r, c + 1);
+	}
+
+	// Review BFS
+	public int numIslandsR3(char[][] grid) {
+		if (grid == null || grid.length == 0) {
+			return 0;
+		}
+		int R = grid.length;
+		int C = grid[0].length;
+
+		int count = 0;
+		for (int i = 0; i < R; i++) {
+			for (int j = 0; j < C; j++) {
+				if (grid[i][j] == '1') {
+					bfsR3(grid, i, j);
+					count++;
+				}
+			}
+		}
+
+		return count;
+	}
+
+	private final int[] DIR_ROW = new int[] { -1, 1, 0, 0 };
+	private final int[] DIR_COL = new int[] { 0, 0, -1, 1 };
+
+	void bfsR3(char[][] grid, int r, int c) {
+		LinkedList<int[]> queue = new LinkedList<>();
+		queue.add(new int[] { r, c, });
+		while (!queue.isEmpty()) {
+			int[] s = queue.poll();
+			int row = s[0];
+			int col = s[1];
+
+			for (int i = 0; i < 4; i++) {
+				int nr = row + DIR_ROW[i];
+				int nc = col + DIR_COL[i];
+				if (nr < 0 || nc < 0 || nr >= grid.length || nc >= grid[0].length || grid[nr][nc] == '0') {
+					continue;
+				}
+				grid[nr][nc] = '0';
+				queue.add(new int[] { nr, nc });
+			}
 		}
 	}
 

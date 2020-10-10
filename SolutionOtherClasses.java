@@ -363,21 +363,46 @@ class GraphWithWeight {
 }
 
 // Union Find (Disjoint Set)
+// Simpler one.
+class UF2 {
+  int[] roots;
+
+  UF2(int n) {
+    roots = new int[n];
+    for (int i = 0; i < n; i++) {
+      roots[i] = i;
+    }
+  }
+
+  int find(int x) {
+    if (x == roots[x]) {
+      return x;
+    }
+    roots[x] = find(roots[x]);
+    return roots[x];
+  }
+
+  void unite(int x, int y) {
+    roots[x] = y;
+  }
+}
+
+// Union Find (Disjoint Set)
 class UF {
-  public int[] par;
+  public int[] roots;
 
   public UF(int n) {
-    par = new int[n];
-    Arrays.fill(par, -1);
+    roots = new int[n];
+    Arrays.fill(roots, -1);
   }
 
   // Find root.
   public int find(int x) {
-    if (par[x] < 0) {
+    if (roots[x] < 0) {
       return x;
     }
-    par[x] = find(par[x]);
-    return par[x];
+    roots[x] = find(roots[x]);
+    return roots[x];
   }
 
   // Merge the two trees.
@@ -396,7 +421,7 @@ class UF {
       // par[x] += par[y];
 
       // Merge tree y into x.
-      par[y] = x;
+      roots[y] = x;
     }
     return x != y;
   }
@@ -404,5 +429,68 @@ class UF {
   // Check if the two nodes belong to the same tree.
   public boolean same(int x, int y) {
     return find(x) == find(y);
+  }
+}
+
+class UnionFind {
+  int count; // # of connected components <= Is it ok?
+  int[] parent;
+  int[] rank;
+
+  // Initialization
+  public UnionFind(char[][] grid) { // for problem 200
+    count = 0;
+    int m = grid.length;
+    int n = grid[0].length;
+    parent = new int[m * n];
+    rank = new int[m * n];
+    for (int i = 0; i < m; i++) {
+      for (int j = 0; j < n; j++) {
+        if (grid[i][j] == '1') {
+          // Initialization. Every node has its own node as a parent node.
+          // Store the coordinate [i, j] itself as the parent coordinate.
+          parent[i * n + j] = i * n + j;
+          count++;
+        }
+        rank[i * n + j] = 0;
+      }
+    }
+  }
+
+  // ex)
+  // 2 - 0 - 3
+  // |
+  // 1 - 4
+  // i: 0 1 2 3 4 find(4) i: 0 1 2 3 4
+  // p: 2 0 2 0 1 ======> p: 2 2 2 0 2
+  public int find(int i) { // path compression <= find root + path compression?
+    if (parent[i] != i) {
+      parent[i] = find(parent[i]);
+    }
+    return parent[i];
+  }
+
+  // Connect the components.
+  public void union(int x, int y) { // union with rank
+    int rootx = find(x);
+    int rooty = find(y);
+    if (rootx != rooty) {
+      if (rank[rootx] > rank[rooty]) {
+        // Add lower tree y to higher tree x.
+        // The parent of rooty is rootx.
+        parent[rooty] = rootx;
+      } else if (rank[rootx] < rank[rooty]) {
+        // Add lower tree x to higher tree y.
+        parent[rootx] = rooty;
+      } else {
+        parent[rooty] = rootx;
+        rank[rootx]++;
+      }
+      count--;
+    }
+  }
+
+  public int getCount() {
+    return count;
   }
 }

@@ -21,6 +21,7 @@ public class ReorderRoutesToMakeAllPathsLeadToTheCityZero {
 
   }
 
+  // 1. BFS
   // Author: beet + kei
   // Date : June 1, 2020
   @SuppressWarnings("unchecked")
@@ -49,15 +50,15 @@ public class ReorderRoutesToMakeAllPathsLeadToTheCityZero {
 
     // BFS
     int ans = 0;
+    Queue<Integer> q = new LinkedList<>();
     // This is necessary during the BFS because even if the network is a tree,
     // the data structure that we use is an adjacency list (graph) that
     // considers two nodes adjacent. Otherwise, we would go back to the previous
     // node.
     Set<Integer> visited = new HashSet<>();
-    Queue<Integer> q = new LinkedList<>();
 
-    visited.add(0);
     q.add(0);
+    visited.add(0);
     while (!q.isEmpty()) {
       int u = q.poll();
       for (int[] e : g[u]) {
@@ -66,12 +67,53 @@ public class ReorderRoutesToMakeAllPathsLeadToTheCityZero {
           continue;
         }
         ans += d;
-        visited.add(v);
         q.add(v);
+        visited.add(v);
       }
     }
 
     return ans;
+  }
+
+  // 2. DFS
+  // Author: kei (AC)
+  // Date : October 9, 2020
+  @SuppressWarnings("unchecked")
+  public int minReorderR3(int n, int[][] connections) {
+    // Graph
+    List<int[]>[] g = new List[n];
+    for (int[] e : connections) {
+      int s = e[0];
+      int t = e[1];
+      if (g[s] == null) {
+        g[s] = new ArrayList<>();
+      }
+      g[s].add(new int[] { t, 1 });
+      if (g[t] == null) {
+        g[t] = new ArrayList<>();
+      }
+      g[t].add(new int[] { s, 0 });
+    }
+
+    // DFS
+    Set<Integer> visited = new HashSet<>();
+    int count = dfs(g, visited, 0);
+
+    return count;
+  }
+
+  int dfs(List<int[]>[] g, Set<Integer> visited, int c) {
+    int cnt = 0;
+    visited.add(c);
+    for (int[] e : g[c]) {
+      int t = e[0];
+      int d = e[1];
+      if (!visited.contains(t)) {
+        cnt += d + dfs(g, visited, t);
+      }
+    }
+
+    return cnt;
   }
 
   // For testing.
