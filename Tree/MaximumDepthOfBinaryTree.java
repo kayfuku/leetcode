@@ -9,26 +9,28 @@ import java.util.Queue;
 import java.util.Stack;
 
 public class MaximumDepthOfBinaryTree {
-	// fields here. 
-	//	private int count;
+	// fields here.
+	// private int count;
 
 	public MaximumDepthOfBinaryTree() {
-		// Initialization here. 
-		//		this.count = 0;
+		// Initialization here.
+		// this.count = 0;
 	}
 
-	// 1. Recursive (DFS). 
-	// The simplest solution. 
-	// For each recursion stack, I get the height of the left subtree and the right subtree, and 
-	// take a max of them. And add it to 1, and then return it. 
-	// O(N) time, we visit every node once. 
-	// O(logN) space if it's balanced, O(N) if it's not balanced, because of the recursion stack. 
+	// 1. Recursive (DFS).
+	// The simplest solution.
+	// For each recursion stack, I get the height of the left subtree and the right
+	// subtree, and
+	// take a max of them. And add it to 1, and then return it.
+	// O(N) time, we visit every node once.
+	// O(logN) space if it's balanced, O(N) if it's not balanced, because of the
+	// recursion stack.
 	public int maxDepth(TreeNode node) {
 		if (node == null) {
 			return 0;
 		}
 
-		// Post-order traversal. 
+		// Post-order traversal.
 		int leftDepth = maxDepth(node.left);
 		int rightDepth = maxDepth(node.right);
 		int maxDep = Math.max(leftDepth, rightDepth) + 1;
@@ -36,11 +38,13 @@ public class MaximumDepthOfBinaryTree {
 		return maxDep;
 	}
 
-	// 2. Iterative (DFS). 
-	// I'm going to use two stacks to traverse the tree by DFS with the node and level. 
-	// And then keep track of the max of the level. 
-	// O(N) time, where N is the total num of nodes, we visit every node once. 
-	// O(logN) space if it's balanced, O(N) if it's not balanced, because of the stack. 
+	// 2. Iterative (DFS).
+	// I'm going to use two stacks to traverse the tree by DFS with the node and
+	// level.
+	// And then keep track of the max of the level.
+	// O(N) time, where N is the total num of nodes, we visit every node once.
+	// O(logN) space if it's balanced, O(N) if it's not balanced, because of the
+	// stack.
 	public int maxDepthIterDfs(TreeNode root) {
 		if (root == null) {
 			return 0;
@@ -72,11 +76,11 @@ public class MaximumDepthOfBinaryTree {
 		return maxDep;
 	}
 
-	// 3. Iterative (BFS). Level-order. 
-	// BFS works as well. 
-	// 
-	// O(N) time, where N is the total num of nodes, we visit every node once. 
-	// O(N) space, because of the size of the queue. 
+	// 3. Iterative (BFS). Level-order.
+	// BFS works as well.
+	//
+	// O(N) time, where N is the total num of nodes, we visit every node once.
+	// O(N) space, because of the size of the queue.
 	public int maxDepthIterBfs(TreeNode root) {
 		if (root == null) {
 			return 0;
@@ -85,7 +89,7 @@ public class MaximumDepthOfBinaryTree {
 		Queue<TreeNode> queue = new LinkedList<>();
 		queue.offer(root);
 
-		// No need to keep track of max. 
+		// No need to keep track of max.
 		int depth = 0;
 		while (!queue.isEmpty()) {
 			depth++;
@@ -94,8 +98,8 @@ public class MaximumDepthOfBinaryTree {
 			for (int i = 0; i < levelSize; i++) {
 				TreeNode node = queue.poll();
 
-				// If there is no child node any more, then 
-				// the current depth is the max depth. 
+				// If there is no child node any more, then
+				// the current depth is the max depth.
 				if (node.left != null) {
 					queue.offer(node.left);
 				}
@@ -108,8 +112,7 @@ public class MaximumDepthOfBinaryTree {
 		return depth;
 	}
 
-
-	// Review 
+	// Review
 	public int maxDepthR(TreeNode node) {
 		if (node == null) {
 			return 0;
@@ -122,9 +125,9 @@ public class MaximumDepthOfBinaryTree {
 		return max;
 	}
 
-	// Review 
+	// Review
 	public int maxDepthDfsIterR(TreeNode root) {
-		// corner. 
+		// corner.
 		if (root == null) {
 			return 0;
 		}
@@ -151,23 +154,22 @@ public class MaximumDepthOfBinaryTree {
 			}
 		}
 
-		return maxLevel;	
-	} 
+		return maxLevel;
+	}
 
-
-	// Review 
+	// Review
 	public int maxDepthIterBfsR(TreeNode root) {
-		// corner. 
+		// corner.
 		if (root == null) {
 			return 0;
 		}
 
 		Queue<TreeNode> queue = new LinkedList<>();
-		queue.add(root);	
+		queue.add(root);
 
 		int level = 0;
 		while (!queue.isEmpty()) {
-			level++;		
+			level++;
 			int size = queue.size();
 			for (int i = 0; i < size; i++) {
 				TreeNode node = queue.poll();
@@ -176,44 +178,33 @@ public class MaximumDepthOfBinaryTree {
 				}
 				if (node.right != null) {
 					queue.add(node.right);
-				}	
-			}	
+				}
+			}
 		}
 
-		return level;	
+		return level;
 	}
 
+	// Review 3
+	public int maxDepthR3(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
 
+		int h = Math.max(maxDepth(node.left), maxDepth(node.right)) + 1;
 
+		return h;
+	}
 
-
-
-	// For testing. 
+	// For testing.
 	public static void main(String[] args) {
 		MaximumDepthOfBinaryTree solution = new MaximumDepthOfBinaryTree();
 
-		// Test arguments. 
-		//	    int num = 24;
-		//	    int target = 2;
-		//	    solution.getInt(num, target);
-
-
+		// Test arguments.
+		// int num = 24;
+		// int target = 2;
+		// solution.getInt(num, target);
 
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

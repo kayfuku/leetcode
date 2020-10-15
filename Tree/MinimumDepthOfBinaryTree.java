@@ -16,15 +16,18 @@ public class MinimumDepthOfBinaryTree {
 		// this.count = 0;
 	}
 
-	// 1. Recursive.
+	// 1. Recursive DFS.
 	// O(N) time, we visit every node once.
 	// O(logN) space if it's balanced, O(N) if it's not balanced, because of the
 	// recursion stack.
 	public int minDepth(TreeNode node) {
+		// This is always necessary. Check the node itself first! Not the subtree.
 		if (node == null) {
 			return 0;
 		}
 
+		// Postorder because we need to check both left and right subtree
+		// if it's null or not.
 		int leftDepth = minDepth(node.left);
 		int rightDepth = minDepth(node.right);
 
@@ -43,7 +46,110 @@ public class MinimumDepthOfBinaryTree {
 		return minDep;
 	}
 
-	// 2. BFS (Level-order).
+	// 1-2. Recursive DFS.
+	// Easy to understand.
+	// Author: kei (AC)
+	// Date : October 11, 2020
+	public int minDepth2(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.left == null && node.right == null) {
+			return 1;
+		}
+		if (node.left == null) {
+			return minDepth2(node.right) + 1;
+		}
+		if (node.right == null) {
+			return minDepth2(node.left) + 1;
+		}
+
+		return Math.min(minDepth2(node.left), minDepth2(node.right)) + 1;
+	}
+
+	// 1-3. Recursive DFS.
+	// Easy to understand.
+	// Author: leetcode + kei (AC)
+	// Date : October 11, 2020
+	public int minDepth3(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.left == null && node.right == null) {
+			return 1;
+		}
+
+		int minDepth = Integer.MAX_VALUE;
+		if (node.left != null) {
+			minDepth = Math.min(minDepth, minDepth3(node.left));
+		}
+		if (node.right != null) {
+			minDepth = Math.min(minDepth, minDepth3(node.right));
+		}
+
+		return minDepth + 1;
+	}
+
+	// 1-4. Recursive DFS.
+	// Easy to understand.
+	// Author: kei (AC)
+	// Date : October 11, 2020
+	public int minDepth4(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.left == null && node.right == null) {
+			return 1;
+		}
+
+		// Not initialized to 0!
+		int left = Integer.MAX_VALUE;
+		int right = Integer.MAX_VALUE;
+		if (node.left != null) {
+			left = minDepth4(node.left);
+		}
+		if (node.right != null) {
+			right = minDepth4(node.right);
+		}
+
+		return Math.min(left, right) + 1;
+	}
+
+	// 2. Iterative DFS.
+	// Author: kei (AC)
+	// Date : October 11, 2020
+	public int minDepthIterDfs(TreeNode root) {
+		if (root == null) {
+			return 0;
+		}
+		LinkedList<TreeNode> s1 = new LinkedList<>();
+		LinkedList<Integer> s2 = new LinkedList<>();
+		s1.push(root);
+		s2.push(1);
+
+		int minDepth = Integer.MAX_VALUE;
+		while (!s1.isEmpty()) {
+			TreeNode node = s1.pop();
+			int depth = s2.pop();
+
+			if (node.left == null && node.right == null) {
+				minDepth = Math.min(minDepth, depth);
+			}
+
+			if (node.right != null) {
+				s1.push(node.right);
+				s2.push(depth + 1);
+			}
+			if (node.left != null) {
+				s1.push(node.left);
+				s2.push(depth + 1);
+			}
+		}
+
+		return minDepth;
+	}
+
+	// 3. BFS (Level-order).
 	// Find the closest leaf node.
 	// O(N) time, where N is the total num of nodes, we visit every node once.
 	// O(N) space, because of the size of the queue.
@@ -140,6 +246,27 @@ public class MinimumDepthOfBinaryTree {
 		}
 
 		return depth;
+	}
+
+	// Review 3
+	// Easy to understand.
+	// Author: kei (AC)
+	// Date : October 11, 2020
+	public int minDepthR3(TreeNode node) {
+		if (node == null) {
+			return 0;
+		}
+		if (node.left == null && node.right == null) {
+			return 1;
+		}
+		if (node.left == null) {
+			return minDepthR3(node.right) + 1;
+		}
+		if (node.right == null) {
+			return minDepthR3(node.left) + 1;
+		}
+
+		return Math.min(minDepthR3(node.left), minDepthR3(node.right)) + 1;
 	}
 
 	// For testing.

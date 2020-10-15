@@ -59,22 +59,22 @@ public class BinaryTreeLevelOrderTraversal {
   }
 
   // 2. Level order traversal (DFS, Recursive).
+  // This one is a little hard.
   // For DFS, I'm going to use level variable to learn which level the current
   // node is in.
   // For each level, I use a list, and while traversing the tree, I add the node
-  // to
-  // the corresponding list.
+  // to the corresponding list.
   // O(N) time, O(logN) (balanced) or O(N) (not balanced) space.
   public List<List<Integer>> levelOrderDfs(TreeNode root) {
     List<List<Integer>> ret = new ArrayList<>();
     if (root == null) {
       return ret;
     }
-    levelOrderDfsHelper(root, 0, ret);
+    dfs(root, 0, ret);
     return ret;
   }
 
-  private void levelOrderDfsHelper(TreeNode node, int level, List<List<Integer>> ret) {
+  private void dfs(TreeNode node, int level, List<List<Integer>> ret) {
     if (node == null) {
       return;
     }
@@ -87,10 +87,48 @@ public class BinaryTreeLevelOrderTraversal {
     ret.get(level).add(node.val);
 
     // Every time I go to the next recursion stack, increment the level.
-    levelOrderDfsHelper(node.left, level + 1, ret);
-    levelOrderDfsHelper(node.right, level + 1, ret);
+    dfs(node.left, level + 1, ret);
+    dfs(node.right, level + 1, ret);
   }
 
+  // 3. Level order traversal (DFS, Iterative).
+  // Author: kei (AC)
+  // Date : October 11 2020
+  public List<List<Integer>> levelOrderIterDfs(TreeNode root) {
+    List<List<Integer>> ret = new ArrayList<>();
+    if (root == null) {
+      return ret;
+    }
+
+    LinkedList<TreeNode> s1 = new LinkedList<>();
+    LinkedList<Integer> s2 = new LinkedList<>(); // Just for convenience
+    s1.push(root);
+    s2.push(0);
+
+    while (!s1.isEmpty()) {
+      TreeNode node = s1.pop();
+      int level = s2.pop();
+
+      if (ret.size() == level) {
+        ret.add(new ArrayList<>());
+      }
+      ret.get(level).add(node.val);
+
+      if (node.right != null) {
+        s1.push(node.right);
+        s2.push(level + 1);
+      }
+      if (node.left != null) {
+        s1.push(node.left);
+        s2.push(level + 1);
+      }
+    }
+
+    return ret;
+  }
+
+  // 4.
+  // No need to review.
   // Level order traversal. Accepted. The first one might be better.
   // O(N) time, O(N) space.
   public List<List<Integer>> levelOrder2(TreeNode node) {
