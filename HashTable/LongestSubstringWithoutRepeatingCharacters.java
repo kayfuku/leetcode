@@ -65,6 +65,8 @@ public class LongestSubstringWithoutRepeatingCharacters {
 			// K: char, V: index (rightmost, updated every time it occurs)
 			map.put(c, e);
 			// 'e - s + 1' is the length of the substring.
+			// Note that even if I find the duplicate in the map, I need to check this
+			// when the last duplicate is to the left of s.
 			max = Math.max(max, e - s + 1);
 		}
 
@@ -106,10 +108,57 @@ public class LongestSubstringWithoutRepeatingCharacters {
 		return maxLen;
 	}
 
+	// R3 NG!
+	// public static int lengthOfLongestSubstringR3(String S) {
+	// if (S == null || S.length() == 0) {
+	// return 0;
+	// }
+	// Map<Character, Integer> map = new HashMap<>();
+	// int s = 0;
+	// int e = 0;
+	// int max = 0;
+	// while (s < S.length() && e < S.length()) {
+	// if (map.containsKey(S.charAt(e))) {
+	// s = Math.max(map.get(S.charAt(e)) + 1, s);
+	// } else {
+	// // Check only here is NG!
+	// max = Math.max(max, e - s + 1);
+	// }
+	// map.put(S.charAt(e), e);
+	// e++;
+	// }
+
+	// return max;
+	// }
+
+	// NG!
+	// public static int lengthOfLongestSubstringR3(String S) {
+	// Set<Character> set = new HashSet<Character>();
+	// // Two pointers.
+	// // i is start of substring, and j is end of substring.
+	// // Keep track of max length.
+	// int s = 0, e = 0, max = 0;
+	// int n = S.length();
+	// // i and j should be within the array.
+	// while (s < n && e < n) {
+	// char c = S.charAt(e);
+	// if (set.contains(c)) {
+	// set.remove(S.charAt(s));
+	// s++;
+	// }
+	// max = Math.max(max, e - s + 1);
+	// set.add(c);
+	// e++;
+	// }
+
+	// return max;
+	// }
+
 	public static void main(String[] args) {
 
 		String str = "tmmzuxt";
-		int ret = lengthOfLongestSubstring2(str);
+		// String str = "abcabcbb";
+		int ret = lengthOfLongestSubstringR3(str);
 
 	}
 
