@@ -158,7 +158,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 
 		String str = "tmmzuxt";
 		// String str = "abcabcbb";
-		int ret = lengthOfLongestSubstringR3(str);
+		int ret = lengthOfLongestSubstring(str);
 
 	}
 
