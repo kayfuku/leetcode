@@ -65,8 +65,11 @@ public class SubarraySumEqualsK {
 
 	// 4. Cumulative Sum using HashMap.
 	// Basically,
+	//
 	// curCumSum - cumSumSoFar = subarraySum
+	//
 	// In other words, if there is a subarray whose sum is k, then
+	//
 	// curCumSum - k = cumSumSoFar
 	//
 	// While iterating through the input array, I calculate cumulative sum.
@@ -74,10 +77,8 @@ public class SubarraySumEqualsK {
 	// the cumulative sum I've seen so far, then there is a subarray whose sum is k.
 	//
 	// I store each cumulative sum in a map as a key and if the same cumulative sum
-	// occurs, then
-	// I store the number of occurrences of the sum as a value so that I can count
-	// the
-	// number of subarrays whose sum is k.
+	// occurs, then I store the number of occurrences of the sum as a value so that
+	// I can count the number of subarrays whose sum is k.
 	//
 	// O(N) time.
 	// O(N) space.

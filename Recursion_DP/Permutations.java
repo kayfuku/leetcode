@@ -56,7 +56,7 @@ public class Permutations {
 			}
 			tempList.add(nums[i]);
 			backtrack2(ans, tempList, nums);
-			// Undo the adding when we go back to the previous recursion stack
+			// Undo the adding when we come back from the lower recursion stack
 			// because tempList traverses in the stack.
 			tempList.remove(tempList.size() - 1);
 		}
