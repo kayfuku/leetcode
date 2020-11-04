@@ -16,35 +16,37 @@ public class AddBinary {
 
   }
 
-
   // 1. Bit by bit approach
   // Author: @liaison and @andvary + kei
   // Date : February 4, 2020
   public String addBinary(String a, String b) {
     int n = a.length(), m = b.length();
     if (n < m) {
+      // Make longer one first.
       return addBinary(b, a);
     }
     // Assert that a is longer than or equal to b.
 
     StringBuilder ans = new StringBuilder();
     int sum = 0, j = m - 1;
-    for (int i = n - 1; i > -1; i--) {
+    for (int i = n - 1; i >= 0; i--) {
       if (a.charAt(i) == '1') {
         sum++;
       }
+      // j could be negative, so take care of it.
       if (j > -1 && b.charAt(j) == '1') {
         sum++;
       }
       j--;
 
+      // Check the LSB in binary number.
       if (sum % 2 == 1) {
         ans.append('1');
       } else {
         ans.append('0');
       }
 
-      // Shift to the right.
+      // Shift to the right. (Cut the LSB)
       sum /= 2;
     }
 
@@ -55,8 +57,6 @@ public class AddBinary {
 
     return ans.toString();
   }
-
-
 
   // 2. Bit manipulation approach
   // Author: @liaison and @andvary + kei
@@ -78,8 +78,6 @@ public class AddBinary {
     return x.toString(2);
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     AddBinary solution = new AddBinary();
@@ -89,10 +87,6 @@ public class AddBinary {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

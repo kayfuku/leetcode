@@ -209,7 +209,26 @@ public class LongestIncreasingSubsequence {
 		return longest;
 	}
 
-	// other classes here.
+	// R3
+	public int lengthOfLISR3(int[] nums) {
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+		int[] dp = new int[nums.length];
+		int max = 0;
+		for (int i = 0; i < nums.length; i++) {
+			int maxValue = 1;
+			for (int j = 0; j < i; j++) {
+				if (nums[j] < nums[i]) {
+					maxValue = Math.max(maxValue, dp[j] + 1);
+				}
+			}
+			dp[i] = maxValue;
+			max = Math.max(max, dp[i]);
+		}
+
+		return max;
+	}
 
 	// For testing.
 	public static void main(String[] args) {

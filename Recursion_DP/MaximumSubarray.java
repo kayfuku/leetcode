@@ -15,7 +15,7 @@ public class MaximumSubarray {
 		// this.count = 0;
 	}
 
-	// 1. Greedy Algorithm. (Also ref. Review below)
+	// 1. Greedy Algorithm. (Also ref. Reviews below)
 	//
 	// The max up to i-th element is calculated by using the max up to the (i -
 	// 1)-th element and i-th element. We just need to return the maximum sum.
@@ -139,6 +139,42 @@ public class MaximumSubarray {
 			if (nums[i] > contigSum) {
 				contigSum = nums[i];
 				start = i;
+			}
+
+			if (contigSum > maxSum) {
+				maxSum = contigSum;
+				end = i;
+			}
+		}
+
+		return maxSum;
+	}
+
+	// Review R3.
+	//
+	// We don't need dp array because we only need to know the maximum so far.
+	//
+	// Regardless of c > 0 or c <= 0,
+	// sum > 0 => sum + c
+	// sum <= 0 => c
+	//
+	// Author: kei (AC)
+	// Date : October 27, 2020
+	public int maxSubArrayR3(int[] nums) {
+		if (nums == null || nums.length == 0) {
+			return 0;
+		}
+
+		int maxSum = nums[0], contigSum = nums[0];
+		int start = 0, end = 0;
+		for (int i = 1; i < nums.length; i++) {
+			if (contigSum <= 0) {
+				contigSum = nums[i];
+				// Update start whenever sum <= 0.
+				start = i;
+			} else {
+				// contigSum > 0
+				contigSum += nums[i];
 			}
 
 			if (contigSum > maxSum) {

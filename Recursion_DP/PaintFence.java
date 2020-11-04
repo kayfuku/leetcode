@@ -49,7 +49,9 @@ public class PaintFence {
 	//
 	// THESE are the cases where can just plop the same color to the end, and no
 	// longer worry about causing three in a row to be the same.
-	// num_ways_same(i) = num_ways_diff(i-1) * 1
+	//
+	// num_ways_same(i) = num_ways_diff(i-1) * 1 <= Point!
+	//
 	// We sum these for our answer, like I said before:
 	//
 	// num_ways(i)
@@ -99,6 +101,29 @@ public class PaintFence {
 			// the recursive formula that we derived
 			dp[i] = (dp[i - 1] + dp[i - 2]) * (k - 1);
 		}
+		return dp[n];
+	}
+
+	// R3
+	public int numWaysR3(int n, int k) {
+		if (n == 0) {
+			return 0;
+		}
+		if (n == 1) {
+			return k;
+		}
+		if (n == 2) {
+			return k * k;
+		}
+
+		int[] dp = new int[n + 1];
+		dp[0] = 0;
+		dp[1] = k;
+		dp[2] = k * k;
+		for (int i = 3; i < n; i++) {
+			dp[i] = (dp[i - 1] + dp[i - 2]) * (k - 1);
+		}
+
 		return dp[n];
 	}
 
