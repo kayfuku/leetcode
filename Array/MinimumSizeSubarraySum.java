@@ -18,7 +18,7 @@ public class MinimumSizeSubarraySum {
   // 4. Sliding Window. Accepted.
   // O(N) time, O(1) space.
   // Author: @abhinavbansal0 + kei
-  // Date : July 10, 2019
+  // Date : July 10, 2019, November 5, 2020
   public int minSubArrayLen(int s, int[] nums) {
     if (nums == null || nums.length == 0) {
       return 0;
@@ -31,22 +31,23 @@ public class MinimumSizeSubarraySum {
     for (int right = 0; right < nums.length; right++) {
       sum += nums[right];
       // Check to see how we can minimize the length.
+      // Note that if nums has 0s and s is 0, which is not the case for this problem,
+      // then this is not going to work.
       while (sum >= s) {
         // Now it satisfies the condition, keep that length.
         int len = right - left + 1;
         // Update the min.
-        ans = (ans != null) ? Math.min(ans, len) : len;
+        ans = (ans == null) ? len : Math.min(ans, len);
         // Reduce the length further.
         sum -= nums[left];
         left++;
       }
     }
 
-    return (ans != null) ? ans : 0;
+    return (ans == null) ? 0 : ans;
   }
 
-
-  // original.
+  // Original solution.
   // I think this solution has a problem with such input as,
   // s = Integer.MAX_VALUE
   // nums.length = Integer.MAX_VALUE
@@ -71,8 +72,6 @@ public class MinimumSizeSubarraySum {
     return (ans != Integer.MAX_VALUE) ? ans : 0;
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     MinimumSizeSubarraySum solution = new MinimumSizeSubarraySum();
@@ -82,7 +81,7 @@ public class MinimumSizeSubarraySum {
     // int target = 2;
     // solution.getInt(num, target);
 
-    int[] nums = new int[] {2, 3, 1, 2, 4, 3};
+    int[] nums = new int[] { 2, 3, 1, 2, 4, 3 };
     int s = 7;
     System.out.println(solution.minSubArrayLen(s, nums)); // 2
 
@@ -93,10 +92,6 @@ public class MinimumSizeSubarraySum {
     // int sBiiig = Integer.MAX_VALUE;
     System.out.println(solution.minSubArrayLen(sBiiig, numsLooong)); // 100
 
-
-
   }
 
 }
-
-
