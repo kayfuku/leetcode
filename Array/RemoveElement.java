@@ -27,6 +27,7 @@ public class RemoveElement {
 				i++;
 			}
 		}
+		// Elements to the left of i are the desired list.
 		return i;
 	}
 
@@ -41,15 +42,15 @@ public class RemoveElement {
 		int n = nums.length;
 		int i = 0;
 		while (i < n) {
-			if (nums[i] == val) {
+			if (nums[i] != val) {
+				i++;
+			} else {
 				// Put the last element to the i-th element.
 				// No need to swap!
 				nums[i] = nums[n - 1];
 				// Reduce the nums length.
 				// i must not move because we have to check the new value.
 				n--;
-			} else {
-				i++;
 			}
 		}
 
