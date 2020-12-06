@@ -14,10 +14,10 @@ public class FindPivotIndex {
 
   }
 
-
-  // Let's say we knew S as the sum of the numbers, and we are at index i. If we knew the sum of
-  // numbers leftsum that are to the left of index i, then the other sum to the right of the index
-  // would just be S - nums[i] - leftsum. No need to have cumuSum array.
+  // Let's say we knew S as the sum of the numbers, and we are at index i. If we
+  // knew the sum of numbers leftsum that are to the left of index i, then
+  // the other sum to the right of the index would just be S - nums[i] - leftsum.
+  // No need to have cumuSum array.
   // O(N) time, O(1) space.
   // Author: @awice + kei
   // Date : February 1, 2020
@@ -38,8 +38,6 @@ public class FindPivotIndex {
     return -1;
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     FindPivotIndex solution = new FindPivotIndex();
@@ -49,10 +47,6 @@ public class FindPivotIndex {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

@@ -1,7 +1,3 @@
-//
-// Author:
-// Date  : October ?, 2020
-
 package leetcode;
 
 public class Solution {
@@ -15,7 +11,7 @@ public class Solution {
   }
 
   // Author: + kei
-  // Date : October ?, 2020
+  // Date : December ?, 2020
   public int getInt(int num, int target) {
 
     return 0;
@@ -24,7 +20,7 @@ public class Solution {
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    TwoSumII solution = new TwoSumII();
+    Solution solution = new Solution();
 
     // Test arguments.
     // int num = 24;

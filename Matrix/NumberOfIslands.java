@@ -5,7 +5,6 @@
 package leetcode;
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 public class NumberOfIslands {
@@ -46,12 +45,12 @@ public class NumberOfIslands {
 	}
 
 	private void dfs(char[][] grid, int r, int c) {
-		if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length || grid[r][c] == '0') {
+		if (r < 0 || r >= grid.length || c < 0 || c >= grid[0].length || grid[r][c] == VISITED) {
 			return;
 		}
 
 		// Mark as visited using '0'.
-		grid[r][c] = '0';
+		grid[r][c] = VISITED;
 
 		// No need to return anything.
 		dfs(grid, r - 1, c); // up
