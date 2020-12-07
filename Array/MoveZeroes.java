@@ -25,7 +25,7 @@ public class MoveZeroes {
 		int slow = 0;
 		for (int cur = 0; cur < nums.length; cur++) {
 			if (nums[cur] != 0) {
-				// We need swap because 0 must not be deleted.
+				// We need to swap because 0 must not be deleted.
 				swap(nums, slow, cur);
 				slow++;
 			}

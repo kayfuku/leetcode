@@ -48,8 +48,12 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	// Author: leetcode + kei
 	// Date : October 15, 2020
 	public static int lengthOfLongestSubstring2(String S) {
+		// K: char, V: index (rightmost if there are duplicates.)
 		Map<Character, Integer> map = new HashMap<>();
 		int max = 0;
+		// s: Start point of a substring.
+		// e: End point of a substring.
+		// 'e - s + 1' is the length of the substring.
 		int s = 0;
 		for (int e = 0; e < S.length(); e++) {
 			char c = S.charAt(e);
@@ -57,16 +61,17 @@ public class LongestSubstringWithoutRepeatingCharacters {
 				// Point!
 				// map.get(c): last (rightmost) index of the same char as c
 				// s: previous start point.
-				// Unlike approach 1, we don't remove char from the map, which meanas
+				// Unlike approach 1, we don't remove char from the map, which means
 				// there can be c in the map that does not lie in between map.get(c) and s.
-				// If we hit c in the map, then take the one of the two that is closer to e.
+				// If we hit c in the map, then we have to take the one of the two
+				// which is closer to e.
 				s = Math.max(map.get(c) + 1, s);
 			}
 			// K: char, V: index (rightmost, updated every time it occurs)
 			map.put(c, e);
 			// 'e - s + 1' is the length of the substring.
 			// Note that even if I find the duplicate in the map, I need to check this
-			// when the last duplicate is to the left of s.
+			// when the last duplicate is to the left of s. So, not if-else.
 			max = Math.max(max, e - s + 1);
 		}
 

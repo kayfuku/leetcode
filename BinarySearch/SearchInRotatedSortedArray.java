@@ -56,6 +56,8 @@ public class SearchInRotatedSortedArray {
 			// We can avoid the integer overflow using other version, but according to
 			// this problem statement, this is ok.
 			int mid = (left + right) / 2;
+
+			// Check the mid first.
 			if (nums[mid] == target) {
 				return mid;
 			}

@@ -28,6 +28,7 @@ public class LetterCombinationsOfPhoneNumber {
 		map.put("9", "wxyz");
 	}
 
+	// The best solution.
 	// The first review solution below is the best solution, not this one.
 	// O(3^N * 4^M) time, where N is the number of digits in the input that
 	// maps to 3 letters (e.g. 2, 3, 4, 5, 6, 8) and M is the number of digits
@@ -59,9 +60,8 @@ public class LetterCombinationsOfPhoneNumber {
 		// Pop the first digit.
 		String nextDigit = nextDigits.substring(0, 1);
 		String letters = map.get(nextDigit);
-		for (int i = 0; i < letters.length(); i++) {
-			char letter = letters.charAt(i);
-			// The point is add letter in the argument.
+		for (char letter : letters.toCharArray()) {
+			// The point is to add letter in the argument.
 			backtrack(combination + letter, nextDigits.substring(1));
 		}
 	}
@@ -97,7 +97,7 @@ public class LetterCombinationsOfPhoneNumber {
 		}
 	}
 
-	// Review. The best solution.
+	// Review.
 	public List<String> letterCombinations3(String digits) {
 		// corner
 		if (digits.length() == 0) {

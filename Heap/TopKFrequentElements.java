@@ -68,12 +68,15 @@ public class TopKFrequentElements {
 		}
 
 		// 3. Make the output.
+		// This is the most tricky part! ref. TopKFrequentWords.java
 		List<Integer> topK = new ArrayList<>();
 		// O(KlogK) time.
 		while (!minHeap.isEmpty()) {
 			topK.add(minHeap.poll());
 		}
+		System.out.println(topK);
 		topK.sort(Comparator.naturalOrder());
+		System.out.println(topK);
 
 		return topK;
 	}

@@ -24,7 +24,7 @@ public class GroupAnagrams {
 	// Two strings are anagrams if and only if their sorted strings are equal.
 	// O(NKlogK) time, O(NK) space, where N is the strs length, and K is the
 	// maximum length of a string in strs.
-	public List<List<String>> groupAnagrams(String[] strs) {
+	public List<List<String>> groupAnagrams2(String[] strs) {
 		if (strs.length == 0) {
 			return new ArrayList<List<String>>();
 		}
@@ -48,7 +48,7 @@ public class GroupAnagrams {
 	// K is the maximum length of a string in the array.
 	// Author: leetcode + kei (AC)
 	// Date : October 13, 2020
-	public List<List<String>> groupAnagramsR(String[] strs) {
+	public List<List<String>> groupAnagrams(String[] strs) {
 		// corner.
 		// Don't forget this! Especially, when the main logic is pretty long,
 		// this is forgettable.
@@ -71,7 +71,8 @@ public class GroupAnagrams {
 			// Make a signature.
 			StringBuilder sb = new StringBuilder();
 			for (int n : counts) {
-				// This is needed to distinguish "bbbbbbbbbbc" and "bdddddddddd"
+				// Be careful!
+				// This delimiter is needed to distinguish "bbbbbbbbbbc" and "bdddddddddd"
 				// Otherwise, sig would be the same, "0101000..."
 				sb.append('#');
 				sb.append(n);
@@ -97,7 +98,7 @@ public class GroupAnagrams {
 	// (respective number of occurrences of each character) are the same.
 	// O(NK) time, O(NK) space, where N is the strs length, and K is the
 	// maximum length of a string in strs.
-	public List<List<String>> groupAnagrams2(String[] strs) {
+	public List<List<String>> groupAnagramsNG(String[] strs) {
 		if (strs.length == 0) {
 			return new ArrayList<List<String>>();
 		}
@@ -168,7 +169,7 @@ public class GroupAnagrams {
 
 		// String[] strs2 = { "bdddddddddd", "bbbbbbbbbbc" };
 		String[] strs2 = { "" };
-		List<List<String>> ret2 = solution.groupAnagramsR(strs2);
+		List<List<String>> ret2 = solution.groupAnagrams(strs2);
 		System.out.println(ret2);
 
 	}
