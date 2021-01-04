@@ -5,20 +5,19 @@
 package leetcode;
 
 public class BestTimeToBuyAndSellStockII {
-	// fields here. 
-	//	private int count;
+	// fields here.
+	// private int count;
 
 	public BestTimeToBuyAndSellStockII() {
-		// Initialization here. 
-		//		this.count = 0;
+		// Initialization here.
+		// this.count = 0;
 	}
 
-	// other classes here. 
+	// other classes here.
 
-
-	// 1. Not good. Move on to the approach 2. 
-	// O(N) time, O(1) space. 
-	public int maxProfit(int[] prices) {
+	// 1. Not good. Move on to the approach 2. No need to review.
+	// O(N) time, O(1) space.
+	public int maxProfit2(int[] prices) {
 		if (prices == null || prices.length == 0) {
 			return 0;
 		}
@@ -27,12 +26,12 @@ public class BestTimeToBuyAndSellStockII {
 		int i = 0;
 		int maxProfit = 0;
 		while (i + 1 < prices.length) {
-			// To find valley. 
+			// To find valley.
 			while (i + 1 < prices.length && prices[i] >= prices[i + 1]) {
 				i++;
 			}
 			valley = prices[i];
-			// To find peak. 
+			// To find peak.
 			while (i + 1 < prices.length && prices[i] <= prices[i + 1]) {
 				i++;
 			}
@@ -43,17 +42,17 @@ public class BestTimeToBuyAndSellStockII {
 		return maxProfit;
 	}
 
-	// 2. Better solution. 
-	// Just add up the profit every time we make. 
-	// O(N) time, O(1) space. 
-	public int maxProfit2(int[] prices) {
+	// 2. Better solution.
+	// Just add up the profit every time we make.
+	// O(N) time, O(1) space.
+	public int maxProfit(int[] prices) {
 		if (prices == null || prices.length == 0) {
 			return 0;
 		}
 		int maxProfit = 0;
 		for (int i = 1; i < prices.length; i++) {
-			// If the price get higher than previous, then 
-			// add the difference as a profit. 
+			// If the price get higher than previous, then
+			// add the difference as a profit.
 			if (prices[i] > prices[i - 1]) {
 				maxProfit += prices[i] - prices[i - 1];
 			}
@@ -61,11 +60,10 @@ public class BestTimeToBuyAndSellStockII {
 
 		return maxProfit;
 	}
-	
-	
-	// Review. 
+
+	// Review.
 	public int maxProfitR2(int[] prices) {
-		// corner 
+		// corner
 		if (prices == null || prices.length < 2) {
 			return 0;
 		}
@@ -73,42 +71,22 @@ public class BestTimeToBuyAndSellStockII {
 		int profit = 0;
 		for (int i = 1; i < prices.length; i++) {
 			if (prices[i] > prices[i - 1]) {
-				profit += prices[i] - prices[i - 1];			
+				profit += prices[i] - prices[i - 1];
 			}
 		}
 
-		return profit;	
+		return profit;
 	}
 
-
-
-
-	// For testing. 
+	// For testing.
 	public static void main(String[] args) {
 		BestTimeToBuyAndSellStockII solution = new BestTimeToBuyAndSellStockII();
 
-		// Test arguments. 
-		//	    int num = 24;
-		//	    int target = 2;
-		//	    solution.getInt(num, target);
-
-
+		// Test arguments.
+		// int num = 24;
+		// int target = 2;
+		// solution.getInt(num, target);
 
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

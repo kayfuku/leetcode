@@ -16,7 +16,8 @@ public class MeetingRooms {
     // this.count = 0;
   }
 
-  // Sort the meetings by starting time. Then, go through the meetings one by one, and
+  // Sort the meetings by starting time. Then, go through the meetings one by one,
+  // and
   // make sure that each meeting ends before the next one starts.
   // Author: jiangyucara + kei
   // Date : July 15, 2019
@@ -28,13 +29,14 @@ public class MeetingRooms {
 
     // Use Arrays.sort() to sort an array of primitive types.
     // Use Comparator<int[]>.
-    Arrays.sort(intervals, new Comparator<int[]>() {
-      @Override
-      public int compare(int[] o1, int[] o2) {
-        // Sort by the first elem (start time) in ascending order.
-        return o1[0] - o2[0];
-      }
-    });
+    // Arrays.sort(intervals, new Comparator<int[]>() {
+    // @Override
+    // public int compare(int[] o1, int[] o2) {
+    // // Sort by the first elem (start time) in ascending order.
+    // return o1[0] - o2[0];
+    // }
+    // });
+    Arrays.sort(intervals, (a1, a2) -> a1[0] - a2[0]);
 
     for (int i = 1; i < intervals.length; i++) {
       if (intervals[i][0] < intervals[i - 1][1]) {
@@ -46,8 +48,6 @@ public class MeetingRooms {
     return true;
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     MeetingRooms solution = new MeetingRooms();
@@ -57,10 +57,6 @@ public class MeetingRooms {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

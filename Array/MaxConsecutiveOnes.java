@@ -27,7 +27,7 @@ public class MaxConsecutiveOnes {
       } else {
         // Find the maximum till now.
         maxCount = Math.max(maxCount, count);
-        // Reset count of 1.
+        // Reset count of 1s.
         count = 0;
       }
     }
