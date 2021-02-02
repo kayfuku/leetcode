@@ -11,7 +11,7 @@ public class Solution {
   }
 
   // Author: + kei
-  // Date : December ?, 2020
+  // Date : February ?, 2021
   public int getInt(int num, int target) {
 
     return 0;
@@ -25,8 +25,9 @@ public class Solution {
     // Test arguments.
     // int num = 24;
     // int target = 2;
-    // solution.getInt(num, target);
+    // System.out.println(solution.getInt(num, target));
 
+    System.out.println("\ndone.");
   }
 
 }
