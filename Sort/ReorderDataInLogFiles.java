@@ -65,7 +65,8 @@ public class ReorderDataInLogFiles {
       }
     };
 
-    // Dual-pivot Quicksort takes O(NlogN) time and O(logN) space in itself.
+    // Dual-pivot Quicksort takes O(NlogN) time (even for the worst case) and
+    // O(logN) space in itself.
     Arrays.sort(logs, myComp);
 
     return logs;

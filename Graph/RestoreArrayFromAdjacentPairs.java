@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
 
 public class RestoreArrayFromAdjacentPairs {
@@ -45,7 +46,7 @@ public class RestoreArrayFromAdjacentPairs {
     }
 
     // Build the original array using BFS.
-    LinkedList<Integer> q = new LinkedList<>();
+    Queue<Integer> q = new LinkedList<>();
     Set<Integer> visited = new HashSet<>();
 
     q.add(first);

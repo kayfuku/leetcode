@@ -39,8 +39,10 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 		}
 	}
 
-	// 2. Hash Map + Doubly Linked List.
+	// 2. Hash Map + Doubly Linked List (DLL).
 	// Add the node to the head, remove the node from the tail.
+	// Implement following the steps.
+	// add => remove => moveToHead => popTail => get => put
 	// O(1) time for get and put operation.
 	// O(C) space, where C is the capacity of the cache.
 	public class LRUCacheClass2 {
@@ -67,6 +69,7 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 			this.size = 0;
 			this.capacity = capacity;
 
+			// Actual node, not a pointer
 			head = new DLLNode();
 			tail = new DLLNode();
 
@@ -131,11 +134,10 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 				newNode.key = key;
 				newNode.value = value;
 
-				// Add it to the map.
-				cache.put(key, newNode);
 				// Add it to the doubly linked list.
 				addNode(newNode);
-
+				// Add it to the map.
+				cache.put(key, newNode);
 				size++;
 
 				// After adding, check if the size is bigger than capacity.
@@ -144,7 +146,6 @@ public class LRUCache extends LinkedHashMap<Integer, Integer> {
 					DLLNode tail = popTail();
 					// Remove it from the map.
 					cache.remove(tail.key);
-
 					size--;
 				}
 

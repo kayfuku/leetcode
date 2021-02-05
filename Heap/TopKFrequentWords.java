@@ -22,6 +22,7 @@ public class TopKFrequentWords {
   // Author: + kei
   // Date : December 6, 2020
   public List<String> topKFrequent(String[] words, int k) {
+    // Count.
     Map<String, Integer> map = new HashMap<>();
     for (String s : words) {
       map.put(s, map.getOrDefault(s, 0) + 1);
@@ -32,6 +33,7 @@ public class TopKFrequentWords {
         // we will reverse it to fulfill the requirement before returning.
         (a, b) -> (map.get(a) != map.get(b)) ? map.get(a) - map.get(b) : b.compareTo(a));
 
+    // Sift through to get k most frequent words.
     for (String s : map.keySet()) {
       minHeap.offer(s);
       if (minHeap.size() > k) {
@@ -53,6 +55,8 @@ public class TopKFrequentWords {
     // NG! The next line sorts it in reverse lexicographic order, which disrupts the
     // arranged order in Min-Heap.
     // res.sort(Collections.reverseOrder());
+
+    // Sort in non-ascending order and if it ties, then lexicographically.
     Collections.reverse(res);
 
     // 2. LinkedList
@@ -61,8 +65,6 @@ public class TopKFrequentWords {
     // // Add it to the head, which reverses the arranged order in Min-Heap.
     // res.add(0, minHeap.poll());
     // }
-
-    // System.out.println(res);
 
     return res;
   }

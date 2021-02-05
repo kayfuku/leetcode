@@ -278,6 +278,7 @@ public class NumberOfIslands {
 			int[] square = queue.poll();
 			int row = square[0];
 			int col = square[1];
+			// grid[row][col] = VISITED; // NG!
 
 			// Neighbors.
 			for (int i = 0; i < 4; i++) {
@@ -287,10 +288,10 @@ public class NumberOfIslands {
 					continue;
 				}
 				// Attention! Adding and marking as visited must be at the same time!
+				// because two children can have the same child node.
 				queue.add(new int[] { nr, nc });
 				grid[nr][nc] = VISITED;
 			}
-
 		}
 	}
 
