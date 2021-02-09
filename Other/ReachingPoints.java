@@ -14,13 +14,13 @@ public class ReachingPoints {
 
   }
 
-
-  // 3. Work Backwards
+  // 3. Work Backwards. Take a look at this first, then look at next solution.
   // Author: @awice + kei (TLE)
   // Date : March 21, 2020
   public boolean reachingPoints2(int sx, int sy, int tx, int ty) {
     while (tx >= sx && ty >= sy) {
       if (sx == tx && sy == ty) {
+        // Just by subtracting tx or ty from tx or ty reached to sx and sy.
         return true;
       }
       if (tx > ty) {
@@ -29,10 +29,9 @@ public class ReachingPoints {
         ty -= tx;
       }
     }
-
+    // tx < sx or ty < sy means there is no way to reach from s to t.
     return false;
   }
-
 
   // 4. Work Backwards variant
   // Author: @awice + kei (AC)
@@ -49,6 +48,7 @@ public class ReachingPoints {
         } else {
           // ty <= sy
           // Check if sx = abs(tx - n * ty)
+          // In other words, check if tx can reach to sx backwards.
           return (tx - sx) % ty == 0;
         }
       } else {
@@ -64,10 +64,10 @@ public class ReachingPoints {
       }
     }
 
+    // if ty < sy or tx < sx, then we cannot reach the target anyway because
+    // sx, sy are positive number and cannot reduce themselves.
     return tx == sx && ty == sy;
   }
-
-
 
   // For testing.
   @SuppressWarnings("unused")
@@ -79,10 +79,6 @@ public class ReachingPoints {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
