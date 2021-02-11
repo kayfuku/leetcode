@@ -61,6 +61,7 @@ public class InsertInterval {
       idx++;
     }
 
+    // Wow! We can convert a list of integer array to 2D integer array!
     return output.toArray(new int[output.size()][2]);
   }
 
