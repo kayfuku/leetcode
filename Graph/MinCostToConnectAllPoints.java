@@ -19,10 +19,9 @@ public class MinCostToConnectAllPoints {
 
   }
 
-
-  // Kruskal's algorithm. 
+  // Kruskal's algorithm.
   // Author: uwi + xiaowuc1 + kei
-  // Date  : September 15, 2020
+  // Date : September 15, 2020
   public int minCostConnectPoints(int[][] points) {
     int ret = 0;
     int n = points.length;
@@ -31,21 +30,21 @@ public class MinCostToConnectAllPoints {
     for (int i = 0; i < n; i++) {
       for (int j = i + 1; j < n; j++) {
         int cost = Math.abs(points[i][0] - points[j][0]) + Math.abs(points[i][1] - points[j][1]);
-        edges.add(new Edge(cost, i, j));        
+        edges.add(new Edge(cost, i, j));
       }
     }
 
-    // Sort by weights in non-descending order. 
+    // Sort by weights in non-descending order.
     Collections.sort(edges, (e1, e2) -> e1.weight - e2.weight);
 
     UF uf = new UF(n);
-    // We only need n - 1 edges to create a minimum spanning tree. 
+    // We only need n - 1 edges to create a minimum spanning tree.
     int need = n - 1;
     for (Edge e : edges) {
       int cost = e.weight;
       int x = e.x;
       int y = e.y;
-      if (uf.union(x, y)) {
+      if (uf.unite(x, y)) {
         ret += cost;
         need--;
         if (need == 0) {
@@ -54,7 +53,7 @@ public class MinCostToConnectAllPoints {
       }
     }
 
-    return ret;    
+    return ret;
   }
 
   class Edge {
@@ -69,7 +68,6 @@ public class MinCostToConnectAllPoints {
     }
   }
 
-
   // Union Find (Disjoint Set)
   class UF {
     public int[] par;
@@ -79,7 +77,7 @@ public class MinCostToConnectAllPoints {
       Arrays.fill(par, -1);
     }
 
-    // Find root. 
+    // Find root.
     public int find(int x) {
       if (par[x] < 0) {
         return x;
@@ -87,43 +85,34 @@ public class MinCostToConnectAllPoints {
       return find(par[x]);
     }
 
-    // Merge the two trees. 
-    // Return true if they are not in the same tree. 
-    public boolean union(int x, int y) {
+    // Merge the two trees.
+    // Return true if they are not in the same tree.
+    public boolean unite(int x, int y) {
       x = find(x);
       y = find(y);
       if (x != y) {
-        // Merge tree y into x. 
+        // Merge tree y into x.
         par[y] = x;
       }
       return x != y;
     }
 
-    // Check if the two nodes belong to the same tree. 
+    // Check if the two nodes belong to the same tree.
     public boolean same(int x, int y) {
       return find(x) == find(y);
     }
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    SpecialPositionsInBinaryMatrix solution = new SpecialPositionsInBinaryMatrix();
+    MinCostToConnectAllPoints solution = new MinCostToConnectAllPoints();
 
     // Test arguments.
     // int num = 24;
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
-
-
-
 }
-
-

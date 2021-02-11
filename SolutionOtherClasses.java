@@ -291,6 +291,7 @@ class GraphNode {
 }
 
 // Graph without weight.
+@SuppressWarnings("unchecked")
 class Graph {
   int numNodes;
   LinkedList<Integer>[] adjacencyList;
@@ -332,6 +333,7 @@ class Edge {
   }
 }
 
+@SuppressWarnings("unchecked")
 class GraphWithWeight {
   int numNodes;
   LinkedList<Edge>[] adjacencyList;

@@ -22,12 +22,13 @@ public class FindPivotIndex {
   // Author: @awice + kei
   // Date : February 1, 2020
   public int pivotIndex(int[] nums) {
-    int sum = 0, leftsum = 0;
+    int sum = 0;
     // Get total sum.
     for (int x : nums) {
       sum += x;
     }
     // Iterate the array nums.
+    int leftsum = 0;
     for (int i = 0; i < nums.length; i++) {
       if (leftsum == sum - leftsum - nums[i]) {
         return i;
@@ -38,6 +39,7 @@ public class FindPivotIndex {
     return -1;
   }
 
+  @SuppressWarnings("unused")
   // For testing.
   public static void main(String[] args) {
     FindPivotIndex solution = new FindPivotIndex();
