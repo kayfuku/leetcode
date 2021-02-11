@@ -16,7 +16,6 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
 
   }
 
-
   // DP
   // Author: lee215 + kei (AC)
   // Date : March 26, 2020
@@ -37,6 +36,7 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
       // Note that even though the tap has a wide range, we do not know
       // how far we should use with that tap in terms of
       // finding minimum number of taps.
+      // Take care of the boundaries.
       int leftmost = Math.max(i - A[i], 0);
       int rightmost = Math.min(i + A[i], n);
       for (int j = leftmost; j <= rightmost; j++) {
@@ -49,8 +49,6 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
     return (dp[n] < n + 2) ? dp[n] : -1;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -61,28 +59,14 @@ public class MinimumNumberOfTapsToOpenToWaterGarden {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-

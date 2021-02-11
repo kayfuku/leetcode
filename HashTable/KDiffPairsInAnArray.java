@@ -35,6 +35,7 @@ public class KDiffPairsInAnArray {
     for (int i = 0; i < nums.length; i++) {
       // Check if there is the other half below and above.
       if (seen.contains(nums[i] - k)) {
+        // Found the counterpart. 
         // The other half of the pair already exists.
         // Save the smaller one.
         smallerSet.add(nums[i] - k);
@@ -52,7 +53,7 @@ public class KDiffPairsInAnArray {
       seen.add(nums[i]);
     }
 
-    // Just count the number of unique pairs.
+    // Count the number of unique pairs.
     return smallerSet.size();
   }
 

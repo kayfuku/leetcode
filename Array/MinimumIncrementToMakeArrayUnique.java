@@ -15,6 +15,8 @@ public class MinimumIncrementToMakeArrayUnique {
   }
 
 
+  // Count the elements and if it's more than one, then move it to 
+  // the empty space in count array. 
   // O(N) time, O(N) space
   // Author: @awice + kei
   // Date : March 12, 2020
@@ -38,6 +40,8 @@ public class MinimumIncrementToMakeArrayUnique {
         // We've got duplicates. Leave one and take the rest.
         taken += count[x] - 1;
         // Subtract the total distances in advance, which will be added later.
+        // This works because we can only increment to move according to the 
+        // problem statement. 
         ans -= x * (count[x] - 1);
       } else if (taken > 0 && count[x] == 0) {
         // There is an empty space here at x.
