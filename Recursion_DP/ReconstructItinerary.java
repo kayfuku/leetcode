@@ -47,7 +47,8 @@ public class ReconstructItinerary {
     for (Map.Entry<String, List<String>> entry : this.g.entrySet()) {
       Collections.sort(entry.getValue());
       // Note that this line is a bit different from a normal graph traversal.
-      // To keep track of if the edge is used
+      // To keep track of if the edge is used, we use boolean array.
+      // We cannot use set here because same nodes must be considered differet nodes.
       this.visitedEdges.put(entry.getKey(), new boolean[entry.getValue().size()]);
     }
 
