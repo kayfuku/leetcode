@@ -5,8 +5,11 @@
 package leetcode;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Set;
 
 class SolutionOtherClasses {
 
@@ -298,7 +301,8 @@ class Graph {
 
   Graph(int numNodes) {
     this.numNodes = numNodes;
-    // Contain n nodes indexed from 1.
+    // Array of LinkedList
+    // Contain n nodes indexed from 1 so we can access node n easily.
     adjacencyList = new LinkedList[numNodes + 1];
     for (int i = 1; i < adjacencyList.length; i++) {
       adjacencyList[i] = new LinkedList<>();
@@ -334,17 +338,24 @@ class Edge {
 }
 
 @SuppressWarnings("unchecked")
-class GraphWithWeight {
+class GraphWU {
   int numNodes;
   LinkedList<Edge>[] adjacencyList;
+  // Store parent node.
+  int[] prev;
 
-  GraphWithWeight(int numNodes) {
+  GraphWU(int numNodes) {
     this.numNodes = numNodes;
+    // Array of LinkedList
+    // Contain n nodes indexed from 1 so we can access node n easily.
     adjacencyList = new LinkedList[numNodes + 1];
     // Initialize adjacency lists for all the vertices.
     for (int i = 1; i < adjacencyList.length; i++) {
       adjacencyList[i] = new LinkedList<>();
     }
+
+    prev = new int[numNodes + 1];
+    Arrays.fill(prev, -1);
   }
 
   public void addEgde(int src, int dest, int weight) {
@@ -352,6 +363,55 @@ class GraphWithWeight {
     adjacencyList[src].addFirst(edge1);
     Edge edge2 = new Edge(dest, src, weight);
     adjacencyList[dest].addFirst(edge2);
+  }
+
+  // Find the shortest distance (cost) from srcNodeId to node i.
+  public long[] dijk(int srcNodeId) {
+    // i: node index, dist[i]: the shortest distance from srcNodeId to node i
+    long[] dist = new long[numNodes + 1];
+    Arrays.fill(dist, Long.MAX_VALUE);
+
+    // Build Min-Heap. long[node index, dist]
+    PriorityQueue<long[]> minHeap = new PriorityQueue<>( //
+        (n1, n2) -> Long.compare(n1[1], n2[1]));
+
+    Set<Integer> done = new HashSet<>();
+    dist[srcNodeId] = 0;
+    minHeap.offer(new long[] { srcNodeId, dist[srcNodeId] });
+    done.add(srcNodeId);
+    while (!minHeap.isEmpty()) {
+      long[] u = minHeap.poll();
+      int uId = (int) u[0];
+      for (Edge e : adjacencyList[uId]) {
+        int vId = e.dest;
+        if (done.contains(vId)) {
+          continue;
+        }
+        // Do RELAX.
+        if (dist[vId] > dist[uId] + e.weight) {
+          dist[vId] = dist[uId] + e.weight;
+        }
+        minHeap.offer(new long[] { vId, dist[vId] });
+        prev[vId] = uId;
+      }
+      done.add(uId);
+    }
+
+    return dist;
+  }
+
+  public void printShortestPath(int dest) {
+    printRoute(dest);
+    System.out.print("\n");
+  }
+
+  private void printRoute(int i) {
+    if (i < 0) {
+      return;
+    }
+
+    printRoute(prev[i]);
+    System.out.print(i + " ");
   }
 
   public void printGraph() {
@@ -434,6 +494,7 @@ class UF {
   }
 }
 
+// Union Find (Disjoint Set) 2
 class UnionFind {
   int count; // # of connected components <= Is it ok?
   int[] parent;
