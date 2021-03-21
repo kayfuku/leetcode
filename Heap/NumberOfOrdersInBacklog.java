@@ -21,10 +21,10 @@ public class NumberOfOrdersInBacklog {
     PriorityQueue<int[]> buyMaxH = new PriorityQueue<>((x, y) -> y[0] - x[0]);
     PriorityQueue<int[]> sellMinH = new PriorityQueue<>((x, y) -> x[0] - y[0]);
 
-    for (int[] order : orders) {
-      int price = order[0];
-      int amount = order[1];
-      int type = order[2];
+    for (int[] o : orders) {
+      int price = o[0];
+      int amount = o[1];
+      int type = o[2];
       if (type == 0) {
         // buy
         while (amount > 0 && !sellMinH.isEmpty() && sellMinH.peek()[0] <= price) {
