@@ -10,7 +10,6 @@ public class MovingAverageFromDataStream {
   // fields and classes here.
   // private int count;
 
-
   // 1. Deque
   // Streaming size is unknown, so you should think about two cases.
   // Streaming size is way smaller or larger than the window size.
@@ -36,22 +35,21 @@ public class MovingAverageFromDataStream {
     }
     winSum = winSum - tail + val;
 
+    // Calculate average.
     // Streaming size can be smaller or larger than the window size.
-    // * 1.0 keeps it type double.
-    return winSum * 1.0 / Math.min(winSize, count);
+    // winSum * 1.0 keeps it type double.
+    return (double) winSum / Math.min(winSize, count);
   }
 
   /**
-   * Your MovingAverage object will be instantiated and called as such: MovingAverage obj = new
-   * MovingAverage(size); double param_1 = obj.next(val);
+   * Your MovingAverage object will be instantiated and called as such:
+   * MovingAverage obj = new MovingAverage(size); double param_1 = obj.next(val);
    */
-
 
   // 2. Circular queue version (See below)
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     MovingAverageFromDataStream solution = new MovingAverageFromDataStream(0);
 
@@ -60,13 +58,9 @@ public class MovingAverageFromDataStream {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
 
 // 2. Circular queue version
 // O(1) time, O(N) space, where N is the size of the moving window.
@@ -95,8 +89,4 @@ class MovingAverageFromDataStream2 {
     return winSum * 1.0 / Math.min(winSize, count);
   }
 
-
-
 }
-
-
