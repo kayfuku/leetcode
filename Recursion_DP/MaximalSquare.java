@@ -26,7 +26,7 @@ public class MaximalSquare {
     for (int i = 1; i <= R; i++) {
       for (int j = 1; j <= C; j++) {
         if (matrix[i - 1][j - 1] == '1') {
-          // Take a min amoung left, up, and upper left.
+          // Take a min amoung left, up, and upper left, and plus one.
           dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
           maxsqlen = Math.max(maxsqlen, dp[i][j]);
         }
@@ -38,7 +38,7 @@ public class MaximalSquare {
   }
 
   // 2. Well, that's good, but no need to implement in the interview.
-  // Just let the interview know that you know a better solution like this.
+  // Just let the interviewer know that you know a better solution like this.
   // Author: leetcode + kei
   // Date : February 3, 2021
   public int maximalSquare2(char[][] matrix) {
