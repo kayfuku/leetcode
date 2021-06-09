@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-class SolutionOtherClasses {
+public class SolutionOtherClasses {
 
   // For testing.
   public static void main(String[] args) {

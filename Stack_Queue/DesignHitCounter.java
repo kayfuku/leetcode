@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -7,7 +8,8 @@ import java.util.Queue;
 // ** Change the name to HitCounter. 
 public class DesignHitCounter {
 
-  // 1. Queue (There is a more efficient solution using Deque with pairs)
+  // 1. Queue (There is a more efficient solution using Deque with pairs. See
+  // below.)
   // Author: leetcode + kei
   // Date : June 2, 2021
 
@@ -82,6 +84,7 @@ public class DesignHitCounter {
    * @param timestamp - The current timestamp (in seconds granularity).
    */
   public void hit(int timestamp) {
+    // Be careful the queue is empty when you use the method.
     if (this.hits.isEmpty() || this.hits.getLast()[0] != timestamp) {
       // Insert the new timestamp with count = 1
       this.hits.add(new int[] { timestamp, 1 });
@@ -103,6 +106,7 @@ public class DesignHitCounter {
    * @param timestamp - The current timestamp (in seconds granularity).
    */
   public int getHits(int timestamp) {
+    // Always think about what happens when the queue is empty.
     while (!this.hits.isEmpty()) {
       // Check the difference between the current timestamp and the oldest timestamp.
       int diff = timestamp - this.hits.getFirst()[0];
@@ -124,6 +128,39 @@ public class DesignHitCounter {
    * obj = new HitCounter(); obj.hit(timestamp); int param_2 =
    * obj.getHits(timestamp);
    */
+
+  // Review. NG!
+  class HitCounterR {
+
+    Deque<int[]> queue;
+    int count;
+
+    HitCounterR() {
+      queue = new ArrayDeque<>();
+      this.count = 0;
+    }
+
+    public void hit(int timestamp) {
+      // NG! What happens when the queue is empty?
+      if (queue.getLast()[0] == timestamp) {
+        queue.getLast()[1] += this.count;
+      } else {
+        queue.add(new int[] { timestamp, 1 });
+      }
+      this.count++;
+    }
+
+    public int getHits(int timestamp) {
+      // NG! Be aware of the order of subtraction.
+      // NG! What happens when the queue is empty?
+      while (queue.getFirst()[0] - timestamp >= 300) {
+        count -= queue.getFirst()[1];
+        queue.poll();
+      }
+      return this.count;
+    }
+
+  }
 
   // For testing.
   @SuppressWarnings("unused")

@@ -15,6 +15,7 @@ public class MergeKSortedLists {
   // 4. Priority Queue (Good for interview)
   // We're gonna use a min heap, which is a kind of priority queue and allows us
   // to put items in the queue and take out a minimum value item in O(1) time.
+  //
   // First off, put all the head nodes in the heap. Then, take out the minimum
   // node and append that node to the final list. Then, check the next node in
   // that list, and if there is a next node, then put the next node in the heap.
@@ -35,11 +36,14 @@ public class MergeKSortedLists {
     PriorityQueue<ListNode> minHeap = new PriorityQueue<>(lists.length, //
         (ListNode o1, ListNode o2) -> o1.val - o2.val);
 
+    // When we return a new list, dummy node is always good.
     ListNode dummy = new ListNode(0);
+    // Set a pointer that points to the tail node of the final list.
     ListNode tail = dummy;
 
     // Put the head nodes in the heap.
     for (ListNode node : lists) {
+      // Don't put a null in a queue anytime!
       if (node != null) {
         minHeap.offer(node);
       }
@@ -52,6 +56,7 @@ public class MergeKSortedLists {
       tail.next = node;
       tail = node;
 
+      // Check if there is a next node in that list.
       if (node.next != null) {
         // Put the next node in that list in the heap.
         minHeap.offer(node.next);
@@ -115,6 +120,37 @@ public class MergeKSortedLists {
    * next; ListNode() {} ListNode(int val) { this.val = val; } ListNode(int val,
    * ListNode next) { this.val = val; this.next = next; } }
    */
+
+  // Review.
+  public ListNode mergeKListsR(ListNode[] lists) {
+    if (lists == null || lists.length == 0) {
+      return null;
+    }
+
+    ListNode dummy = new ListNode(0);
+    ListNode tail = dummy;
+
+    PriorityQueue<ListNode> minHeap = new PriorityQueue<>(lists.length, //
+        (ListNode o1, ListNode o2) -> o1.val - o2.val);
+
+    for (ListNode node : lists) {
+      if (node != null) {
+        minHeap.offer(node);
+      }
+    }
+
+    while (!minHeap.isEmpty()) {
+      ListNode minNode = minHeap.poll();
+      tail.next = minNode;
+      tail = minNode;
+
+      if (minNode.next != null) {
+        minHeap.offer(minNode.next);
+      }
+    }
+
+    return dummy.next;
+  }
 
   // For testing.
   @SuppressWarnings("unused")

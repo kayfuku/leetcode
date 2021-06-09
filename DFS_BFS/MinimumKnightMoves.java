@@ -21,6 +21,7 @@ public class MinimumKnightMoves {
   // O(|xy|) time and space because we use memoization based on the x, y
   // coordinate and in the worst case, there are |xy| cells between the target
   // and the origin.
+  //
   // Author: leetcode + kei
   // Date : May 28, 2021
 
@@ -29,7 +30,8 @@ public class MinimumKnightMoves {
   private Map<String, Integer> memo = new HashMap<>();
 
   public int minKnightMoves(int x, int y) {
-    // Symmetry of the board
+    // Because of the symmetry of the board, we only need to focus on the first
+    // quadrant. Don't forget to take the absolute value.
     return dfs(Math.abs(x), Math.abs(y));
   }
 
@@ -56,16 +58,47 @@ public class MinimumKnightMoves {
     } else {
       // Since the knight move and the board are symmetry,
       // we only need to focus on the first quadrant.
-      int ret = 1 + Math.min( //
+      int steps = 1 + Math.min( //
           // Also, we only need to consider two moves because of the symmetry of the
           // allowed move, which is one left two down, or two left one down.
           dfs(Math.abs(x - 1), Math.abs(y - 2)), //
           dfs(Math.abs(x - 2), Math.abs(y - 1)));
 
       // Memoization
-      memo.put(key, ret);
+      memo.put(key, steps);
 
-      return ret;
+      return steps;
+    }
+  }
+
+  // Review
+
+  // K: x y coordinate, V: steps
+  Map<String, Integer> memoR = new HashMap<>();
+
+  public int minKnightMovesR(int x, int y) {
+    return dfsR(Math.abs(x), Math.abs(y));
+  }
+
+  int dfsR(int x, int y) {
+    String key = "" + x + "," + y;
+
+    int steps = 0;
+
+    if (memoR.containsKey(key)) {
+      return memoR.get(key);
+    }
+
+    if (x == 0 && y == 0) {
+      return 0;
+    } else if (x + y == 2) {
+      return 2;
+    } else {
+      steps = 1 + Math.min( //
+          dfsR(Math.abs(x - 2), Math.abs(y - 1)), //
+          dfsR(Math.abs(x - 1), Math.abs(y - 2)));
+      memoR.put(key, steps);
+      return steps;
     }
   }
 

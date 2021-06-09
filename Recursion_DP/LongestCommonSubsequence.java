@@ -18,7 +18,8 @@ public class LongestCommonSubsequence {
 	//
 	// https://leetcode.com/problems/longest-common-subsequence/discuss/351689/Java-Two-DP-codes-of-O(mn)-and-O(min(m-n))-spaces-w-picture-and-analysis
 	//
-	// 2d array dp stores the longest common sequence (LCS) so far.
+	// I'm gonna use a 2d array 'dp', which stores the longest common sequence (LCS)
+	// so far.
 	//
 	// Iterating through the 2d array, I compare the two sequences, one is the
 	// sequence from the beginning to the i-th character of the first string and the
@@ -28,14 +29,14 @@ public class LongestCommonSubsequence {
 	// For each iteration, I check if the i-th character of the first sequence and
 	// the j-th character of the second sequence are the same.
 	//
-	// If two sequences end in the same character, the LCS contains that character.
-	// If two sequences have different last character, the length of the LCS is
+	// If the characters are the same, then the LCS contains that character.
+	// If not the same, then the length of the LCS is
 	// the larger one of whichever the length of the LCS we get by dropping the last
 	// character of the first sequence or the last character of the second sequence.
 	//
 	// In other words:
-	// If the characters are not the same, then take a larger value of previous raw
-	// or previous column because dp 2d array already stores the LCS so far.
+	// If the characters are not the same, then take a larger value of previous row
+	// or previous column because 2d array 'dp' already stores the LCS so far.
 	// If the characters are the same, then add 1 to the LCS that is one step before
 	// of both sequences.
 	//
@@ -88,6 +89,29 @@ public class LongestCommonSubsequence {
 
 		// Return the most bottom right value in the 2d array.
 		return dp[m][n];
+	}
+
+	// Review.
+	// Author: kei (AC)
+	// Date : June 9, 2021
+	public int longestCommonSubsequenceR(String s1, String s2) {
+		int m = s1.length();
+		int n = s2.length();
+		int[][] dp = new int[m + 1][n + 1];
+
+		int max = 0;
+		for (int i = 1; i < m + 1; i++) {
+			for (int j = 1; j < n + 1; j++) {
+				if (s1.charAt(i - 1) == s2.charAt(j - 1)) {
+					dp[i][j] = dp[i - 1][j - 1] + 1;
+					max = Math.max(max, dp[i][j]);
+				} else {
+					dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
+				}
+			}
+		}
+
+		return max;
 	}
 
 	// For testing.
