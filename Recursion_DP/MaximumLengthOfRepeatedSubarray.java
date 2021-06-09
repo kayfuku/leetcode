@@ -11,6 +11,35 @@ public class MaximumLengthOfRepeatedSubarray {
   }
 
   // 3. DP
+  // To find a common subarray, we can use 2d matrix to store the common subarray
+  // length.
+  //
+  // we put the first string vertically and the second string horizontally, and
+  // iterate through the matrix from the top left to the bottom right, which means
+  // that we append character one by one from the first character in the first
+  // string when interating horizontally, and we append character one by one from
+  // the first character in the second string when interating vertically.
+  //
+  // If we find the same character, then we add 1 to the value of the previous row
+  // and the previous column and save it in the current square. What that means is
+  // that if there is a common character, then the common subarray length
+  // increases by one.
+  //
+  // dp[i][j] = dp[i - 1][j - 1] + 1 (if A[i] == B[j])
+  //
+  // Our answer will be max(dp[i][j])
+  //
+  // s1 = "abcba", s2 = "cbadg"
+  // dp:
+  // * j 0 c b a d g
+  // i * * * * * * *
+  // 0 * 0 0 0 0 0 0
+  // a * 0 0 0 1 0 0
+  // b * 0 0 1 0 0 0
+  // c * 0 1 0 0 0 0
+  // b * 0 0 2 0 0 0
+  // a * 0 0 0 3 0 0
+  //
   // O(MN) time and space, where M is num1 length and N is num2 length.
   // Author: leetcode + kei
   // Date : June 1, 2021
@@ -19,6 +48,7 @@ public class MaximumLengthOfRepeatedSubarray {
     int n = num2.length;
     int maxlen = 0;
     int[][] dp = new int[m + 1][n + 1];
+    //
     for (int i = 1; i < m + 1; i++) {
       for (int j = 1; j < n + 1; j++) {
         // Be careful of index minus one to access original arrays.
@@ -32,6 +62,7 @@ public class MaximumLengthOfRepeatedSubarray {
         // Compare to LongestCommonSubsequence.java.
       }
     }
+
     return maxlen;
   }
 

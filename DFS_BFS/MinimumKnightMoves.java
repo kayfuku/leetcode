@@ -14,6 +14,8 @@ public class MinimumKnightMoves {
   }
 
   // DFS
+  // I'm gonna use DFS to check if the night can move from (x, y) to the origin.
+  //
   // The time complexity of the algorithm is proportional to the total number of
   // invocations of the recursive function.
   // O(|xy|) time and space because we use memoization based on the x, y
@@ -34,27 +36,35 @@ public class MinimumKnightMoves {
   private int dfs(int x, int y) {
     // We can use two variables as one key.
     String key = x + "," + y;
+
+    // Memoization
     if (memo.containsKey(key)) {
       return memo.get(key);
     }
 
-    if (x + y == 0) {
+    // if (x + y == 0) {
+    if (x == 0 && y == 0) {
       // Base case 1
       return 0;
+
     } else if (x + y == 2) {
       // Base case 2
-      // We need to take care of this case because the last a few steps are
-      // out of the first quadrant.
+      // We need to take care of this case because there could be infinite loop
+      // around the origin.
       return 2;
+
     } else {
-      // We only need to focus on the first quadrant.
+      // Since the knight move and the board are symmetry,
+      // we only need to focus on the first quadrant.
       int ret = 1 + Math.min( //
-          // Symmetry of the move
+          // Also, we only need to consider two moves because of the symmetry of the
+          // allowed move, which is one left two down, or two left one down.
           dfs(Math.abs(x - 1), Math.abs(y - 2)), //
           dfs(Math.abs(x - 2), Math.abs(y - 1)));
 
       // Memoization
       memo.put(key, ret);
+
       return ret;
     }
   }

@@ -4,8 +4,6 @@
 
 package leetcode;
 
-import javax.print.event.PrintEvent;
-
 public class ReverseLinkedList {
   // fields here.
   // private int count;
@@ -15,7 +13,8 @@ public class ReverseLinkedList {
     // this.count = 0;
   }
 
-  // 1. Iterative.
+  // 1. Iterative. This one (iterative) or third one (recursive) is good for
+  // interview.
   // O(N) time, O(1) space.
   public ListNode reverseList(ListNode head) {
     // corner: null, 1, => ok
@@ -89,7 +88,6 @@ public class ReverseLinkedList {
 
   private ListNode preorder(ListNode prev, ListNode curr) {
     // You can add node == null later when you explain the corner case.
-    // node.next == null means when the node gets to the last node.
     if (curr == null) {
       return prev;
     }

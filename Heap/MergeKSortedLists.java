@@ -12,9 +12,17 @@ public class MergeKSortedLists {
 
   }
 
-  // 4. Priority Queue
+  // 4. Priority Queue (Good for interview)
+  // We're gonna use a min heap, which is a kind of priority queue and allows us
+  // to put items in the queue and take out a minimum value item in O(1) time.
+  // First off, put all the head nodes in the heap. Then, take out the minimum
+  // node and append that node to the final list. Then, check the next node in
+  // that list, and if there is a next node, then put the next node in the heap.
+  // Repeat that while the heap is not empty. Then, return the final list.
+  //
   // O(NlogK) time, where N is total number of nodes and K is the number of lists.
-  // To find minimum value node, it takes O(logK) time and there are N nodes.
+  // To find minimum value node, it takes O(logK) time and there are N nodes in
+  // the final list.
   // O(N) space because of the final list.
   // Author: reeclappl + kei
   // Date : June 4, 2021
@@ -30,6 +38,7 @@ public class MergeKSortedLists {
     ListNode dummy = new ListNode(0);
     ListNode tail = dummy;
 
+    // Put the head nodes in the heap.
     for (ListNode node : lists) {
       if (node != null) {
         minHeap.offer(node);
@@ -52,7 +61,7 @@ public class MergeKSortedLists {
     return dummy.next;
   }
 
-  // 5. Divide and Conquer
+  // 5. Divide and Conquer (No good for interview)
   // O(NlogK) time because the number of sorted lists almost reduces by half.
   // O(logK) space
   // Author: mouqi123 + kei

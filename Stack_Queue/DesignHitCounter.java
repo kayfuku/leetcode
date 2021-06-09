@@ -1,30 +1,31 @@
 package leetcode;
 
+import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
 // ** Change the name to HitCounter. 
 public class DesignHitCounter {
 
-  // 1. Queue (There is more efficient solution using Deque with pairs)
+  // 1. Queue (There is a more efficient solution using Deque with pairs)
   // Author: leetcode + kei
   // Date : June 2, 2021
 
-  private Queue<Integer> hits;
+  private Queue<Integer> q;
 
   /** Initialize your data structure here. */
   // ** Change the name to HitCounter.
-  public DesignHitCounter() {
-    this.hits = new LinkedList<>();
-  }
+  // public DesignHitCounter() {
+  // this.q = new LinkedList<>();
+  // }
 
   /**
    * O(1) time
    * 
    * @param timestamp - The current timestamp (in seconds granularity).
    */
-  public void hit(int timestamp) {
-    this.hits.add(timestamp);
+  public void hit2(int timestamp) {
+    this.q.add(timestamp);
   }
 
   /**
@@ -36,18 +37,18 @@ public class DesignHitCounter {
    * However, we must notice that each timestamp is processed only twice (first
    * while adding the timestamp in the queue in hit method and second while
    * removing the timestamp from the queue in the getHits method). Hence if the
-   * total number of timestamps encountered throughout is NN, the overall time
-   * taken by getHits method is O(N)O(N). This results in an amortized time
-   * complexity of O(1) for a single call to getHits method.
+   * total number of timestamps encountered throughout is N, the overall time
+   * taken by getHits method is O(N). This results in an amortized time complexity
+   * of O(1) for a single call to getHits method.
    * 
    * @param timestamp - The current timestamp (in seconds granularity).
    */
-  public int getHits(int timestamp) {
-    while (!this.hits.isEmpty()) {
+  public int getHits2(int timestamp) {
+    while (!this.q.isEmpty()) {
       // Be careful of the condition.
       // We want to count Hits between timestamp - 300 + 1 and timestamp inclusive
-      if (timestamp - this.hits.peek() >= 300) {
-        this.hits.poll();
+      if (timestamp - this.q.peek() >= 300) {
+        this.q.poll();
       } else {
         // The queue contains the only timestamps we want.
         break;
@@ -55,7 +56,67 @@ public class DesignHitCounter {
     }
 
     // The queue may contain two or more of the same timestamps in it.
-    return this.hits.size();
+    return this.q.size();
+  }
+
+  // 2. Using Deque with Pairs
+  // We'll keep timestamp and the count for the timestamp.
+  // We'll use the "deque" data structure which allows us to insert and delete
+  // values from both the ends of the queue.
+  //
+  // Author: leetcode + kei
+  // Date : June 7, 2021
+  private int total;
+  // int[]: [timestamp, count]
+  private Deque<int[]> hits;
+
+  // ** Change the name to HitCounter.
+  public DesignHitCounter() {
+    this.total = 0;
+    this.hits = new LinkedList<>();
+  }
+
+  /**
+   * Record a hit.
+   * 
+   * @param timestamp - The current timestamp (in seconds granularity).
+   */
+  public void hit(int timestamp) {
+    if (this.hits.isEmpty() || this.hits.getLast()[0] != timestamp) {
+      // Insert the new timestamp with count = 1
+      this.hits.add(new int[] { timestamp, 1 });
+    } else {
+      // The last timestamp in the deque is the same as the current timestamp.
+      // Update the count of latest timestamp by incrementing the count by 1.
+      this.hits.getLast()[1]++;
+    }
+
+    // Increment total
+    this.total++;
+  }
+
+  /**
+   * Return the number of hits in the past 5 minutes (300 seconds). O(N) time,
+   * where N is the total number of timestamps in the deque because in the worst
+   * case, the deque can have N timestamps. O(N) space
+   * 
+   * @param timestamp - The current timestamp (in seconds granularity).
+   */
+  public int getHits(int timestamp) {
+    while (!this.hits.isEmpty()) {
+      // Check the difference between the current timestamp and the oldest timestamp.
+      int diff = timestamp - this.hits.getFirst()[0];
+      if (diff >= 300) {
+        // Decrement total by the count of the oldest timestamp that is removed.
+        this.total -= this.hits.getFirst()[1];
+        this.hits.removeFirst();
+      } else {
+        // The oldest timestamp is within the time window.
+        break;
+      }
+    }
+
+    return this.total;
   }
 
   /**

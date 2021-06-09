@@ -10,7 +10,7 @@ public class MovingAverageFromDataStream {
   // fields and classes here.
   // private int count;
 
-  // 1. Deque
+  // 1. Queue
   // Streaming size is unknown, so you should think about two cases.
   // Streaming size is way smaller or larger than the window size.
   //
@@ -28,16 +28,16 @@ public class MovingAverageFromDataStream {
     count++;
     // Add to the last.
     queue.add(val);
-    int tail = 0;
+    winSum += val;
     if (count > winSize) {
       // Remove from the head.
-      tail = (int) queue.poll();
+      int tail = (int) queue.poll();
+      winSum -= tail;
     }
-    winSum = winSum - tail + val;
 
     // Calculate average.
     // Streaming size can be smaller or larger than the window size.
-    // winSum * 1.0 keeps it type double.
+    // winSum * 1.0 keeps it type double. (Python)
     return (double) winSum / Math.min(winSize, count);
   }
 

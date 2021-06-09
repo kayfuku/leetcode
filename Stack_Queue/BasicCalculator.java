@@ -1,5 +1,6 @@
 package leetcode;
 
+import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.LinkedList;
 
@@ -14,63 +15,139 @@ public class BasicCalculator {
   }
 
   // Stack
-  // O(N) time and space
+  // I'm gonna go through the input String character by character.
+  // If the character is digit, then ...
+  // If the character is '+' sign, then ...
+  //
+  //
+  // O(N) time and space, where N is the total number of characters.
   // Author: leetcode + kei
   // Date : May 22, 2021
   public int calculate(String s) {
 
     Deque<Integer> stack = new LinkedList<>();
-    int operand = 0;
+    // Init
     int result = 0; // For the on-going result
     int sign = 1; // 1 means positive, -1 means negative
+    int operand = 0;
 
-    // Iterate expression string character by character.
-    // Evaluate to the left when we find '+', '-', or ')'.
+    // 1 + 2 + 1
+    // The tricky part is that we find an operator/sign first, then we know
+    // the operand after that. We save the sign fist, and when we evaluate the
+    // expression so far, we use that sign.
+
+    // Iterate the expression string character by character.
+    // Evaluate to the left when we find '+', '-', ')', or end of loop.
     // We use a stack when we find parenthesis.
     for (int i = 0; i < s.length(); i++) {
-      char ch = s.charAt(i);
-      if (Character.isDigit(ch)) {
-        // Forming operand, since it could be more than one digit
-        operand = 10 * operand + (int) (ch - '0');
-      } else if (ch == '+') {
-        // Evaluate the expression to the left,
+      char c = s.charAt(i);
+      if (Character.isDigit(c)) {
+        // Form operand, since it could be more than one digit.
+        operand = 10 * operand + (int) (c - '0');
+
+      } else if (c == '+') {
+        // We can evaluate the expression to the left,
         // with result, sign, operand
         result += sign * operand;
+
         // Save the recently encountered '+' sign
         sign = 1;
         // Reset operand
         operand = 0;
-      } else if (ch == '-') {
+
+      } else if (c == '-') {
+        // We can evaluate the expression to the left,
         result += sign * operand;
+
         sign = -1;
         operand = 0;
-      } else if (ch == '(') {
-        // Push the result and sign on to the stack, for later
-        // We push the result first, then sign
+
+      } else if (c == '(') {
+        // Push the result so far and sign onto the stack, for later use.
+        // We push the result first, then sign in the stack.
         stack.push(result);
         stack.push(sign);
-        // Reset sign and result, as if new evaluation begins for the new
+
+        // Reset result, sign, and operand, as if new evaluation begins for the new
         // sub-expression
-        sign = 1;
         result = 0;
-      } else if (ch == ')') {
-        // Evaluate the expression to the left with result, sign and operand
+        sign = 1;
+        operand = 0;
+
+      } else if (c == ')') {
+        // We can evaluate the sub-expression to the left.
         result += sign * operand;
-        // ')' marks end of expression within a set of parenthesis
-        // Its result is multiplied with sign on top of stack
-        // as stack.pop() is the sign before the parenthesis
+
+        // Now that we know the sub-expression ended, we can also evaluate to the left.
+        // First we take the sign out of the stack, and then add the result we saved
+        // before to the result of the sub-expression.
         result *= stack.pop();
-        // Then add to the next operand on the top.
-        // as stack.pop() is the result calculated before this parenthesis
-        // (operand on stack) + (sign on stack * (result from parenthesis))
         result += stack.pop();
-        // Reset sign and operand
+
+        // Reset sign and operand.
         sign = 1;
         operand = 0;
       }
     }
 
+    // We need to evaluate again.
     result += sign * operand;
+
+    return result;
+  }
+
+  // Review
+  public int calculateR(String s) {
+    Deque<Integer> stack = new ArrayDeque<>();
+    int result = 0;
+    int sign = 1;
+    int operand = 0;
+
+    for (char c : s.toCharArray()) {
+      if (Character.isDigit(c)) {
+        // Form the operand.
+        operand = operand * 10 + (int) (c - '0');
+      } else if (c == '+') {
+        // 1 + 2 + 2
+        // The tricky part is that we find sign first, and then find operand after that.
+        // So, we need to save the sign for the next operand.
+        // res: 1
+        // When we find the '+' sign, we update the sign.
+        // sign: 1
+        // op: 0
+        result += sign * operand;
+        sign = 1;
+        operand = 0;
+      } else if (c == '-') {
+        result += sign * operand;
+        sign = -1;
+        operand = 0;
+      } else if (c == '(') {
+        // res - (2 + 4)
+        stack.push(result);
+        stack.push(sign);
+        // We initialize variables so that we can start the evaluation for the
+        // sub-expression.
+        result = 0;
+        sign = 1;
+        operand = 0;
+      } else if (c == ')') {
+        // ... res + 4)
+        result += sign * operand;
+        // Now that we know the sub-expression ended, we can also evaluate to the left.
+        // First we take the sign out of the stack, and then add the result we saved
+        // before to the result of the sub-expression.
+        result *= stack.pop();
+        result += stack.pop();
+
+        sign = 1;
+        operand = 0;
+      }
+    }
+
+    // ... res + 5
+    result += sign * operand;
+
     return result;
   }
 
