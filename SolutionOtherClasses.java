@@ -100,7 +100,6 @@ class ListNode {
 
   public void add(ListNode node) {
     this.next = node;
-
   }
 
   @Override

@@ -11,7 +11,7 @@ public class Solution {
   }
 
   // Author: + kei
-  // Date : March ?, 2021
+  // Date : June ?, 2021
   public int getInt(int num, int target) {
 
     return 0;
