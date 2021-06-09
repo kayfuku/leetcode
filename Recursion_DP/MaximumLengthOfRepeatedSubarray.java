@@ -23,13 +23,15 @@ public class MaximumLengthOfRepeatedSubarray {
   // If we find the same character, then we add 1 to the value of the previous row
   // and the previous column and save it in the current square. What that means is
   // that if there is a common character, then the common subarray length
-  // increases by one.
+  // increases by one. Written in equation,
   //
-  // dp[i][j] = dp[i - 1][j - 1] + 1 (if A[i] == B[j])
+  // dp[i][j] = dp[i - 1][j - 1] + 1 (if nums1[i] == nums2[j])
   //
-  // Our answer will be max(dp[i][j])
+  // Our answer will be,
   //
-  // s1 = "abcba", s2 = "cbadg"
+  // max(dp[i][j])
+  //
+  // nums1 = "abcba", nums2 = "cbadg"
   // dp:
   // * j 0 c b a d g
   // i * * * * * * *
@@ -40,7 +42,7 @@ public class MaximumLengthOfRepeatedSubarray {
   // b * 0 0 2 0 0 0
   // a * 0 0 0 3 0 0
   //
-  // O(MN) time and space, where M is num1 length and N is num2 length.
+  // O(MN) time and space, where M is nums1 length and N is nums2 length.
   // Author: leetcode + kei
   // Date : June 1, 2021
   public int findLength(int[] num1, int[] num2) {
@@ -64,6 +66,25 @@ public class MaximumLengthOfRepeatedSubarray {
     }
 
     return maxlen;
+  }
+
+  // Review
+  public int findLengthR(int[] num1, int[] num2) {
+    int m = num1.length;
+    int n = num2.length;
+    int[][] dp = new int[m + 1][n + 1];
+
+    int max = 0;
+    for (int i = 1; i < m + 1; i++) {
+      for (int j = 1; j < n + 1; j++) {
+        if (num1[i - 1] == num2[j - 1]) {
+          dp[i][j] = dp[i - 1][j - 1] + 1;
+          max = Math.max(max, dp[i][j]);
+        }
+      }
+    }
+
+    return max;
   }
 
   // For testing.
