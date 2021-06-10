@@ -2,14 +2,12 @@ package leetcode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 import java.util.Queue;
 
 // ** Change the name to HitCounter. 
 public class DesignHitCounter {
 
-  // 1. Queue (There is a more efficient solution using Deque with pairs. See
-  // below.)
+  // 1. Queue (Next one is better for interview)
   // Author: leetcode + kei
   // Date : June 2, 2021
 
@@ -61,13 +59,14 @@ public class DesignHitCounter {
     return this.q.size();
   }
 
-  // 2. Using Deque with Pairs
+  // 2. Using Deque with Pairs (This is better for interview)
   // We'll keep timestamp and the count for the timestamp.
   // We'll use the "deque" data structure which allows us to insert and delete
-  // values from both the ends of the queue.
+  // values from both ends of the queue.
   //
   // Author: leetcode + kei
   // Date : June 7, 2021
+
   private int total;
   // int[]: [timestamp, count]
   private Deque<int[]> hits;
@@ -75,7 +74,7 @@ public class DesignHitCounter {
   // ** Change the name to HitCounter.
   public DesignHitCounter() {
     this.total = 0;
-    this.hits = new LinkedList<>();
+    this.hits = new ArrayDeque<>();
   }
 
   /**
@@ -89,7 +88,7 @@ public class DesignHitCounter {
       // Insert the new timestamp with count = 1
       this.hits.add(new int[] { timestamp, 1 });
     } else {
-      // The last timestamp in the deque is the same as the current timestamp.
+      // The latetst timestamp in the deque is the same as the current timestamp.
       // Update the count of latest timestamp by incrementing the count by 1.
       this.hits.getLast()[1]++;
     }
@@ -100,24 +99,20 @@ public class DesignHitCounter {
 
   /**
    * Return the number of hits in the past 5 minutes (300 seconds). O(N) time,
-   * where N is the total number of timestamps in the deque because in the worst
-   * case, the deque can have N timestamps. O(N) space
+   * where N is the total number of hits because in the worst case, the deque can
+   * have N timestamps. O(N) space
    * 
    * @param timestamp - The current timestamp (in seconds granularity).
    */
   public int getHits(int timestamp) {
     // Always think about what happens when the queue is empty.
-    while (!this.hits.isEmpty()) {
-      // Check the difference between the current timestamp and the oldest timestamp.
-      int diff = timestamp - this.hits.getFirst()[0];
-      if (diff >= 300) {
-        // Decrement total by the count of the oldest timestamp that is removed.
-        this.total -= this.hits.getFirst()[1];
-        this.hits.removeFirst();
-      } else {
-        // The oldest timestamp is within the time window.
-        break;
-      }
+    // Check if the difference between the current timestamp and the oldest
+    // timestamp is greater than or equal to 300, if true, then it's out of
+    // the time window.
+    while (!this.hits.isEmpty() && timestamp - this.hits.getFirst()[0] >= 300) {
+      // Subtract the count of the oldest timestamp from total.
+      this.total -= this.hits.getFirst()[1];
+      this.hits.removeFirst();
     }
 
     return this.total;
@@ -129,38 +124,38 @@ public class DesignHitCounter {
    * obj.getHits(timestamp);
    */
 
-  // Review. NG!
-  class HitCounterR {
+  // // Review. NG!
+  // class HitCounterR {
 
-    Deque<int[]> queue;
-    int count;
+  // Deque<int[]> queue;
+  // int count;
 
-    HitCounterR() {
-      queue = new ArrayDeque<>();
-      this.count = 0;
-    }
+  // HitCounterR() {
+  // queue = new ArrayDeque<>();
+  // this.count = 0;
+  // }
 
-    public void hit(int timestamp) {
-      // NG! What happens when the queue is empty?
-      if (queue.getLast()[0] == timestamp) {
-        queue.getLast()[1] += this.count;
-      } else {
-        queue.add(new int[] { timestamp, 1 });
-      }
-      this.count++;
-    }
+  // public void hit(int timestamp) {
+  // // NG! What happens when the queue is empty?
+  // if (queue.getLast()[0] == timestamp) {
+  // queue.getLast()[1] += this.count;
+  // } else {
+  // queue.add(new int[] { timestamp, 1 });
+  // }
+  // this.count++;
+  // }
 
-    public int getHits(int timestamp) {
-      // NG! Be aware of the order of subtraction.
-      // NG! What happens when the queue is empty?
-      while (queue.getFirst()[0] - timestamp >= 300) {
-        count -= queue.getFirst()[1];
-        queue.poll();
-      }
-      return this.count;
-    }
+  // public int getHits(int timestamp) {
+  // // NG! Be aware of the order of subtraction.
+  // // NG! What happens when the queue is empty?
+  // while (queue.getFirst()[0] - timestamp >= 300) {
+  // count -= queue.getFirst()[1];
+  // queue.poll();
+  // }
+  // return this.count;
+  // }
 
-  }
+  // }
 
   // For testing.
   @SuppressWarnings("unused")
