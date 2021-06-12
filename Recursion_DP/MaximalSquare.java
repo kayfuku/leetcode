@@ -21,12 +21,14 @@ public class MaximalSquare {
     int R = matrix.length;
     int C = matrix[0].length;
 
+    // The first row and the first column are all 0s.
     int[][] dp = new int[R + 1][C + 1];
     int maxsqlen = 0;
     for (int i = 1; i <= R; i++) {
       for (int j = 1; j <= C; j++) {
+        // Decrement indices to access to the original 'matrix' (not 'dp').
         if (matrix[i - 1][j - 1] == '1') {
-          // Take a min amoung left, up, and upper left, and plus one.
+          // Take a min among left, up, and upper left, and plus one.
           dp[i][j] = Math.min(Math.min(dp[i][j - 1], dp[i - 1][j]), dp[i - 1][j - 1]) + 1;
           maxsqlen = Math.max(maxsqlen, dp[i][j]);
         }

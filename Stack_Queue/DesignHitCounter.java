@@ -124,6 +124,37 @@ public class DesignHitCounter {
    * obj.getHits(timestamp);
    */
 
+  // Review
+  class HitCounterR {
+
+    private int count;
+    // int[]: [timestamp, count]
+    private Deque<int[]> queue;
+
+    HitCounterR() {
+      this.count = 0;
+      this.queue = new ArrayDeque<>();
+    }
+
+    public void hit(int timestamp) {
+      if (queue.isEmpty() || queue.getLast()[0] != timestamp) {
+        queue.add(new int[] { timestamp, 1 });
+      } else {
+        queue.getLast()[1]++;
+      }
+      count++;
+    }
+
+    public int getHits(int timestamp) {
+      while (!queue.isEmpty() && timestamp - queue.getFirst()[0] >= 300) {
+        count -= queue.getFirst()[1];
+        queue.poll();
+      }
+
+      return count;
+    }
+  }
+
   // // Review. NG!
   // class HitCounterR {
 

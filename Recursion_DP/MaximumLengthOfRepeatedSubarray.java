@@ -42,6 +42,16 @@ public class MaximumLengthOfRepeatedSubarray {
   // b * 0 0 2 0 0 0
   // a * 0 0 0 3 0 0
   //
+  // dp:
+  // * j 0 a b a b a
+  // i * * * * * * *
+  // 0 * 0 0 0 0 0 0
+  // a * 0 1 0 1 0 1
+  // b * 0 0 2 0 2 0
+  // a * 0 1 0 3 0 3
+  // b * 0 0 2 0 4 0
+  // a * 0 1 0 3 0 5
+  //
   // O(MN) time and space, where M is nums1 length and N is nums2 length.
   // Author: leetcode + kei
   // Date : June 1, 2021
@@ -64,6 +74,11 @@ public class MaximumLengthOfRepeatedSubarray {
         // Compare to LongestCommonSubsequence.java.
       }
     }
+
+    // If we need return the longest common subarray, then save the index as a
+    // lastIdx when we find maxlen. Then, using the lastIdx and maxlen, we can slice
+    // the num1 (or num2) to get the longest common subarray.
+    // (leetcode_contest/IndeedPrep.java)
 
     return maxlen;
   }
