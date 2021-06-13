@@ -21,19 +21,23 @@ public class NumberOfIslands {
 	// because we visit every square at most twice.
 	// O(MN) space, in the case that the grid map is filled with lands
 	// where DFS goes by M x N deep.
+
+	// up, right, down, left
+	private static final int[][] D = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
+
 	public int numIslands(char[][] grid) {
 		// Epithet code. Note that grid == null is first.
 		if (grid == null || grid.length == 0) {
 			return 0;
 		}
-		int nr = grid.length;
-		int nc = grid[0].length;
+		int m = grid.length;
+		int n = grid[0].length;
 
 		// Iterate through the grid, and if we find a '1', then we start DFS.
 		// And count the number of triggers of DFS.
 		int numIslands = 0;
-		for (int r = 0; r < nr; r++) {
-			for (int c = 0; c < nc; c++) {
+		for (int r = 0; r < m; r++) {
+			for (int c = 0; c < n; c++) {
 				if (grid[r][c] == '1') {
 					numIslands++;
 					dfs(grid, r, c);
@@ -52,11 +56,9 @@ public class NumberOfIslands {
 		// Mark as visited using '0'.
 		grid[r][c] = VISITED;
 
-		// No need to return anything.
-		dfs(grid, r - 1, c); // up
-		dfs(grid, r + 1, c); // down
-		dfs(grid, r, c - 1); // left
-		dfs(grid, r, c + 1); // right
+		for (int[] d : D) {
+			dfs(grid, r + d[0], c + d[1]);
+		}
 	}
 
 	// 2. BFS. The bottom one is the best.
@@ -237,7 +239,7 @@ public class NumberOfIslands {
 
 	// BFS. Review. This is the best for BFS!
 	// Author: kei (AC)
-	// Date : January 6, 2020
+	// Date : January 6, 2020, April 9, 2021
 	public int numIslandsR(char[][] grid) {
 		// Epithet code.
 		if (grid == null || grid.length == 0) {
@@ -262,8 +264,8 @@ public class NumberOfIslands {
 	}
 
 	private static final char VISITED = '0';
-	private static final int[] ROW_DIR = new int[] { -1, 1, 0, 0 };
-	private static final int[] COL_DIR = new int[] { 0, 0, -1, 1 };
+	// 0: up, 1: right, 2: down, 3: left
+	private static final int[][] DIR = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
 
 	private void bfsR2(char[][] grid, int r, int c) {
 		int R = grid.length;
@@ -281,9 +283,9 @@ public class NumberOfIslands {
 			// grid[row][col] = VISITED; // NG!
 
 			// Neighbors.
-			for (int i = 0; i < 4; i++) {
-				int nr = row + ROW_DIR[i];
-				int nc = col + COL_DIR[i];
+			for (int[] d : DIR) {
+				int nr = row + d[0];
+				int nc = col + d[1];
 				if (nr < 0 || nc < 0 || nr >= R || nc >= C || grid[nr][nc] == VISITED) {
 					continue;
 				}
