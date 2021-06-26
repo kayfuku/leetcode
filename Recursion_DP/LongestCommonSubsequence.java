@@ -18,8 +18,8 @@ public class LongestCommonSubsequence {
 	//
 	// https://leetcode.com/problems/longest-common-subsequence/discuss/351689/Java-Two-DP-codes-of-O(mn)-and-O(min(m-n))-spaces-w-picture-and-analysis
 	//
-	// I'm gonna use a 2d array 'dp', which stores the longest common sequence (LCS)
-	// so far.
+	// To find a longest common subsequence of two strings, we can use 2d matrix to
+	// store the longest common subsequence length.
 	//
 	// Iterating through the 2d array, I compare the two sequences, one is the
 	// sequence from the beginning to the i-th character of the first string and the
@@ -56,7 +56,7 @@ public class LongestCommonSubsequence {
 	// d * 0 1 2 2
 	// e * 0 1 2 3
 	//
-	// O(MN) time and space, where M is the s1 length and N is s2 length.
+	// O(MN) time and space, where M is s1 length and N is s2 length.
 	//
 	// Author: rock + kei
 	// Date : August 23, 2019, May 28, 2021
@@ -64,7 +64,7 @@ public class LongestCommonSubsequence {
 		int m = s1.length();
 		int n = s2.length();
 		// To keep track of the longest common subsequence length.
-		// We need additional row and column.
+		// We're gonna use the first row and column with all 0s.
 		int[][] dp = new int[m + 1][n + 1];
 
 		// The first row and column is 0.

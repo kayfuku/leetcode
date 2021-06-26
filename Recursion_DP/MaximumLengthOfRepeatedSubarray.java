@@ -11,14 +11,14 @@ public class MaximumLengthOfRepeatedSubarray {
   }
 
   // 3. DP
-  // To find a common subarray, we can use 2d matrix to store the common subarray
-  // length.
+  // To find a common subarray of two strings, we can use 2d matrix to store the
+  // common subarray length.
   //
   // we put the first string vertically and the second string horizontally, and
   // iterate through the matrix from the top left to the bottom right, which means
   // that we append character one by one from the first character in the first
-  // string when interating horizontally, and we append character one by one from
-  // the first character in the second string when interating vertically.
+  // string when interating vertically, and we append character one by one from
+  // the first character in the second string when interating horizontally.
   //
   // If we find the same character, then we add 1 to the value of the previous row
   // and the previous column and save it in the current square. What that means is
@@ -59,8 +59,9 @@ public class MaximumLengthOfRepeatedSubarray {
     int m = num1.length;
     int n = num2.length;
     int maxlen = 0;
+    // We need the first row and the first column with all 0s.
     int[][] dp = new int[m + 1][n + 1];
-    //
+    // Go through the dp.
     for (int i = 1; i < m + 1; i++) {
       for (int j = 1; j < n + 1; j++) {
         // Be careful of index minus one to access original arrays.
@@ -78,7 +79,7 @@ public class MaximumLengthOfRepeatedSubarray {
     // If we need return the longest common subarray, then save the index as a
     // lastIdx when we find maxlen. Then, using the lastIdx and maxlen, we can slice
     // the num1 (or num2) to get the longest common subarray.
-    // (leetcode_contest/IndeedPrep.java)
+    // (leetcode_contest/IndeedPrep.java, findContiguousHistory())
 
     return maxlen;
   }

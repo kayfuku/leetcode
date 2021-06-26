@@ -49,6 +49,7 @@ public class TextJustification {
 
     // Check if the next word fits in.
     right++;
+    // If the word does not fit in the line, then we get out of the loop.
     while (right < words.length && (sum + 1 + words[right].length()) <= maxWidth) {
       // The current word fits in that line.
       sum += 1 + words[right].length();
@@ -60,9 +61,10 @@ public class TextJustification {
     return right - 1;
   }
 
-  // Return the complete line.
+  // Return the complete line, which has spaces distributed evenly in between
+  // those words.
   // left: leftmost word index
-  // right: right most word index
+  // right: rightmost word index
   private String justify(int left, int right, String[] words, int maxWidth) {
     StringBuilder line = new StringBuilder();
 
@@ -75,6 +77,7 @@ public class TextJustification {
     if (right - left == 0) {
       // Only one word in the line
       line.append(words[left]);
+      // Pad with spaces.
       line.append(getSpaces(maxWidth - words[left].length()));
       return line.toString();
     }
@@ -129,11 +132,11 @@ public class TextJustification {
 
   // Return n continuous spaces.
   private String getSpaces(int n) {
-    String spaces = "";
+    StringBuilder spaces = new StringBuilder();
     for (int i = 0; i < n; i++) {
-      spaces += " ";
+      spaces.append(" ");
     }
-    return spaces;
+    return spaces.toString();
   }
 
   // Review

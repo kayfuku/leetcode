@@ -60,9 +60,10 @@ public class DesignHitCounter {
   }
 
   // 2. Using Deque with Pairs (This is better for interview)
-  // We'll keep timestamp and the count for the timestamp.
+  //
   // We'll use the "deque" data structure which allows us to insert and delete
   // values from both ends of the queue.
+  // We'll keep timestamp and the count for the timestamp.
   //
   // Author: leetcode + kei
   // Date : June 7, 2021
@@ -77,45 +78,40 @@ public class DesignHitCounter {
     this.hits = new ArrayDeque<>();
   }
 
-  /**
-   * Record a hit.
-   * 
-   * @param timestamp - The current timestamp (in seconds granularity).
-   */
+  // Store the timestamp with count.
   public void hit(int timestamp) {
-    // Be careful the queue is empty when you use the method.
-    if (this.hits.isEmpty() || this.hits.getLast()[0] != timestamp) {
+    // Be careful that the deque can be empty when you use the getting method.
+    // If the deque is not empty, then check the latest timestamp in the deque to
+    // see if the current timestamp is the same as the latest timestamp.
+    if (hits.isEmpty() || hits.getLast()[0] != timestamp) {
       // Insert the new timestamp with count = 1
-      this.hits.add(new int[] { timestamp, 1 });
+      hits.add(new int[] { timestamp, 1 });
     } else {
       // The latetst timestamp in the deque is the same as the current timestamp.
-      // Update the count of latest timestamp by incrementing the count by 1.
-      this.hits.getLast()[1]++;
+      // Update the count of latest timestamp by incrementing the count.
+      hits.getLast()[1]++;
     }
 
     // Increment total
-    this.total++;
+    total++;
   }
 
-  /**
-   * Return the number of hits in the past 5 minutes (300 seconds). O(N) time,
-   * where N is the total number of hits because in the worst case, the deque can
-   * have N timestamps. O(N) space
-   * 
-   * @param timestamp - The current timestamp (in seconds granularity).
-   */
+  // Return the number of hits in the past 5 minutes (300 seconds).
+  // O(N) time, where N is the total number of hits because in the worst case, the
+  // deque can have N timestamps.
+  // O(N)space
   public int getHits(int timestamp) {
-    // Always think about what happens when the queue is empty.
+    // Always think about what happens when the deque is empty.
     // Check if the difference between the current timestamp and the oldest
-    // timestamp is greater than or equal to 300, if true, then it's out of
-    // the time window.
-    while (!this.hits.isEmpty() && timestamp - this.hits.getFirst()[0] >= 300) {
+    // timestamp is greater than or equal to 300, if true, then the oldest timestamp
+    // is out of the time window.
+    while (!hits.isEmpty() && timestamp - hits.getFirst()[0] >= 300) {
       // Subtract the count of the oldest timestamp from total.
-      this.total -= this.hits.getFirst()[1];
-      this.hits.removeFirst();
+      total -= hits.getFirst()[1];
+      hits.removeFirst();
     }
 
-    return this.total;
+    return total;
   }
 
   /**

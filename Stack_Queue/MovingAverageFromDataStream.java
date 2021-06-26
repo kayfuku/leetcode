@@ -12,26 +12,30 @@ public class MovingAverageFromDataStream {
 
   // 1. Queue
   // Streaming size is unknown, so you should think about two cases.
-  // Streaming size is way smaller or larger than the window size.
+  // Streaming size could be way smaller or larger than the window size.
   //
   // O(1) time, O(N) space, where N is the size of the moving window.
   // Author: @liaison and @andvary + kei
-  // Date : January 6, 2020
+  // Date : January 6, 2020, June 8, 2021
+
   int winSize, winSum = 0, count = 0;
-  LinkedList<Integer> queue = new LinkedList<>();
+  // LinkedList
+  LinkedList<Integer> queue;
 
   public MovingAverageFromDataStream(int size) {
+    queue = new LinkedList<>();
     this.winSize = size;
   }
 
   public double next(int val) {
-    count++;
     // Add to the last.
     queue.add(val);
     winSum += val;
+    count++;
+
     if (count > winSize) {
       // Remove from the head.
-      int tail = (int) queue.poll();
+      int tail = queue.poll();
       winSum -= tail;
     }
 
@@ -46,7 +50,60 @@ public class MovingAverageFromDataStream {
    * MovingAverage obj = new MovingAverage(size); double param_1 = obj.next(val);
    */
 
-  // 2. Circular queue version (See below)
+  // Review
+  class MovingAverageFromDataStreamR {
+
+    int winSize;
+    int count = 0, sum = 0;
+    LinkedList<Integer> queue;
+
+    MovingAverageFromDataStreamR(int size) {
+      queue = new LinkedList<>();
+      this.winSize = size;
+    }
+
+    // O(1) time, O(N) space
+    public double next(int val) {
+      queue.add(val);
+      sum += val;
+      count++;
+      if (count > winSize) {
+        int oldest = queue.poll();
+        sum -= oldest;
+      }
+
+      return (double) sum / Math.min(count, winSize);
+    }
+  }
+
+  // 2. Circular queue version
+  // O(1) time, O(N) space, where N is the size of the moving window.
+  // Author: @liaison and @andvary + kei
+  // Date : January 6, 2020
+  class MovingAverageFromDataStream2 {
+    // Only one pointer is needed.
+    int winSize, head = 0, winSum = 0, count = 0;
+    int[] queue;
+
+    public MovingAverageFromDataStream2(int size) {
+      this.winSize = size;
+      queue = new int[size];
+    }
+
+    public double next(int val) {
+      count++;
+      int tail = (head + 1) % winSize;
+      // If 'count' is smaller than 'winSize', queue[tail] is 0.
+      winSum = winSum - queue[tail] + val;
+      // Move on to the next head. If the count >= winSize, then
+      // automatically remove the oldest val.
+      head = (head + 1) % winSize;
+      queue[head] = val;
+
+      return winSum * 1.0 / Math.min(winSize, count);
+    }
+
+  }
 
   // For testing.
   @SuppressWarnings("unused")
@@ -58,35 +115,6 @@ public class MovingAverageFromDataStream {
     // int target = 2;
     // solution.getInt(num, target);
 
-  }
-
-}
-
-// 2. Circular queue version
-// O(1) time, O(N) space, where N is the size of the moving window.
-// Author: @liaison and @andvary + kei
-// Date : January 6, 2020
-class MovingAverageFromDataStream2 {
-  // Only one pointer is needed.
-  int winSize, head = 0, winSum = 0, count = 0;
-  int[] queue;
-
-  public MovingAverageFromDataStream2(int size) {
-    this.winSize = size;
-    queue = new int[size];
-  }
-
-  public double next(int val) {
-    count++;
-    int tail = (head + 1) % winSize;
-    // If 'count' is smaller than 'winSize', queue[tail] is 0.
-    winSum = winSum - queue[tail] + val;
-    // Move on to the next head. If the count >= winSize, then
-    // automatically remove the oldest val.
-    head = (head + 1) % winSize;
-    queue[head] = val;
-
-    return winSum * 1.0 / Math.min(winSize, count);
   }
 
 }

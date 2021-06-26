@@ -35,6 +35,7 @@ public class MinimumKnightMoves {
     return dfs(Math.abs(x), Math.abs(y));
   }
 
+  // Return the minimum number of steps.
   private int dfs(int x, int y) {
     // We can use two variables as one key.
     String key = x + "," + y;
@@ -56,18 +57,19 @@ public class MinimumKnightMoves {
       return 2;
 
     } else {
-      // Since the knight move and the board are symmetry,
-      // we only need to focus on the first quadrant.
-      int steps = 1 + Math.min( //
+      // The minimum steps is going to be 1 plus minimum steps of the one of the two
+      // moves. Since the knight move and the board are symmetry, we only need to
+      // focus on the first quadrant.
+      int minSteps = 1 + Math.min( //
           // Also, we only need to consider two moves because of the symmetry of the
           // allowed move, which is one left two down, or two left one down.
           dfs(Math.abs(x - 1), Math.abs(y - 2)), //
           dfs(Math.abs(x - 2), Math.abs(y - 1)));
 
       // Memoization
-      memo.put(key, steps);
+      memo.put(key, minSteps);
 
-      return steps;
+      return minSteps;
     }
   }
 
