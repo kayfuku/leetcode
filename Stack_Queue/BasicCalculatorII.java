@@ -17,6 +17,7 @@ public class BasicCalculatorII {
   // Date : June 24, 2021
   public int calculate(String s) {
     Deque<Integer> stack = new ArrayDeque<>();
+
     int result = 0;
     int sign = 1;
     int operand = 0;
@@ -121,7 +122,7 @@ public class BasicCalculatorII {
     // System.out.println(solution.getInt(num, target));
 
     String s = "22 - 3 * 5";
-    System.out.println(solution.calculate2(s));
+    System.out.println(solution.calculate2(s)); // 7
 
     System.out.println("\ndone.");
   }

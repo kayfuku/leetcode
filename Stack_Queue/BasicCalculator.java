@@ -2,7 +2,6 @@ package leetcode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
-import java.util.LinkedList;
 
 public class BasicCalculator {
   // fields and classes here.
@@ -19,13 +18,12 @@ public class BasicCalculator {
   // If the character is digit, then ...
   // If the character is '+' sign, then ...
   //
-  //
   // O(N) time and space, where N is the total number of characters.
   // Author: leetcode + kei
   // Date : May 22, 2021
   public int calculate(String s) {
+    Deque<Integer> stack = new ArrayDeque<>();
 
-    Deque<Integer> stack = new LinkedList<>();
     // Init
     int result = 0; // For the on-going result
     int sign = 1; // 1 means positive, -1 means negative
@@ -33,57 +31,49 @@ public class BasicCalculator {
 
     // 1 + 2 + 1
     // The tricky part is that we find an operator/sign first, then we know
-    // the operand after that. We save the sign fist, and when we evaluate the
+    // the operand after that. We save the sign first, and when we evaluate the
     // expression so far, we use that sign.
 
-    // Iterate the expression string character by character.
+    // Go through the expression string character by character.
     // Evaluate to the left when we find '+', '-', ')', or end of loop.
     // We use a stack when we find parenthesis.
     for (int i = 0; i < s.length(); i++) {
       char c = s.charAt(i);
       if (Character.isDigit(c)) {
         // Form operand, since it could be more than one digit.
-        operand = 10 * operand + (int) (c - '0');
-
+        operand = 10 * operand + (c - '0');
       } else if (c == '+') {
         // We can evaluate the expression to the left,
         // with result, sign, operand
         result += sign * operand;
-
         // Save the recently encountered '+' sign
         sign = 1;
         // Reset operand
         operand = 0;
-
       } else if (c == '-') {
         // We can evaluate the expression to the left,
         result += sign * operand;
-
+        // Save the '-' sign.
         sign = -1;
         operand = 0;
-
       } else if (c == '(') {
         // Push the result so far and sign onto the stack, for later use.
         // We push the result first, then sign in the stack.
         stack.push(result);
         stack.push(sign);
-
         // Reset result, sign, and operand, as if new evaluation begins for the new
         // sub-expression
         result = 0;
         sign = 1;
         operand = 0;
-
       } else if (c == ')') {
         // We can evaluate the sub-expression to the left.
         result += sign * operand;
-
         // Now that we know the sub-expression ended, we can also evaluate to the left.
         // First we take the sign out of the stack, and then add the result we saved
         // before to the result of the sub-expression.
         result *= stack.pop();
         result += stack.pop();
-
         // Reset sign and operand.
         sign = 1;
         operand = 0;
@@ -108,7 +98,7 @@ public class BasicCalculator {
         // Form the operand.
         operand = operand * 10 + (int) (c - '0');
       } else if (c == '+') {
-        // 1 + 2 + 2
+        // 1 + 2 + 3
         // The tricky part is that we find sign first, and then find operand after that.
         // So, we need to save the sign for the next operand.
         // res: 1
@@ -124,6 +114,7 @@ public class BasicCalculator {
         operand = 0;
       } else if (c == '(') {
         // res - (2 + 4)
+        // Set aside the result in the stack.
         stack.push(result);
         stack.push(sign);
         // We initialize variables so that we can start the evaluation for the
@@ -139,12 +130,13 @@ public class BasicCalculator {
         // before to the result of the sub-expression.
         result *= stack.pop();
         result += stack.pop();
-
+        // Init
         sign = 1;
         operand = 0;
       }
     }
 
+    // Don't forget this.
     // ... res + 5
     result += sign * operand;
 

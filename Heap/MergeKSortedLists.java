@@ -34,7 +34,7 @@ public class MergeKSortedLists {
 
     // Min Heap
     PriorityQueue<ListNode> minHeap = new PriorityQueue<>(lists.length, //
-        (ListNode o1, ListNode o2) -> o1.val - o2.val);
+        (o1, o2) -> o1.val - o2.val);
 
     // When we return a new list, dummy node is always good.
     ListNode dummy = new ListNode(0);
@@ -56,7 +56,7 @@ public class MergeKSortedLists {
       tail.next = node;
       tail = node;
 
-      // Check if there is a next node in that list.
+      // Check if there is a next node of that node in that list.
       if (node.next != null) {
         // Put the next node in that list in the heap.
         minHeap.offer(node.next);
@@ -131,7 +131,7 @@ public class MergeKSortedLists {
     ListNode tail = dummy;
 
     PriorityQueue<ListNode> minHeap = new PriorityQueue<>(lists.length, //
-        (ListNode o1, ListNode o2) -> o1.val - o2.val);
+        (o1, o2) -> o1.val - o2.val);
 
     for (ListNode node : lists) {
       if (node != null) {

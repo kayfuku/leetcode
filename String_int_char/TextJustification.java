@@ -61,7 +61,7 @@ public class TextJustification {
     return right - 1;
   }
 
-  // Return the complete line, which has spaces distributed evenly in between
+  // Return a complete line, which has spaces distributed evenly in between
   // those words.
   // left: leftmost word index
   // right: rightmost word index
