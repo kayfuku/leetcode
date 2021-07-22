@@ -24,12 +24,17 @@ public class UniqueEmailAddresses {
 			int i = email.indexOf("@");
 			String local = email.substring(0, i);
 			String rest = email.substring(i);
+
+			// This also ok.
+			// String local = email.split("@")[0];
+			// String domain = email.split("@")[1];
+
 			if (local.contains("+")) {
 				local = local.substring(0, local.indexOf("+"));
 			}
 			local = local.replaceAll("\\.", "");
 			// local.replaceAll("\\.", ""); // NG!
-			set.add(local + rest);
+			set.add(local + '@' + rest);
 		}
 
 		return set.size();
