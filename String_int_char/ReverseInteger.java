@@ -4,13 +4,11 @@
 
 package leetcode;
 
-
-
 public class ReverseInteger {
 
   // Time Complexity: O(log(x)). There are roughly log_10(x) digits in x.
   // Space Complexity: O(1).
-  public static int reverse(int x) {
+  public int reverse(int x) {
     int rev = 0;
     while (x != 0) {
       int pop = x % 10;
@@ -26,7 +24,6 @@ public class ReverseInteger {
 
     return rev;
   }
-
 
   public int reverse2(int x) {
     // Integers pop and reverse pattern.
@@ -47,18 +44,13 @@ public class ReverseInteger {
     return (int) rev;
   }
 
-
   public static void main(String[] args) {
     ReverseInteger solution = new ReverseInteger();
 
-    int num = 123;
-    int rev = solution.reverse2(num);
+    int num = -123;
+    int rev = solution.reverse(num);
     System.out.println(rev);
-
-
 
   }
 
 }
-
-

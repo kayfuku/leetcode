@@ -28,7 +28,7 @@ public class LongestCommonPrefix {
 		return prefix;
 	}
 
-	// 2. Vertical scanning.
+	// 2. Vertical scanning. (For interview)
 	// O(S) time, where S is the total number of characters in the array.
 	// In the best case, O(N * minLen), where N is the number of the strings, and
 	// minLen is the shortest length of the strings in the array.

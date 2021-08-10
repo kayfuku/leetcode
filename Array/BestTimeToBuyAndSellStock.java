@@ -21,36 +21,34 @@ public class BestTimeToBuyAndSellStock {
 	// through the array and keep track of max profit using the current min.
 	// Note that you do not need to keep track of max price.
 	// O(N) time, O(1) space.
+	// Author: girikuncoro + kei
+	// Date : August 9, 2021
 	public int maxProfit(int[] prices) {
 		int min = Integer.MAX_VALUE;
 		// Think about the case where maxProfit will not be updated at all.
 		// e.g. all the prices are sorted in descending order.
 		int maxProfit = 0;
 		for (int i = 0; i < prices.length; i++) {
-			if (prices[i] < min) {
-				// Update min.
-				min = prices[i];
-			} else {
-				if (prices[i] - min > maxProfit) {
-					maxProfit = prices[i] - min;
-				}
-			}
+			// Update min so far.
+			min = Math.min(min, prices[i]);
+			// Calc profit.
+			int profit = prices[i] - min;
+			// Take max.
+			maxProfit = Math.max(maxProfit, profit);
 		}
 
 		return maxProfit;
 	}
 
-	// Review
-	public int maxProfitR(int[] prices) {
+	// A bit faster.
+	public int maxProfit2(int[] prices) {
 		int min = Integer.MAX_VALUE;
 		int maxProfit = 0;
 		for (int i = 0; i < prices.length; i++) {
 			if (prices[i] < min) {
 				min = prices[i];
 			} else {
-				if (prices[i] - min > maxProfit) {
-					maxProfit = prices[i] - min;
-				}
+				maxProfit = Math.max(maxProfit, prices[i] - min);
 			}
 		}
 
