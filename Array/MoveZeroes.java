@@ -39,6 +39,7 @@ public class MoveZeroes {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MoveZeroes solution = new MoveZeroes();
 

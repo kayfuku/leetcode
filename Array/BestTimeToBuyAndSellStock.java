@@ -105,6 +105,7 @@ public class BestTimeToBuyAndSellStock {
 	// }
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		BestTimeToBuyAndSellStock solution = new BestTimeToBuyAndSellStock();
 

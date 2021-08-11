@@ -17,7 +17,6 @@ public class PalindromeLinkedList {
 
   }
 
-
   // Approach 1: Copy the list into array and use two pointers.
   // O(N) time, O(N) space
   // Author: LeetCode + kei
@@ -47,7 +46,6 @@ public class PalindromeLinkedList {
     return true;
   }
 
-
   // Approach 3: Reverse Second Half In-place
   // O(N) time, O(1) space
   // Author: LeetCode + kei
@@ -65,7 +63,7 @@ public class PalindromeLinkedList {
     ListNode p1 = head;
     ListNode p2 = secondHalfStart;
     boolean result = true;
-    while (p2 != null) {
+    while (result && p2 != null) {
       if (p1.val != p2.val) {
         // Not return immediately because we need to restore the original list
         // before the return.
@@ -83,8 +81,6 @@ public class PalindromeLinkedList {
     return result;
   }
 
-
-
   private ListNode reverseList(ListNode head) {
     ListNode prev = null;
     ListNode curr = head;
@@ -98,7 +94,6 @@ public class PalindromeLinkedList {
     return prev;
   }
 
-
   private ListNode getEndOfFirstHalf(ListNode head) {
     ListNode fast = head;
     ListNode slow = head;
@@ -110,7 +105,6 @@ public class PalindromeLinkedList {
     return slow;
   }
 
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -121,28 +115,14 @@ public class PalindromeLinkedList {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
