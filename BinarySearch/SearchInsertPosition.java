@@ -5,17 +5,17 @@
 package leetcode;
 
 public class SearchInsertPosition {
-	// fields here. 
-	//	private int count;
+	// fields here.
+	// private int count;
 
 	public SearchInsertPosition() {
-		// Initialization here. 
-		//		this.count = 0;
+		// Initialization here.
+		// this.count = 0;
 	}
 
-	// Binary Search. 
-	// O(logN) time, where N is the total number of elements in the input array. 
-	// O(1) space. 
+	// Binary Search.
+	// O(logN) time, where N is the total number of elements in the input array.
+	// O(1) space.
 	public int searchInsert(int[] nums, int target) {
 		int left = 0, right = nums.length - 1;
 		while (left <= right) {
@@ -33,10 +33,9 @@ public class SearchInsertPosition {
 		return left;
 	}
 
-
-	// Review. 
+	// Review.
 	public int searchInsertR(int[] nums, int target) {
-		// corner. 
+		// corner.
 		if (nums == null || nums.length == 0) {
 			return 0;
 		}
@@ -48,7 +47,7 @@ public class SearchInsertPosition {
 			int mid = left + (right - left) / 2;
 			if (nums[mid] == target) {
 				return mid;
-			} 
+			}
 
 			if (nums[mid] > target) {
 				right = mid - 1;
@@ -60,36 +59,16 @@ public class SearchInsertPosition {
 		return left;
 	}
 
-
-
-
-
-	// For testing. 
+	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		SearchInsertPosition solution = new SearchInsertPosition();
 
-		// Test arguments. 
+		// Test arguments.
 		// int num = 24;
 		// int target = 2;
 		// solution.getInt(num, target);
 
-
-
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

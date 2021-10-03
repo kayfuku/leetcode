@@ -98,7 +98,7 @@ public class FindMinimumInRotatedSortedArray {
 		return -1;
 	}
 
-	// Binary Search. This might be the best.
+	// Binary Search. The bottom one is the best.
 	// Author: SnowZheng + kei
 	// Date : September 24, 2020
 	public int findMin2(int[] arr) {
@@ -164,7 +164,7 @@ public class FindMinimumInRotatedSortedArray {
 			return nums[0];
 		}
 
-		// Binary Search. R = M - 1
+		// Binary Search. R=M-1 ver.
 		int left = 0;
 		int right = nums.length - 1;
 		while (left <= right) {
@@ -178,6 +178,47 @@ public class FindMinimumInRotatedSortedArray {
 			}
 
 			if (nums[mid] < nums[0]) {
+				right = mid - 1;
+			} else {
+				left = mid + 1;
+			}
+		}
+
+		return -1;
+	}
+
+	// Review, this is the best.
+	public int findMinR2(int[] nums) {
+		if (nums.length == 1) {
+			return nums[0];
+		}
+
+		if (nums[0] < nums[nums.length - 1]) {
+			return nums[0];
+		}
+
+		// Binary Search. R=M-1 ver.
+		int left = 0;
+		int right = nums.length - 1;
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+
+			// Check if the nums[mid] is the minimum.
+			// If the elem to the left of the mid elem is bigger than mid elem,
+			// then mid elem is the minimum.
+			// Be careful if the mid is 0.
+			// The reason we need the second condition is because with the R=M-1 version of
+			// binary search, the mid can move like index 2 => 0 => 1. In that case,
+			// we check index 0 before index 1. If the elem at index 1 is the minimum,
+			// then we need,
+			// 'nums[mid] < nums[mid + 1]'
+			// to continue when the mid is equal to 0.
+			if ((mid != 0 && nums[mid - 1] > nums[mid]) || //
+					(mid == 0 && nums[mid] < nums[mid + 1])) {
+				return nums[mid];
+			}
+
+			if (nums[mid] < nums[right]) {
 				right = mid - 1;
 			} else {
 				left = mid + 1;
