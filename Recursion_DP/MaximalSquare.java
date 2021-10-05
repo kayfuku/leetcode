@@ -24,8 +24,8 @@ public class MaximalSquare {
     // The first row and the first column are all 0s.
     int[][] dp = new int[R + 1][C + 1];
     int maxsqlen = 0;
-    for (int i = 1; i <= R; i++) {
-      for (int j = 1; j <= C; j++) {
+    for (int i = 1; i < dp.length; i++) {
+      for (int j = 1; j < dp[0].length; j++) {
         // Decrement indices to access to the original 'matrix' (not 'dp').
         if (matrix[i - 1][j - 1] == '1') {
           // Take a min among left, up, and upper left, and plus one.
@@ -39,7 +39,7 @@ public class MaximalSquare {
     return maxsqlen * maxsqlen;
   }
 
-  // 2. Well, that's good, but no need to implement in the interview.
+  // 2. Well, this is good, but no need to implement in the interview.
   // Just let the interviewer know that you know a better solution like this.
   // Author: leetcode + kei
   // Date : February 3, 2021
