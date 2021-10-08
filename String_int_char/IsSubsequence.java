@@ -18,18 +18,18 @@ public class IsSubsequence {
     // this.count = 0;
   }
 
-
   // 1. Using two pointers.
   // Set the pointers to the first character of each string.
   // Iterating through string t, check if the characters are the same.
   // If it's same, then move forward s pointer.
-  // If it's not, then move on to the next character of t until finding the same character.
+  // If it's not, then move on to the next character of t until finding the same
+  // character.
   //
   // https://leetcode.com/problems/is-subsequence/discuss/87254/Straight-forward-Java-simple-solution
   // O(N) time, where N is t length (~=500,000).
   // O(1) space.
   // Author: sampsonchan + kei
-  // Date : July 16, 2019
+  // Date : July 16, 2019, January 2, 2021
   public boolean isSubsequence(String s, String t) {
     // s (len<=100), t (len~=500,000)
     // corner
@@ -40,17 +40,14 @@ public class IsSubsequence {
       return false;
     }
 
-    int idxS = 0, idxT = 0;
-    while (idxT < t.length()) {
+    int idxS = 0;
+    for (int idxT = 0; idxT < t.length(); idxT++) {
       if (s.charAt(idxS) == t.charAt(idxT)) {
         idxS++;
         if (idxS == s.length()) {
-          // Subsequence found.
           return true;
         }
       }
-
-      idxT++;
     }
 
     return false;
@@ -58,9 +55,11 @@ public class IsSubsequence {
 
   // 2. Using built-in indexOf().
   // Use indexOf(char, fromIdx).
-  // For each character in s string (len<=100), check if t (len~=500,000) string contains that
+  // For each character in s string (len<=100), check if t (len~=500,000) string
+  // contains that
   // character.
-  // And then if it's in there, save that index, and start searching for the next character
+  // And then if it's in there, save that index, and start searching for the next
+  // character
   // after that index.
   //
   // https://leetcode.com/problems/is-subsequence/discuss/87384/java-1ms-solution
@@ -105,7 +104,8 @@ public class IsSubsequence {
   //
   // O(N) time.
   // O(N) time to preprocess, where N is t length (~=500,000).
-  // O(MlogN) time to search/query, where M is s length (<=100), and N is list length (<=500,000).
+  // O(MlogN) time to search/query, where M is s length (<=100), and N is list
+  // length (<=500,000).
   // O(N) space for preprocessing.
   //
   // Author: shuoshankou + kei
@@ -143,9 +143,11 @@ public class IsSubsequence {
   }
 
   // Binary Search R = M, Continuous version. (Next int)
-  // Binary Search to find an index of the elem in the list, which is the smallest, but
+  // Binary Search to find an index of the elem in the list, which is the
+  // smallest, but
   // greater than the 'prevElem'.
-  // Note that the list is a list of indices in string t sorted in ascending order.
+  // Note that the list is a list of indices in string t sorted in ascending
+  // order.
   //
   // O(logN) time, where N is the list length.
   // Author: kei (+ shuoshankou)
@@ -159,13 +161,15 @@ public class IsSubsequence {
     while (left < right) {
       int mid = left + (right - left) / 2;
       if (list.get(mid) > prevElem) {
-        // Search on the left subarray to find the index of the smallest elem that is bigger than
+        // Search on the left subarray to find the index of the smallest elem that is
+        // bigger than
         // the previous elem.
         right = mid;
       } else {
         // list.get(mid) <= prevElem
         // The mid elem value (index in t string) is less than or equal to the
-        // previous elem. This elem (index in t string) cannot be used as part of s subsequence
+        // previous elem. This elem (index in t string) cannot be used as part of s
+        // subsequence
         // because we cannot disturb the relative order.
         // Search on the right subarray to find a bigger elem than the previous elem.
         left = mid + 1;
@@ -174,7 +178,8 @@ public class IsSubsequence {
 
     // 'left' is the index of the next elem.
     // Note that it returns an index at which the next elem would be
-    // if prevElem is not in the list, which is ok as long as prevElem is not bigger than
+    // if prevElem is not in the list, which is ok as long as prevElem is not bigger
+    // than
     // or equal to the last elem. In this case, t has an index for the character ch.
     // However, if prevElem is bigger than or equal to the last element, then
     // it returns list.size(), an index out of bound.
@@ -183,9 +188,8 @@ public class IsSubsequence {
     return (left != list.size()) ? list.get(left) : -1;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     IsSubsequence solution = new IsSubsequence();
 
@@ -194,10 +198,6 @@ public class IsSubsequence {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
