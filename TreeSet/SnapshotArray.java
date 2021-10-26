@@ -17,7 +17,7 @@ class SnapshotArray {
 
   public SnapshotArray(int length) {
     A = new TreeMap[length];
-    // We cannot use foreach to initialize.
+    // Note that we cannot use foreach to initialize.
     for (int i = 0; i < length; i++) {
       A[i] = new TreeMap<>();
       A[i].put(0, 0);
@@ -30,6 +30,8 @@ class SnapshotArray {
 
   public int snap() {
     // return snapId, then add one to it.
+    // No need to put it in the TreeMap because we will return the value using
+    // floorEntry() when get() called.
     return snapId++;
   }
 
