@@ -85,7 +85,7 @@ public class ValidSquare {
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    Solution solution = new Solution();
+    ArrayOfDoubledPairs solution = new ArrayOfDoubledPairs();
 
     // Test arguments.
     // int num = 24;
