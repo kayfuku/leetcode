@@ -4,16 +4,15 @@
 
 package leetcode;
 
-public class ShuffleArray {
+public class ShuffleTheArray {
   // fields and classes here.
   // private int count;
 
-  public ShuffleArray() {
+  public ShuffleTheArray() {
     // Initialization here.
     // this.count = 0;
 
   }
-
 
   // Author: JOHNKRAM + kei
   // Date : June 9, 2020
@@ -32,40 +31,24 @@ public class ShuffleArray {
     return ret;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    ShuffleArray solution = new ShuffleArray();
+    ShuffleTheArray solution = new ShuffleTheArray();
 
     // Test arguments.
     // int num = 24;
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
