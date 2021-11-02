@@ -62,7 +62,7 @@ public class Permutations {
 		}
 	}
 
-	// Backtracking. Swap/Recursion/Swap model.
+	// Backtracking. Swap/Recursion/Swap model. Easy if you know.
 	// O(?) time, https://leetcode.com/problems/permutations/solution/
 	// O(N!) space, since it has to keep N! solutions.
 	// Author: @liaison and @andvary + kei
@@ -70,8 +70,8 @@ public class Permutations {
 	public List<List<Integer>> permute(int[] nums) {
 		List<List<Integer>> output = new LinkedList<>();
 
-		// Convert nums into list since the output is a list of lists.
-		List<Integer> numsList = new ArrayList<Integer>();
+		// Convert primitive array into a list since the output is a list of lists.
+		List<Integer> numsList = new ArrayList<>();
 		for (int num : nums) {
 			numsList.add(num);
 		}
@@ -83,7 +83,7 @@ public class Permutations {
 	private void backtrack(List<Integer> numsList, int i, List<List<Integer>> output) {
 		if (i == numsList.size()) {
 			// All integers are used up.
-			output.add(new ArrayList<Integer>(numsList));
+			output.add(new ArrayList<>(numsList));
 			return;
 		}
 
@@ -94,6 +94,32 @@ public class Permutations {
 			backtrack(numsList, i + 1, output);
 			// Backtrack. While going up the recursion stack, we undo the swap.
 			Collections.swap(numsList, i, j);
+		}
+	}
+
+	// Review
+	List<List<Integer>> output = new ArrayList<>();
+
+	public List<List<Integer>> permuteR2(int[] nums) {
+		List<Integer> numsList = new ArrayList<>();
+		for (Integer num : nums) {
+			numsList.add(num);
+		}
+		backtrack(numsList, 0);
+
+		return output;
+	}
+
+	private void backtrack(List<Integer> numsList, int start) {
+		if (start == numsList.size()) {
+			output.add(new ArrayList<>(numsList));
+			return;
+		}
+
+		for (int i = start; i < numsList.size(); i++) {
+			Collections.swap(numsList, start, i);
+			backtrack(numsList, start + 1);
+			Collections.swap(numsList, start, i);
 		}
 	}
 
