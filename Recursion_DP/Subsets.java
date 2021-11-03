@@ -57,20 +57,20 @@ public class Subsets {
 	}
 
 	// Review.
-	public List<List<Integer>> subsetsR(int[] nums) {
-		List<List<Integer>> ret = new ArrayList<>();
-		List<Integer> tempList = new ArrayList<>();
+	private List<List<Integer>> ret = new ArrayList<>();
 
-		subsetsR(tempList, nums, ret, 0);
+	public List<List<Integer>> subsetsR(int[] nums) {
+		List<Integer> tempList = new ArrayList<>();
+		helper(nums, tempList, 0);
 		return ret;
 	}
 
-	private void subsetsR(List<Integer> tempList, int[] nums, List<List<Integer>> ret, int start) {
+	private void helper(int[] nums, List<Integer> tempList, int start) {
 		ret.add(new ArrayList<>(tempList));
 
 		for (int i = start; i < nums.length; i++) {
 			tempList.add(nums[i]);
-			subsetsR(tempList, nums, ret, i + 1);
+			helper(nums, tempList, i + 1);
 			tempList.remove(tempList.size() - 1);
 		}
 	}
