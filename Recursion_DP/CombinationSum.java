@@ -21,20 +21,21 @@ public class CombinationSum {
 	// https://leetcode.com/problems/subsets/discuss/27281/A-general-approach-to-backtracking-questions-in-Java-(Subsets-Permutations-Combination-Sum-Palindrome-Partitioning)
 	// Author: issac3 + luckygxf + kei
 	// Date : July 13, 2019
+	private List<List<Integer>> ans = new ArrayList<>();
+
 	public List<List<Integer>> combinationSum(int[] candidates, int target) {
-		List<List<Integer>> ans = new ArrayList<>();
 		// Sorting is necessary because, with nums[i] <= remain in the for loop,
 		// we do not have to check the rest of the candidates,
 		// which makes it much faster.
 		Arrays.sort(candidates);
 
 		List<Integer> tempList = new ArrayList<>();
-		backtrack(ans, tempList, candidates, 0, target);
+		backtrack(tempList, candidates, 0, target);
 
 		return ans;
 	}
 
-	private void backtrack(List<List<Integer>> ans, List<Integer> tempList, int[] nums, int start, int remain) {
+	private void backtrack(List<Integer> tempList, int[] nums, int start, int remain) {
 		// Not necessary. If you write '&& nums[i] <= remain' in the for loop.
 		// if (remain < 0) {
 		// return;
@@ -56,72 +57,72 @@ public class CombinationSum {
 			tempList.add(nums[i]);
 			// Pass in 'i' because we can reuse same elements.
 			// Not 'i + 1'!
-			backtrack(ans, tempList, nums, i, remain - nums[i]);
+			backtrack(tempList, nums, i, remain - nums[i]);
 			tempList.remove(tempList.size() - 1);
 		}
 	}
 
-	// NG! Without 'start', it gets wrong answers.
-	public List<List<Integer>> combinationSum2(int[] candidates, int target) {
-		List<List<Integer>> ans = new ArrayList<>();
-		// Sorting is necessary because, with nums[i] <= remain in the for loop,
-		// we do not have to check the rest of the candidates,
-		// which makes it much faster.
-		Arrays.sort(candidates);
+	// // NG! Without 'start', it gets wrong answers.
+	// public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+	// List<List<Integer>> ans = new ArrayList<>();
+	// // Sorting is necessary because, with nums[i] <= remain in the for loop,
+	// // we do not have to check the rest of the candidates,
+	// // which makes it much faster.
+	// Arrays.sort(candidates);
 
-		List<Integer> tempList = new ArrayList<>();
-		backtrack2(ans, tempList, candidates, target);
+	// List<Integer> tempList = new ArrayList<>();
+	// backtrack2(ans, tempList, candidates, target);
 
-		return ans;
-	}
+	// return ans;
+	// }
 
-	private void backtrack2(List<List<Integer>> ans, List<Integer> tempList, int[] nums, int remain) {
-		// Not necessary. If you write '&& nums[i] <= remain' in the for loop.
-		// if (remain < 0) {
-		// return;
-		// }
-		if (remain == 0) {
-			// Pick the fruit!
-			ans.add(new ArrayList<>(tempList));
-			return;
-		}
+	// private void backtrack2(List<List<Integer>> ans, List<Integer> tempList,
+	// int[] nums, int remain) {
+	// // Not necessary. If you write '&& nums[i] <= remain' in the for loop.
+	// // if (remain < 0) {
+	// // return;
+	// // }
+	// if (remain == 0) {
+	// // Pick the fruit!
+	// ans.add(new ArrayList<>(tempList));
+	// return;
+	// }
 
-		// i starts from 'start' because the elements prior to the 'start' index has
-		// been
-		// already considered.
-		// In other words, one sorted order of the elements is good enough for
-		// combinations.
-		// If the nums[i] > remain, no need to proceed because nums array is sorted.
-		// Do not make a mistake in the condition! Not num[i] > remain.
-		for (int i = 0; i < nums.length && nums[i] <= remain; i++) {
-			tempList.add(nums[i]);
-			// Pass in 'i' because we can reuse same elements.
-			// Not 'i + 1'!
-			backtrack2(ans, tempList, nums, remain - nums[i]);
-			tempList.remove(tempList.size() - 1);
-		}
-	}
+	// // i starts from 'start' because the elements prior to the 'start' index has
+	// // been
+	// // already considered.
+	// // In other words, one sorted order of the elements is good enough for
+	// // combinations.
+	// // If the nums[i] > remain, no need to proceed because nums array is sorted.
+	// // Do not make a mistake in the condition! Not num[i] > remain.
+	// for (int i = 0; i < nums.length && nums[i] <= remain; i++) {
+	// tempList.add(nums[i]);
+	// // Pass in 'i' because we can reuse same elements.
+	// // Not 'i + 1'!
+	// backtrack2(ans, tempList, nums, remain - nums[i]);
+	// tempList.remove(tempList.size() - 1);
+	// }
+	// }
 
 	// Review.
-	public List<List<Integer>> combinationSumR(int[] candidates, int target) {
-		List<List<Integer>> ret = new ArrayList<>();
-		List<Integer> tempList = new ArrayList<>();
-		Arrays.sort(candidates);
+	private List<List<Integer>> ret = new ArrayList<>();
 
-		combinationSumR(tempList, candidates, ret, 0, target);
+	public List<List<Integer>> combinationSumR(int[] candidates, int target) {
+		Arrays.sort(candidates);
+		List<Integer> tempList = new ArrayList<>();
+		backtrackR(candidates, 0, tempList, target);
 		return ret;
 	}
 
-	private void combinationSumR(List<Integer> tempList, int[] nums, List<List<Integer>> ret, int start, int remain) {
-		// base case
-		if (remain == 0) {
+	private void backtrackR(int[] nums, int start, List<Integer> tempList, int remainder) {
+		if (remainder == 0) {
 			ret.add(new ArrayList<>(tempList));
 			return;
 		}
 
-		for (int i = start; i < nums.length && nums[i] <= remain; i++) {
+		for (int i = start; i < nums.length && nums[i] <= remainder; i++) {
 			tempList.add(nums[i]);
-			combinationSumR(tempList, nums, ret, i, remain - nums[i]);
+			backtrackR(nums, i, tempList, remainder - nums[i]);
 			tempList.remove(tempList.size() - 1);
 		}
 	}
