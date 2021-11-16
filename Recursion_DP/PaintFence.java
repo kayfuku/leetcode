@@ -69,8 +69,7 @@ public class PaintFence {
 	// you think you understand it intuitively, you are fooling yourself. Only the
 	// original equation makes intuitive sense.
 	// Once you have this, the code is trivial (but overall, this problem is not an
-	// easy problem, despite the
-	// leetcode tag!):
+	// easy problem, despite the leetcode tag!):
 	// https://leetcode.com/problems/paint-fence/discuss/178010/The-only-solution-you-need-to-read
 	//
 	// O(N) time. O(1) space.
@@ -128,6 +127,7 @@ public class PaintFence {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		PaintFence solution = new PaintFence();
 
