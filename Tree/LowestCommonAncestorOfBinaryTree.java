@@ -22,6 +22,26 @@ public class LowestCommonAncestorOfBinaryTree {
 
   }
 
+  // 0. Recursive, this is the best solution.
+  // Author: iceco + kei
+  // Date : March 13, 2022
+  public TreeNode lowestCommonAncestor(TreeNode node, TreeNode p, TreeNode q) {
+    if (node == null || node.val == p.val || node.val == q.val) {
+      return node;
+    }
+
+    // Check child nodes.
+    TreeNode left = lowestCommonAncestor(node.left, p, q);
+    TreeNode right = lowestCommonAncestor(node.right, p, q);
+    if (left != null && right != null) {
+      // Return the node when both child nodes are not null.
+      return node;
+    }
+
+    // Return not-null child node, and
+    // return null if both nodes are null.
+    return left == null ? right : left;
+  }
 
   // 1. Recursive
   // Author: LeetCode + kei
@@ -29,7 +49,9 @@ public class LowestCommonAncestorOfBinaryTree {
 
   private TreeNode lcaNode;
 
-  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+  // StepByStepDirectionsFromBinaryTreeNodeToAnother.java has a much simpler
+  // solution!
+  public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
     // Traverse the tree
     this.recurseTree(root, p, q);
     return this.lcaNode;
@@ -57,9 +79,8 @@ public class LowestCommonAncestorOfBinaryTree {
     return mid + left + right > 0;
   }
 
-
   // 2. Iterative using parent pointers.
-  public TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+  public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
     // Stack for tree traversal
     Deque<TreeNode> stack = new ArrayDeque<>();
 
@@ -91,7 +112,8 @@ public class LowestCommonAncestorOfBinaryTree {
     // Ancestors set for node p.
     Set<TreeNode> ancestorsForP = new HashSet<>();
 
-    // Put all ancestors for node p including p itself in the set using parent pointers.
+    // Put all ancestors for node p including p itself in the set using parent
+    // pointers.
     while (p != null) {
       ancestorsForP.add(p);
       // Move up.
@@ -107,7 +129,6 @@ public class LowestCommonAncestorOfBinaryTree {
     return q;
   }
 
-
   // Not review yet.
   // 3. Iterative without parent pointers
   // O(N) time, O(N) space
@@ -119,13 +140,14 @@ public class LowestCommonAncestorOfBinaryTree {
   private static int BOTH_PENDING = 2;
 
   // Left traversal done.
+  @SuppressWarnings("unused")
   private static int LEFT_DONE = 1;
 
   // Both left and right traversal done for a node.
   // Indicates the node can be popped off the stack.
   private static int BOTH_DONE = 0;
 
-  public TreeNode lowestCommonAncestor3(TreeNode root, TreeNode p, TreeNode q) {
+  public TreeNode lowestCommonAncestor4(TreeNode root, TreeNode p, TreeNode q) {
 
     Stack<PairGen<TreeNode, Integer>> stack = new Stack<PairGen<TreeNode, Integer>>();
 
@@ -205,8 +227,6 @@ public class LowestCommonAncestorOfBinaryTree {
     return null;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -217,28 +237,14 @@ public class LowestCommonAncestorOfBinaryTree {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
