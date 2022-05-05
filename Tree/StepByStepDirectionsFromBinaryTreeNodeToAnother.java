@@ -57,7 +57,6 @@ public class StepByStepDirectionsFromBinaryTreeNodeToAnother {
     return left == null ? right : left;
   }
 
-  // I think this could be a litte better.
   private boolean getDirection(TreeNode ancestor, int value, List<String> steps) {
     if (ancestor == null) {
       return false;
