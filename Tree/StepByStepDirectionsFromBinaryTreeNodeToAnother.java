@@ -40,7 +40,7 @@ public class StepByStepDirectionsFromBinaryTreeNodeToAnother {
     if (node == null || node.val == p || node.val == q) {
       // No need to further explore this branch because
       // if the node is p or q, then the node can be the LCA even if there is
-      // another node in this brach.
+      // the other node in this brach.
       return node;
     }
 
@@ -54,7 +54,7 @@ public class StepByStepDirectionsFromBinaryTreeNodeToAnother {
 
     // Return not-null child node, and
     // return null if both nodes are null.
-    return left == null ? right : left;
+    return left != null ? left : right;
   }
 
   private boolean getDirection(TreeNode ancestor, int value, List<String> steps) {

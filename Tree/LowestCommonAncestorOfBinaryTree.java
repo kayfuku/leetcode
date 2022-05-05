@@ -27,6 +27,9 @@ public class LowestCommonAncestorOfBinaryTree {
   // Date : March 13, 2022
   public TreeNode lowestCommonAncestor(TreeNode node, TreeNode p, TreeNode q) {
     if (node == null || node.val == p.val || node.val == q.val) {
+      // No need to further explore this branch because
+      // if the node is p or q, then the node can be the LCA even if there is
+      // the other node in this brach.
       return node;
     }
 
@@ -40,7 +43,7 @@ public class LowestCommonAncestorOfBinaryTree {
 
     // Return not-null child node, and
     // return null if both nodes are null.
-    return left == null ? right : left;
+    return left != null ? left : right;
   }
 
   // 1. Recursive
