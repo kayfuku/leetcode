@@ -36,7 +36,6 @@ public class BinaryTreePostorderTraversal {
     ret.add(node.val);
   }
 
-
   // Iterative.
   // Author: @liaison and @andvary + kei (AC)
   // Date : January 4, 2020
@@ -68,9 +67,8 @@ public class BinaryTreePostorderTraversal {
     return ret;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     BinaryTreePostorderTraversal solution = new BinaryTreePostorderTraversal();
 
@@ -79,10 +77,6 @@ public class BinaryTreePostorderTraversal {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

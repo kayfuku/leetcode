@@ -17,7 +17,6 @@ public class BinaryTreePreorderTraversal {
 
   }
 
-
   // Recursive.
   // Author: kei (AC)
   // Date : January 3, 2020
@@ -37,7 +36,6 @@ public class BinaryTreePreorderTraversal {
     preorderTraversal(node.left, ret);
     preorderTraversal(node.right, ret);
   }
-
 
   // Iterative.
   // Author: kei (AC)
@@ -69,9 +67,8 @@ public class BinaryTreePreorderTraversal {
     return ret;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     BinaryTreePreorderTraversal solution = new BinaryTreePreorderTraversal();
 
@@ -80,10 +77,6 @@ public class BinaryTreePreorderTraversal {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
