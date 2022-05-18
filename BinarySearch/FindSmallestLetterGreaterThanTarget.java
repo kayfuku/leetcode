@@ -5,26 +5,25 @@
 package leetcode;
 
 public class FindSmallestLetterGreaterThanTarget {
-	// fields and classes here. 
-	//private int count;
+	// fields and classes here.
+	// private int count;
 
 	public FindSmallestLetterGreaterThanTarget() {
-		// Initialization here. 
-		//this.count = 0;
-		
+		// Initialization here.
+		// this.count = 0;
+
 	}
 
-	
-	// Binary Search. R=M-1 Next Int. 
-	// O(logN) time. 
+	// Binary Search. R=M-1 Next Int.
+	// O(logN) time.
 	// Author: @awice + kei (AC)
-	// Date  : August 12, 2019
-    public char nextGreatestLetter(char[] letters, char target) {
-    	int left = 0;
-    	int right = letters.length - 1;
-    	while (left <= right) {
+	// Date : August 12, 2019
+	public char nextGreatestLetter(char[] letters, char target) {
+		int left = 0;
+		int right = letters.length - 1;
+		while (left <= right) {
 			int mid = left + (right - left) / 2;
-			
+
 			if (letters[mid] > target) {
 				right = mid - 1;
 			} else {
@@ -35,38 +34,16 @@ public class FindSmallestLetterGreaterThanTarget {
 		return letters[left % letters.length];
 	}
 
-
-
-	
-	
-	
-
-	// For testing. 
+	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		FindSmallestLetterGreaterThanTarget solution = new FindSmallestLetterGreaterThanTarget();
 
-		// Test arguments. 
+		// Test arguments.
 		// int num = 24;
 		// int target = 2;
 		// solution.getInt(num, target);
 
-
-
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

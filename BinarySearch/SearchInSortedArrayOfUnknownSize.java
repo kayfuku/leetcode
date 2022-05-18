@@ -22,31 +22,31 @@ public class SearchInSortedArrayOfUnknownSize {
 	// Then do binary search.
 	// Author: touchdown + kei
 	// Date : August 12, 2019
-	// public int search(ArrayReader reader, int target) {
-	// int right = 1;
-	// // Be careful with '<', not '>'! Continuing condition.
-	// while (reader.get(right) < target) {
-	// right = right << 1;
-	// }
-	// int left = right >> 1;
-	//
-	// // Binary Search.
-	// // R=M-1 ver. because 'right' can be the index of 'target'.
-	// while (left <= right) {
-	// int mid = left + (right - left) / 2;
-	// if (reader.get(mid) == target) {
-	// return mid;
-	// }
-	//
-	// if (reader.get(mid) > target) {
-	// right = mid - 1;
-	// } else {
-	// left = mid + 1;
-	// }
-	// }
-	//
-	// return -1;
-	// }
+	public int search(ArrayReader reader, int target) {
+		int right = 1;
+		// Be careful with '<', not '>'! Continuing condition.
+		while (reader.get(right) < target) {
+			right = right << 1;
+		}
+		int left = right >> 1;
+
+		// Binary Search.
+		// R=M-1 ver. because 'right' can be the index of 'target'.
+		while (left <= right) {
+			int mid = left + (right - left) / 2;
+			if (reader.get(mid) == target) {
+				return mid;
+			}
+
+			if (reader.get(mid) > target) {
+				right = mid - 1;
+			} else {
+				left = mid + 1;
+			}
+		}
+
+		return -1;
+	}
 
 	// For testing.
 	@SuppressWarnings("unused")
@@ -60,4 +60,16 @@ public class SearchInSortedArrayOfUnknownSize {
 
 	}
 
+}
+
+interface ArrayReader {
+	abstract int get(int i);
+}
+
+class reader implements ArrayReader {
+	@Override
+	public int get(int i) {
+		int[] arr = new int[10];
+		return arr[i];
+	}
 }
