@@ -77,6 +77,7 @@ class DesignHashSet {
 	 */
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		DesignHashSet solution = new DesignHashSet();
 
