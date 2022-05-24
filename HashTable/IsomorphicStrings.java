@@ -4,6 +4,8 @@
 
 package leetcode;
 
+import java.util.Arrays;
+
 public class IsomorphicStrings {
 	// fields and classes here.
 	// private int count;
@@ -16,11 +18,13 @@ public class IsomorphicStrings {
 
 	// Use a map to keep track of the information about the same character.
 	// Use index to hold order information.
-	// Author: grandyang + kei
-	// Date : January 2, 2020
+	// Author: grandyang + pouring + kei
+	// Date : January 2, 2020, May 24, 2022
 	public boolean isIsomorphic(String s, String t) {
 		int[] m1 = new int[256];
+		Arrays.fill(m1, -1);
 		int[] m2 = new int[256];
+		Arrays.fill(m2, -1);
 		int n = s.length();
 
 		for (int i = 0; i < n; i++) {
@@ -34,8 +38,8 @@ public class IsomorphicStrings {
 			}
 			// Put the index except 0 to hold order information.
 			// Counting cannot hold the order information.
-			m1[c1] = i + 1;
-			m2[c2] = i + 1;
+			m1[c1] = i;
+			m2[c2] = i;
 		}
 
 		return true;
