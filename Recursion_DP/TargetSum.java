@@ -17,7 +17,6 @@ public class TargetSum {
 
   }
 
-
   // 1. Recursion. No need to review.
   // O(2^N) time, where N is the nums length.
   // O(N) space, The depth of the recursion tree can go up to n.
@@ -43,7 +42,6 @@ public class TargetSum {
 
     return countLeft + countRight;
   }
-
 
   // 2. Memoization. No need to review.
   // Author: kei (Time Limit Exceeded, why??)
@@ -83,6 +81,24 @@ public class TargetSum {
     return count;
   }
 
+  // 3. DP
+  // Author: @mkn1921 + kei (AC)
+  // Date : June 21, 2022
+  public int findTargetSumWays4(int[] nums, int s) {
+    Map<Integer, Integer> dp = new HashMap<>();
+    dp.put(0, 1);
+    for (int num : nums) {
+      Map<Integer, Integer> dp2 = new HashMap<>();
+      for (int tempSum : dp.keySet()) {
+        int key1 = tempSum + num;
+        dp2.put(key1, dp2.getOrDefault(key1, 0) + dp.get(tempSum));
+        int key2 = tempSum - num;
+        dp2.put(key2, dp2.getOrDefault(key2, 0) + dp.get(tempSum));
+      }
+      dp = dp2;
+    }
+    return dp.getOrDefault(s, 0);
+  }
 
   // 3. Dynamic Programming
   // Author: @vinod23 + kei (AC)
@@ -92,18 +108,21 @@ public class TargetSum {
       return 0;
     }
     // Since the sum can range from -1000 to +1000, we need to add an offset of 1000
-    // to the sum indices (column number) to map all the sums obtained to positive range only (0 ~
+    // to the sum indices (column number) to map all the sums obtained to positive
+    // range only (0 ~
     // 2000).
     // dp holds the number of ways that the sum_i + nums[i] can occur upto i.
     int[] dp = new int[2001];
     dp[nums[0] + 1000] = 1;
-    // Note that it is '+=', not just '=' because nums[0] could be 0 and there is already 1 added
+    // Note that it is '+=', not just '=' because nums[0] could be 0 and there is
+    // already 1 added
     // above in this case.
     dp[-nums[0] + 1000] += 1;
 
     // Traverse nums.
     for (int i = 1; i < nums.length; i++) {
-      // Create another copy of array dp because we traverse previous dp and based on that dp, we
+      // Create another copy of array dp because we traverse previous dp and based on
+      // that dp, we
       // count up in the sum ± nums[i] equivalent in 'next' array.
       int[] next = new int[2001];
       // Check all the counts in the previous array dp.
@@ -123,8 +142,6 @@ public class TargetSum {
     return dp[S + 1000];
   }
 
-
-
   // For testing.
   public static void main(String[] args) {
     TargetSum solution = new TargetSum();
@@ -134,15 +151,13 @@ public class TargetSum {
     // int target = 2;
     // solution.getInt(num, target);
 
-    // int[] nums = new int[] { 5, 19, 48, 39, 14, 5, 39, 32, 5, 46, 11, 30, 1, 20, 36, 15, 21, 6,
+    // int[] nums = new int[] { 5, 19, 48, 39, 14, 5, 39, 32, 5, 46, 11, 30, 1, 20,
+    // 36, 15, 21, 6,
     // 15, 2 };
-    int[] nums = new int[] {5, 19, 48};
+    int[] nums = new int[] { 5, 19, 48 };
     int S = 39;
     System.out.println(solution.findTargetSumWays2(nums, S));
-
 
   }
 
 }
-
-
