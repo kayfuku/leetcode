@@ -14,7 +14,6 @@ public class LargestNumberAtLeastTwiceOfOthers {
 
   }
 
-
   // Author: @awice + kei
   // Date : February 1, 2020
   public int dominantIndex(int[] nums) {
@@ -36,9 +35,8 @@ public class LargestNumberAtLeastTwiceOfOthers {
     return maxIndex;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     LargestNumberAtLeastTwiceOfOthers solution = new LargestNumberAtLeastTwiceOfOthers();
 
@@ -47,10 +45,6 @@ public class LargestNumberAtLeastTwiceOfOthers {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-

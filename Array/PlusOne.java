@@ -14,7 +14,6 @@ public class PlusOne {
 
   }
 
-
   // Author: diaa + kei
   // Date : February 1, 2020
   public int[] plusOne(int[] digits) {
@@ -37,9 +36,8 @@ public class PlusOne {
     return newNumber;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     PlusOne solution = new PlusOne();
 
@@ -48,10 +46,6 @@ public class PlusOne {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
