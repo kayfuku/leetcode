@@ -17,7 +17,6 @@ public class DiagonalTraverse {
 
   }
 
-
   // There is another solution.
   // Author: @sachinmalhotra1993 + kei
   // Date : February 2, 2020
@@ -41,7 +40,7 @@ public class DiagonalTraverse {
     // å å å
     // a a å
     // a a å
-    // num å: N + M -1
+    // num å: N + M - 1
     for (int d = 0; d < N + M - 1; d++) {
 
       // Clear the intermediate array every time we start
@@ -57,7 +56,6 @@ public class DiagonalTraverse {
       // Iterate until one of the indices goes out of scope
       // Take note of the index math to go down the diagonal
       while (r < N && c > -1) {
-
         intermediate.add(matrix[r][c]);
         ++r;
         --c;
@@ -81,9 +79,8 @@ public class DiagonalTraverse {
     return result;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     DiagonalTraverse solution = new DiagonalTraverse();
 
@@ -92,10 +89,6 @@ public class DiagonalTraverse {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
