@@ -79,6 +79,7 @@ public class AddBinary {
   }
 
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     AddBinary solution = new AddBinary();
 
