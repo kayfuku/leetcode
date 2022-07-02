@@ -14,8 +14,6 @@ public class OddEvenLinkedList {
 
   }
 
-
-
   // It is good to traverse the list by two pointers, odd and even.
   // The odd is a tail of the odd list. The even is a tail of the even list.
   // So we can easily append the even list at the end of the odd list.
@@ -36,7 +34,6 @@ public class OddEvenLinkedList {
     odd.next = evenHead;
     return head;
   }
-
 
   // Author: kei, the first solution (AC)
   // Date : April 15, 2020
@@ -73,8 +70,6 @@ public class OddEvenLinkedList {
     return head;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -103,28 +98,14 @@ public class OddEvenLinkedList {
       n = n.next;
     }
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
