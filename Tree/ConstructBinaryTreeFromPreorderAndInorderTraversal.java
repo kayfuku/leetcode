@@ -16,8 +16,10 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
     // this.count = 0;
   }
 
-  // Pre-order always starts from root, but for in-order, every node could be a root node.
-  // If I find which is the root in in-order, then I can learn that every node to the left of
+  // Pre-order always starts from root, but for in-order, every node could be a
+  // root node.
+  // If I find which is the root in in-order, then I can learn that every node to
+  // the left of
   // the root is in the left subtree because that is the property of in-order.
   // In conclusion, use preorder to find the next root node, and use inorder
   // to figure out which nodes are in the left subtree or right subtree.
@@ -70,22 +72,16 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
     return node;
   }
 
-
-
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
-    ConstructBinaryTreeFromPreorderAndInorderTraversal solution =
-        new ConstructBinaryTreeFromPreorderAndInorderTraversal();
+    ConstructBinaryTreeFromPreorderAndInorderTraversal solution = new ConstructBinaryTreeFromPreorderAndInorderTraversal();
 
     // Test arguments.
     // int num = 24;
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
 }
-
-
