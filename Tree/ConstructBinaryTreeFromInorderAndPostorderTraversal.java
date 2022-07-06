@@ -16,13 +16,13 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
 
   }
 
-
   public class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
 
-    TreeNode() {}
+    TreeNode() {
+    }
 
     TreeNode(int val) {
       this.val = val;
@@ -34,7 +34,6 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
       this.right = right;
     }
   }
-
 
   // Use postorder to find the next root node, and use inorder
   // to figure out which nodes are in the left subtree or right subtree.
@@ -85,41 +84,24 @@ public class ConstructBinaryTreeFromInorderAndPostorderTraversal {
     return node;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    ConstructBinaryTreeFromInorderAndPostorderTraversal solution =
-        new ConstructBinaryTreeFromInorderAndPostorderTraversal();
+    ConstructBinaryTreeFromInorderAndPostorderTraversal solution = new ConstructBinaryTreeFromInorderAndPostorderTraversal();
 
     // Test arguments.
     // int num = 24;
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
