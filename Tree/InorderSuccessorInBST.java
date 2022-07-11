@@ -26,10 +26,26 @@ public class InorderSuccessorInBST {
     }
   }
 
-
   // Author: LeetCode + kei
   // Date : June 5, 2020
   public TreeNode inorderSuccessor(TreeNode root, TreeNode p) {
+    TreeNode successor = null;
+    while (root != null) {
+      if (p.val >= root.val) {
+        root = root.right;
+      } else {
+        successor = root;
+        root = root.left;
+      }
+    }
+
+    return successor;
+  }
+
+  // Not recommended for interview
+  // Author: LeetCode + kei
+  // Date : June 5, 2020
+  public TreeNode inorderSuccessor2(TreeNode root, TreeNode p) {
     // The node has a right child.
     // The successor is somewhere lower in the right subtree.
     // successor: one step right and then left till you can
@@ -72,8 +88,6 @@ public class InorderSuccessorInBST {
     return null;
   }
 
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -84,28 +98,14 @@ public class InorderSuccessorInBST {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
-
-
 
   public void dummyMethod() {
 
-
-
   }
-
-
 
   public void dummyMethod2() {
 
-
-
   }
 
-
-
 }
-
-
