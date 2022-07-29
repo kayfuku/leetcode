@@ -17,7 +17,6 @@ public class RobotRoomCleaner {
 
   }
 
-  
   // This is the robot's control interface.
   // You should not implement it, or speculate about its implementation
   interface Robot {
@@ -28,20 +27,20 @@ public class RobotRoomCleaner {
     // Robot will stay on the same cell after calling turnLeft/turnRight.
     // Each turn will be 90 degrees.
     void turnLeft();
+
     void turnRight();
 
     // Clean the current cell.
     void clean();
   }
 
-
-  // O(N - M) time, O(N - M) space, where N is a number of cells in the room 
+  // O(N - M) time, O(N - M) space, where N is a number of cells in the room
   // and M is a number of obstacles.
   // Author: leetcode + kei
-  // Date  : September 17, 2020
+  // Date : September 17, 2020
 
   // Going clockwise: 0: 'up', 1: 'right', 2: 'down', 3: 'left'
-  int[][] directions = {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+  int[][] directions = { { -1, 0 }, { 0, 1 }, { 1, 0 }, { 0, -1 } };
   Set<PairGen<Integer, Integer>> visited = new HashSet<>();
   Robot robot;
 
@@ -55,7 +54,7 @@ public class RobotRoomCleaner {
     robot.clean();
 
     // Going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'
-    // We need 'd' because this solution is based on the same idea as 
+    // We need 'd' because this solution is based on the same idea as
     // maze solving algorithm called right-hand rule.
     // https://en.wikipedia.org/wiki/Maze_solving_algorithm#Wall_follower
     for (int i = 0; i < 4; i++) {
@@ -81,10 +80,6 @@ public class RobotRoomCleaner {
     robot.turnRight();
   }
 
-  
-
-
-
   // For testing.
   @SuppressWarnings("unused")
   public static void main(String[] args) {
@@ -95,13 +90,6 @@ public class RobotRoomCleaner {
     // int target = 2;
     // solution.getInt(num, target);
 
-
-
   }
 
-
-
-
 }
-
-
