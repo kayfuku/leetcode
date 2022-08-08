@@ -4,7 +4,6 @@
 
 package leetcode;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +12,7 @@ public class JewelsAndStones {
   // private int count;
 
   public JewelsAndStones() {
-    // Initialization here.
+    // Initialization here
     // this.count = 0;
 
   }
