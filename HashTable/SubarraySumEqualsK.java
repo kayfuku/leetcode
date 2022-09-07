@@ -125,6 +125,7 @@ public class SubarraySumEqualsK {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		SubarraySumEqualsK solution = new SubarraySumEqualsK();
 
