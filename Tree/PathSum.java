@@ -103,6 +103,7 @@ public class PathSum {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		PathSum solution = new PathSum();
 
