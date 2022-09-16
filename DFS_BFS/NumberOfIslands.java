@@ -377,6 +377,7 @@ public class NumberOfIslands {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		NumberOfIslands solution = new NumberOfIslands();
 
