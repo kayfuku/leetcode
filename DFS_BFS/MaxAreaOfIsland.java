@@ -301,6 +301,7 @@ public class MaxAreaOfIsland {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MaxAreaOfIsland solution = new MaxAreaOfIsland();
 
