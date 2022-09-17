@@ -113,6 +113,7 @@ public class NumberOfConnectedComponentsInAnUndirectedGraph {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		NumberOfConnectedComponentsInAnUndirectedGraph solution = new NumberOfConnectedComponentsInAnUndirectedGraph();
 
