@@ -231,6 +231,7 @@ public class LongestIncreasingSubsequence {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		LongestIncreasingSubsequence solution = new LongestIncreasingSubsequence();
 
