@@ -4,8 +4,6 @@
 
 package leetcode;
 
-import java.util.*;
-
 public class MaximumSubarray {
 	// fields here.
 	// private int count;
@@ -126,6 +124,7 @@ public class MaximumSubarray {
 	}
 
 	// Review.
+	@SuppressWarnings("unused")
 	public int maxSubArrayR(int[] nums) {
 		// corner
 		if (nums == null) {
@@ -160,6 +159,7 @@ public class MaximumSubarray {
 	//
 	// Author: kei (AC)
 	// Date : October 27, 2020
+	@SuppressWarnings("unused")
 	public int maxSubArrayR3(int[] nums) {
 		if (nums == null || nums.length == 0) {
 			return 0;
@@ -187,6 +187,7 @@ public class MaximumSubarray {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		MaximumSubarray solution = new MaximumSubarray();
 
