@@ -82,6 +82,7 @@ public class UniquePaths {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		UniquePaths solution = new UniquePaths();
 
