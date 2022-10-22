@@ -68,6 +68,7 @@ public class HouseRobberII {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		HouseRobberII solution = new HouseRobberII();
 

@@ -152,6 +152,7 @@ public class HouseRobber {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		HouseRobber solution = new HouseRobber();
 
