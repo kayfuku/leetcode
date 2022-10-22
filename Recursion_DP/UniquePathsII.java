@@ -129,6 +129,7 @@ public class UniquePathsII {
 	}
 
 	// For testing.
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		UniquePathsII solution = new UniquePathsII();
 
