@@ -159,6 +159,7 @@ public class LongestSubstringWithoutRepeatingCharacters {
 	// return max;
 	// }
 
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
 		String str = "tmmzuxt";
