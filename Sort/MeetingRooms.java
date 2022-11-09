@@ -5,7 +5,6 @@
 package leetcode;
 
 import java.util.Arrays;
-import java.util.Comparator;
 
 public class MeetingRooms {
   // fields and classes here.
@@ -49,6 +48,7 @@ public class MeetingRooms {
   }
 
   // For testing.
+  @SuppressWarnings("unused")
   public static void main(String[] args) {
     MeetingRooms solution = new MeetingRooms();
 
